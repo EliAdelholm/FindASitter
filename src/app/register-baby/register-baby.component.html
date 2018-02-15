@@ -1,0 +1,52 @@
+<form [formGroup]="registerBabyForm" (submit)="onSubmit(registerBabyForm)" novalidate>
+  	<h1>Register baby</h1>
+	  <div>
+			<label>Firstname</label>
+			<input formControlName="firstname">
+			<div *ngIf="registerBabyForm.controls.firstname.errors?.required && registerBabyForm.controls.firstname.touched">
+				You must fill out your firstname.
+			</div>
+		</div>
+	
+		<div>
+			<label>Lastname</label>
+			<input formControlName="lastname">
+			<div *ngIf="registerBabyForm.controls.lastname.errors?.required && registerBabyForm.controls.lastname.touched">
+				You must fill out your lastname.
+			</div>
+		</div>
+	
+		<div>
+			<label>Age</label>
+			<input formControlName="age" type="number">
+			<div *ngIf="registerBabyForm.controls.age.errors?.required && registerBabyForm.controls.age.touched">
+				You must fill out your age.
+			</div>
+		</div>
+	
+		<div>
+			<label>Gender</label>
+			<select formControlName="gender">
+				<option value="female">Female</option>
+				<option value="male">Male</option>
+				<option value="other">Other</option>
+			</select>
+			<div *ngIf="registerBabyForm.controls.gender.errors?.required && registerBabyForm.controls.gender.touched">
+				You must fill out your gender.
+			</div>
+		</div>
+	
+		<div>
+			<label>Area</label>
+			<input formControlName="area">
+			<div *ngIf="registerBabyForm.controls.area.errors?.required && registerBabyForm.controls.area.touched">
+				You must fill out your area.
+			</div>
+		</div>
+  
+    <p>Form value: {{ registerBabyForm.value | json }}</p>
+    <p>Form status: {{ registerBabyForm.status | json }}</p>
+  
+    <button type="submit" [disabled]="registerBabyForm.invalid">Register Baby</button>
+  
+</form>

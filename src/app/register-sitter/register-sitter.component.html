@@ -1,0 +1,89 @@
+<form [formGroup]="registerSitterForm" (submit)="onSubmit(registerSitterForm)" novalidate>
+
+	<h1>Register sitter</h1>
+	
+	<h3>Account Details</h3>
+	<div>
+		<label>Username</label>
+		<input formControlName="username">
+		<div *ngIf="registerSitterForm.controls.username.errors?.required && registerSitterForm.controls.username.touched">
+			You must fill out your username.
+		</div>
+	</div>
+
+	<div>
+		<label>Email</label>
+		<input formControlName="email" type="email">
+		<div *ngIf="registerSitterForm.controls.email.errors?.required && registerSitterForm.controls.email.touched">
+			You must fill out your email.
+		</div>
+	</div>
+	
+	<div>
+		<label>Password</label>
+		<input formControlName="password">
+		<div *ngIf="registerSitterForm.controls.password.errors?.required && registerSitterForm.controls.password.touched">
+			You must fill out your password.
+		</div>
+	</div>
+
+	<h3>Personal Details</h3>
+	<div>
+		<label>Firstname</label>
+		<input formControlName="firstname">
+		<div *ngIf="registerSitterForm.controls.firstname.errors?.required && registerSitterForm.controls.firstname.touched">
+			You must fill out your firstname.
+		</div>
+	</div>
+
+	<div>
+		<label>Lastname</label>
+		<input formControlName="lastname">
+        <div *ngIf="registerSitterForm.controls.lastname.errors?.required && registerSitterForm.controls.lastname.touched">
+            You must fill out your lastname.
+		</div>
+	</div>
+
+	<div>
+		<label>Age</label>
+		<input formControlName="age" type="number">
+		<div *ngIf="registerSitterForm.controls.age.errors?.required && registerSitterForm.controls.age.touched">
+			You must fill out your age.
+		</div>
+	</div>
+
+	<div>
+		<label>Gender</label>
+		<select formControlName="gender">
+			<option value="female">Female</option>
+			<option value="male">Male</option>
+			<option value="other">Other</option>
+		</select>
+		<div *ngIf="registerSitterForm.controls.gender.errors?.required && registerSitterForm.controls.gender.touched">
+			You must fill out your gender.
+		</div>
+	</div>
+
+	<div>
+		<label>Area</label>
+		<input formControlName="area">
+		<div *ngIf="registerSitterForm.controls.area.errors?.required && registerSitterForm.controls.area.touched">
+			You must fill out your area.
+		</div>
+	</div>
+
+	<div>
+		<label>Rate</label>
+		<input formControlName="rate">
+		<div *ngIf="registerSitterForm.controls.rate.errors?.required && registerSitterForm.controls.rate.touched">
+			You must fill out your rate.
+		</div>
+	</div>
+    
+	<p>Form value: {{ registerSitterForm.value | json }}</p>
+	<p>Form status: {{ registerSitterForm.status | json }}</p>
+
+	<button type="submit" [disabled]="registerSitterForm.invalid">Register Sitter</button>
+    
+</form>
+  
