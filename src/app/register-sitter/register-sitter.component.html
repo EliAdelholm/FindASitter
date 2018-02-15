@@ -1,7 +1,7 @@
 <form [formGroup]="registerSitterForm" (submit)="onSubmit(registerSitterForm)" novalidate>
 
 	<h1>Register sitter</h1>
-	
+
 	<h3>Account Details</h3>
 	<div>
 		<label>Username</label>
@@ -18,7 +18,7 @@
 			You must fill out your email.
 		</div>
 	</div>
-	
+
 	<div>
 		<label>Password</label>
 		<input formControlName="password">
@@ -39,8 +39,8 @@
 	<div>
 		<label>Lastname</label>
 		<input formControlName="lastname">
-        <div *ngIf="registerSitterForm.controls.lastname.errors?.required && registerSitterForm.controls.lastname.touched">
-            You must fill out your lastname.
+		<div *ngIf="registerSitterForm.controls.lastname.errors?.required && registerSitterForm.controls.lastname.touched">
+			You must fill out your lastname.
 		</div>
 	</div>
 
@@ -79,11 +79,10 @@
 			You must fill out your rate.
 		</div>
 	</div>
-    
+
 	<p>Form value: {{ registerSitterForm.value | json }}</p>
 	<p>Form status: {{ registerSitterForm.status | json }}</p>
 
 	<button type="submit" [disabled]="registerSitterForm.invalid">Register Sitter</button>
-    
+
 </form>
-  

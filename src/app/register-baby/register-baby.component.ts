@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'register-baby',
-  templateUrl: './register-baby.component.html',
-  styleUrls: ['./register-baby.component.scss']
+	selector: 'register-baby',
+	templateUrl: './register-baby.component.html',
+	styleUrls: ['./register-baby.component.scss']
 })
 
 export class RegisterBabyComponent implements OnInit {
-  registerBabyForm: FormGroup;
+	registerBabyForm: FormGroup;
 
 	constructor(private fb: FormBuilder) {
 		this.registerBabyForm = this.fb.group({
@@ -30,7 +30,7 @@ export class RegisterBabyComponent implements OnInit {
 		}
 	}
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
 }
