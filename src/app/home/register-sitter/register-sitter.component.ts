@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Sitter } from '../entities/sitter';
+import { Sitter } from '../../entities/sitter';
 
 @Component({
 	selector: 'register-sitter',
