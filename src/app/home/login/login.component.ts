@@ -26,7 +26,15 @@ export class LoginComponent implements OnInit {
 
 			// Navigate to some page
 			this.authService.login().subscribe(x => {
-				// this.router.navigate(['portal'])
+				
+				// If a redictUrl is specified go there and then clear the slate
+				if (this.authService.redirectUrl) {
+					this.router.navigate([this.authService.redirectUrl])
+					this.authService.redirectUrl = null
+				} else {
+					// Else just go to the overview page
+					this.router.navigate(['portal'])
+				}
 			})
 			
 		} else {
