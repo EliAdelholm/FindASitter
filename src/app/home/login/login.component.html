@@ -1,22 +1,24 @@
-<form [formGroup]="loginForm" (submit)="onSubmit(loginForm)" novalidate>
-	<h1>Login</h1>
-	<label>Username:
-		<input formControlName="username">
-	</label>
-	<div *ngIf="loginForm.controls.username.errors?.required && loginForm.controls.username.touched">
-		You must fill out your username.
-	</div>
+<div class="form-container">
+	<form [formGroup]="loginForm" (submit)="onSubmit(loginForm)" novalidate>
+		<h1>Login</h1>
 
-	<label>Password:
-		<input formControlName="password">
-	</label>
-	<div *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
-		You must fill out your password.
-	</div>
+		<div>
+			<mat-form-field>
+				<input matInput formControlName="username" placeholder="Username">
+				<mat-error *ngIf="loginForm.controls.username.errors?.required && loginForm.controls.username.touched">
+					You must fill out a username.
+				</mat-error>
+			</mat-form-field>
 
-	<p>Form value: {{ loginForm.value | json }}</p>
-	<p>Form status: {{ loginForm.status | json }}</p>
+			<mat-form-field>
+				<input matInput formControlName="password" placeholder="Password">
+				<mat-error *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
+					You must fill out your password.
+				</mat-error>
+			</mat-form-field>
+		</div>
 
-	<button type="submit">Login</button>
+		<button mat-raised-button color="primary" type="submit">Login</button>
 
-</form>
+	</form>
+</div>

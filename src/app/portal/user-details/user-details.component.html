@@ -1,0 +1,71 @@
+<div *ngIf="baby" class="user-details">
+
+    <mat-card class="user-details-card">
+
+        <mat-card-header >
+            <img mat-card-avatar class="user-details-avatar" src="../../assets/img/default-avatar.png" alt="Avatar">
+            <mat-card-title class="user-details-title">
+                <h1>{{ baby.username }}</h1>
+            </mat-card-title>
+            <mat-card-subtitle class="user-details-subtitle"></mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content class="user-details-content">
+            <div>
+                <p><b>Rating</b></p>
+                <p><b>Fullname</b></p>
+                <p><b>Birthdate</b></p>
+                <p><b>Gender</b></p>
+                <p><b>Area</b></p>
+            </div>
+            <div>
+                <p>Avg. rating: 0 (no ratings yet)</p>
+                <p>{{baby.firstname}} {{baby.lastname}}</p>
+                <p>{{baby.Birthdate | date :  "dd.MM.y"}}</p>
+                <p>{{baby.gender}}</p>
+                <p>{{baby.area}}</p>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">EDIT</button>
+            <button mat-raised-button color="warn" (click)="data.deleteBaby(baby.username)">DELETE</button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>
+
+<div *ngIf="sitter" class="user-details">
+
+        <mat-card class="user-details-card">
+    
+            <mat-card-header >
+                <img mat-card-avatar class="user-details-avatar" src="../../assets/img/default-avatar.png" alt="Avatar">
+                <mat-card-title class="user-details-title">
+                    <h1>{{ sitter.username }}</h1>
+                </mat-card-title>
+                <mat-card-subtitle class="user-details-subtitle"></mat-card-subtitle>
+            </mat-card-header>
+    
+            <mat-card-content class="user-details-content">
+                <div>
+                    <p><b>Rating</b></p>
+                    <p><b>Fullname</b></p>
+                    <p><b>Birthdate</b></p>
+                    <p><b>Gender</b></p>
+                    <p><b>Area</b></p>
+                </div>
+                <div>
+                    <p>Avg. rating: 0 (no ratings yet)</p>
+                    <p>{{sitter.firstname}} {{sitter.lastname}}</p>
+                    <p>{{sitter.Birthdate | date :  "dd.MM.y"}}</p>
+                    <p>{{sitter.gender}}</p>
+                    <p>{{sitter.area}}</p>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary">EDIT</button>
+                <button mat-raised-button color="warn" (click)="data.deleteSitter(sitter.username)">DELETE</button>
+            </mat-card-actions>
+        </mat-card>
+    
+    </div>

@@ -1,4 +1,5 @@
 export class Person {
+    public username: String;
     public firstname: String;
     public lastname: String;
     public birthDate: Date;

@@ -1,9 +1,18 @@
-<nav>
-    <button routerLink="home">Home</button>
-    <button routerLink="contact">Contact</button>
-    <button routerLink="register-sitter">Register sitter</button>
-    <button routerLink="register-baby">Register baby</button>
-    <button routerLink="login">Login</button>
-  </nav>
+<mat-toolbar color="primary">
+  <span>FindASitter </span>
+  <button mat-button routerLink="/home">Home</button>
+  <button mat-button routerLink="contact">Contact</button>
+  <button mat-button routerLink="login">Login</button>
+  <button mat-button [matMenuTriggerFor]="menu">Register</button>
 
-  <router-outlet></router-outlet>
+  <mat-menu color="primary" #menu="matMenu">
+    <button mat-button routerLink="register-sitter">Register sitter</button>
+    <button mat-button routerLink="register-baby">Register baby</button>
+  </mat-menu>
+
+</mat-toolbar>
+
+
+
+
+<router-outlet></router-outlet>

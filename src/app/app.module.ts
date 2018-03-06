@@ -1,6 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material';
+import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
+import {MatCardModule} from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -18,6 +29,10 @@ import { OverviewComponent } from './portal/overview/overview.component';
 import { IndexComponent } from './home/index/index.component';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
+import { DataService } from './data.service';
+import { BabiesListComponent } from './portal/babies-list/babies-list.component';
+import { UserDetailsComponent } from './portal/user-details/user-details.component';
+
 
 
 @NgModule({
@@ -33,14 +48,27 @@ import { AuthService } from './auth.service';
 		FindBabyComponent,
 		FindSitterComponent,
 		OverviewComponent,
-		IndexComponent
+		IndexComponent,
+		BabiesListComponent,
+		UserDetailsComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		MatMenuModule,
+		NoopAnimationsModule,
+		MatButtonModule,
+		MatToolbarModule,
+		MatMomentDateModule,
+		MatDatepickerModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatSelectModule,
+		MatCardModule,
+		MatListModule
 	],
-	providers: [AuthGuardService, AuthService],
+	providers: [AuthGuardService, AuthService, DataService, MatMomentDateModule],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

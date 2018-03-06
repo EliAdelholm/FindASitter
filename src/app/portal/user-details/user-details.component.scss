@@ -1,0 +1,30 @@
+.user-details {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+
+    .user-details-title {
+        margin-top: 35px;
+        margin-left: 20px;
+    }
+
+    .user-details-subtitle {
+        margin-left: 20px;
+    }
+
+    .user-details-content {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
+
+.user-details-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 0;
+    vertical-align: bottom;
+}
+
+.user-details-card {
+    width: 500px;
+}

@@ -1,0 +1,37 @@
+
+<h1>Manage users</h1>
+<div id="user-listing">
+	
+	<mat-card class="list-card">
+		<mat-card-title>Babies</mat-card-title>
+		<mat-card-content>
+
+			<mat-list role="list">
+				<mat-list-item role="listitem" class="user-listing-item" *ngFor="let baby of babies">
+					<img matListAvatar src="../../assets/img/default-avatar.png" alt="...">
+					<h4 matLine>{{ baby.username }}</h4>
+					<p matLine>{{ baby.firstname }} {{ baby.lastname }}</p>
+					<button mat-raised-button color="accent" type="button" routerLink="baby/{{ baby.username }}">Edit</button>
+				</mat-list-item>
+			</mat-list>
+
+		</mat-card-content>
+	</mat-card>
+
+	<mat-card class="list-card">
+		<mat-card-title>Sitters</mat-card-title>
+		<mat-card-content>
+
+			<mat-list role="list">
+				<mat-list-item role="listitem" class="user-listing-item" *ngFor="let sitter of sitters">
+					<img matListAvatar src="../../assets/img/default-avatar.png" alt="...">
+					<h4 matLine>{{ sitter.username }}</h4>
+					<p matLine>{{ sitter.firstname }} {{ sitter.lastname }}</p>
+					<button mat-raised-button color="accent" type="button" routerLink="sitter/{{ sitter.username }}">Edit</button>
+				</mat-list-item>
+			</mat-list>
+
+		</mat-card-content>
+	</mat-card>
+
+</div>

@@ -1,52 +1,74 @@
-<form [formGroup]="registerBabyForm" (submit)="onSubmit(registerBabyForm)" novalidate>
-	<h1>Register baby</h1>
-	<div>
-		<label>Firstname</label>
-		<input formControlName="firstname">
-		<div *ngIf="registerBabyForm.controls.firstname.errors?.required && registerBabyForm.controls.firstname.touched">
-			You must fill out your firstname.
+<div class="form-container">
+	<form [formGroup]="registerBabyForm" (submit)="onSubmit(registerBabyForm)" novalidate>
+		<h1>Register baby</h1>
+
+		<div>
+			<mat-form-field>
+				<input matInput formControlName="username" placeholder="Username">
+				<mat-error *ngIf="registerBabyForm.controls.username.errors?.required && registerBabyForm.controls.username.touched">
+					You must fill out a username.
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="area" placeholder="Home area">
+				<mat-error *ngIf="registerBabyForm.controls.area.errors?.required && registerBabyForm.controls.area.touched">
+					You must fill out your area.
+				</mat-error>
+			</mat-form-field>
 		</div>
-	</div>
 
-	<div>
-		<label>Lastname</label>
-		<input formControlName="lastname">
-		<div *ngIf="registerBabyForm.controls.lastname.errors?.required && registerBabyForm.controls.lastname.touched">
-			You must fill out your lastname.
+		<div>
+			<mat-form-field>
+				<input matInput formControlName="password" placeholder="Password">
+
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="repeat" placeholder="Repeat password">
+
+			</mat-form-field>
 		</div>
-	</div>
 
-	<div>
-		<label>Age</label>
-		<input formControlName="age" type="number">
-		<div *ngIf="registerBabyForm.controls.age.errors?.required && registerBabyForm.controls.age.touched">
-			You must fill out your age.
+		<div>
+			<mat-form-field>
+				<input matInput formControlName="firstname" placeholder="Firstname">
+				<mat-error *ngIf="registerBabyForm.controls.firstname.errors?.required && registerBabyForm.controls.firstname.touched">
+					You must fill out your firstname.
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="lastname" placeholder="Lastname">
+				<mat-error *ngIf="registerBabyForm.controls.lastname.errors?.required && registerBabyForm.controls.lastname.touched">
+					You must fill out your lastname.
+				</mat-error>
+			</mat-form-field>
 		</div>
-	</div>
 
-	<div>
-		<label>Gender</label>
-		<select formControlName="gender">
-			<option value="female">Female</option>
-			<option value="male">Male</option>
-			<option value="other">Other</option>
-		</select>
-		<div *ngIf="registerBabyForm.controls.gender.errors?.required && registerBabyForm.controls.gender.touched">
-			You must fill out your gender.
+		<div>
+			<mat-form-field>
+				<input matInput formControlName="birthdate" [matDatepicker]="picker" placeholder="Birthdate">
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+				<mat-error *ngIf="registerBabyForm.controls.birthdate.errors?.required && registerBabyForm.controls.birthdate.touched">
+					You must fill out your baby's birthdate.
+				</mat-error>
+			</mat-form-field>
+
+
+			<mat-form-field>
+				<mat-select placeholder="Gender">
+					<mat-option value="female">Female</mat-option>
+					<mat-option value="male">Male</mat-option>
+					<mat-option value="other">Other</mat-option>
+				</mat-select>
+				<mat-error *ngIf="registerBabyForm.controls.gender.errors?.required && registerBabyForm.controls.gender.touched">
+					You must fill out your gender.
+				</mat-error>
+			</mat-form-field>
 		</div>
-	</div>
 
-	<div>
-		<label>Area</label>
-		<input formControlName="area">
-		<div *ngIf="registerBabyForm.controls.area.errors?.required && registerBabyForm.controls.area.touched">
-			You must fill out your area.
-		</div>
-	</div>
-
-	<p>Form value: {{ registerBabyForm.value | json }}</p>
-	<p>Form status: {{ registerBabyForm.status | json }}</p>
-
-	<button type="submit" [disabled]="registerBabyForm.invalid">Register Baby</button>
-
-</form>
+		<button mat-raised-button color="primary" type="submit">Register</button>
+	</form>
+</div>

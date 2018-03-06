@@ -12,6 +12,8 @@ import { FindBabyComponent } from './portal/find-baby/find-baby.component';
 import { FindSitterComponent } from './portal/find-sitter/find-sitter.component';
 import { IndexComponent } from './home/index/index.component';
 import { AuthGuardService } from './auth-guard.service';
+import { BabiesListComponent } from './portal/babies-list/babies-list.component';
+import { UserDetailsComponent } from './portal/user-details/user-details.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -23,14 +25,18 @@ const routes: Routes = [
 		{ path: 'register-sitter', component: RegisterSitterComponent},
 		{ path: 'contact', component: ContactComponent },
 	] },
-	{ path: 'portal', component: PortalComponent, canActivate: [AuthGuardService], children: [
+	{ path: 'portal', component: PortalComponent, children: [
 		{ path: '', redirectTo: 'overview', pathMatch: 'full' },
 		{ path: 'overview', component: OverviewComponent },
 		{ path: 'find-baby', component: FindBabyComponent },
 		{ path: 'find-sitter', component: FindSitterComponent},
+		{ path: 'babies-list/:type/:id', component: UserDetailsComponent},
+		{ path: 'babies-list', component: BabiesListComponent},
 	]},
 	{ path: '**', component: PageNotFoundComponent }
 ];
+
+// canActivate: [AuthGuardService],
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
