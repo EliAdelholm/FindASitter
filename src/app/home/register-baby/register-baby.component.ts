@@ -24,7 +24,7 @@ export class RegisterBabyComponent implements OnInit {
 
 		if (registerBabyForm.valid) {
 			this.data.addBaby(baby)
-			this.router.navigate(['portal/babies-list'])
+			this.router.navigate(['portal/overview'])
 			console.log("valid")
 		} else {
 			console.log("Not")
@@ -40,7 +40,7 @@ export class RegisterBabyComponent implements OnInit {
 			firstname: ['', Validators.required],
 			lastname: ['', Validators.required],
 			birthdate: ['', Validators.required],
-			gender: ['', Validators.required],
+			gender: [''],
 		});
 	}
 

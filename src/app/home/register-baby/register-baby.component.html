@@ -1,5 +1,5 @@
 <div class="form-container">
-	<form [formGroup]="registerBabyForm" (submit)="onSubmit(registerBabyForm)" novalidate>
+	<form id="registerBabyForm" [formGroup]="registerBabyForm" (submit)="onSubmit(registerBabyForm)" novalidate>
 		<h1>Register baby</h1>
 
 		<div>
@@ -58,7 +58,7 @@
 
 
 			<mat-form-field>
-				<mat-select placeholder="Gender">
+				<mat-select formControlName="gender" placeholder="Gender">
 					<mat-option value="female">Female</mat-option>
 					<mat-option value="male">Male</mat-option>
 					<mat-option value="other">Other</mat-option>
@@ -69,6 +69,6 @@
 			</mat-form-field>
 		</div>
 
-		<button mat-raised-button color="primary" type="submit">Register</button>
+		<button id="submitNewBaby" mat-raised-button color="primary" type="submit">Register</button>
 	</form>
 </div>

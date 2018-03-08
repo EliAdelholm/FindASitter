@@ -30,8 +30,8 @@ const routes: Routes = [
 		{ path: 'overview', component: OverviewComponent },
 		{ path: 'find-baby', component: FindBabyComponent },
 		{ path: 'find-sitter', component: FindSitterComponent},
-		{ path: 'babies-list/:type/:id', component: UserDetailsComponent},
-		{ path: 'babies-list', component: BabiesListComponent},
+		{ path: 'users/:type/:id', component: UserDetailsComponent},
+		{ path: 'users', component: BabiesListComponent},
 	]},
 	{ path: '**', component: PageNotFoundComponent }
 ];
