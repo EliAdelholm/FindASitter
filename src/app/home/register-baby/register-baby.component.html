@@ -5,15 +5,17 @@
 		<div>
 			<mat-form-field>
 				<input matInput formControlName="username" placeholder="Username">
-				<mat-error *ngIf="registerBabyForm.controls.username.errors?.required && registerBabyForm.controls.username.touched">
-					You must fill out a username.
+				<mat-error *ngIf="registerBabyForm.controls.username.errors && registerBabyForm.controls.username.touched">
+					<span *ngIf="registerBabyForm.controls.username.errors?.required">Username is required</span>
+					<span *ngIf="registerBabyForm.controls.username.errors?.minlength">Min 3 characters required</span>
+					<span *ngIf="registerBabyForm.controls.username.errors?.maxlength">Max 25 characters allowed</span>
 				</mat-error>
 			</mat-form-field>
 
 			<mat-form-field>
 				<input matInput formControlName="area" placeholder="Home area">
 				<mat-error *ngIf="registerBabyForm.controls.area.errors?.required && registerBabyForm.controls.area.touched">
-					You must fill out your area.
+					Area is required
 				</mat-error>
 			</mat-form-field>
 		</div>
@@ -21,6 +23,9 @@
 		<div>
 			<mat-form-field>
 				<input matInput formControlName="password" placeholder="Password">
+				<mat-error *ngIf="registerBabyForm.controls.password.errors && registerBabyForm.controls.password.touched">
+					<span *ngIf="registerBabyForm.controls.password.errors?.required">Password is required</span>
+				</mat-error>
 
 			</mat-form-field>
 

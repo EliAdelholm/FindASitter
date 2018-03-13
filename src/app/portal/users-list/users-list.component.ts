@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data.service';
 
 @Component({
-	selector: 'app-babies-list',
-	templateUrl: './babies-list.component.html',
-	styleUrls: ['./babies-list.component.scss']
+	selector: 'app-users-list',
+	templateUrl: './users-list.component.html',
+	styleUrls: ['./users-list.component.scss']
 })
-export class BabiesListComponent implements OnInit {
+export class UsersListComponent implements OnInit {
 	babies = this.data.babies;
 	sitters = this.data.sitters;
 

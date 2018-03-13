@@ -12,7 +12,7 @@ import { FindBabyComponent } from './portal/find-baby/find-baby.component';
 import { FindSitterComponent } from './portal/find-sitter/find-sitter.component';
 import { IndexComponent } from './home/index/index.component';
 import { AuthGuardService } from './auth-guard.service';
-import { BabiesListComponent } from './portal/babies-list/babies-list.component';
+import { UsersListComponent } from './portal/users-list/users-list.component';
 import { UserDetailsComponent } from './portal/user-details/user-details.component';
 
 const routes: Routes = [
@@ -31,7 +31,7 @@ const routes: Routes = [
 		{ path: 'find-baby', component: FindBabyComponent },
 		{ path: 'find-sitter', component: FindSitterComponent},
 		{ path: 'users/:type/:id', component: UserDetailsComponent},
-		{ path: 'users', component: BabiesListComponent},
+		{ path: 'users', component: UsersListComponent},
 	]},
 	{ path: '**', component: PageNotFoundComponent }
 ];

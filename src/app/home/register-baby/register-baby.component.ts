@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { DataService } from '../../data.service';
 import { Router } from '@angular/router';
 import { Baby } from '../../entities/baby';
+import { PasswordValidator } from '../../PasswordValidator';
 
 @Component({
 	selector: 'register-baby',
@@ -33,14 +34,17 @@ export class RegisterBabyComponent implements OnInit {
 
 	ngOnInit() {
 		this.registerBabyForm = this.fb.group({
-			username: ['', Validators.required],
+			username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
 			area: ['', Validators.required],
-			password: ['', Validators.required],
+			password: ['', Validators.compose([
+				Validators.required,
+				PasswordValidator.getPasswordValidator()
+			])],
 			repeat: ['', Validators.required],
-			firstname: ['', Validators.required],
-			lastname: ['', Validators.required],
+			firstname: ['', [Validators.required, Validators.maxLength(30)]],
+			lastname: ['', [Validators.required, Validators.maxLength(40)]],
 			birthdate: ['', Validators.required],
-			gender: [''],
+			gender: ['', Validators.required],
 		});
 	}
 

@@ -1,20 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MomentModule } from 'angular2-moment';
+
+// Material Design
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
-import {MatSelectModule} from '@angular/material/select';
-import {MatListModule} from '@angular/material/list';
-import {MatCardModule} from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
+// Modules
 import { AppRoutingModule } from './app-routing.module';
 
+// Services
+import { AuthGuardService } from './auth-guard.service';
+import { AuthService } from './auth.service';
+import { DataService } from './data.service';
+
+// Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterSitterComponent } from './home/register-sitter/register-sitter.component';
@@ -27,10 +37,7 @@ import { FindBabyComponent } from './portal/find-baby/find-baby.component';
 import { FindSitterComponent } from './portal/find-sitter/find-sitter.component';
 import { OverviewComponent } from './portal/overview/overview.component';
 import { IndexComponent } from './home/index/index.component';
-import { AuthGuardService } from './auth-guard.service';
-import { AuthService } from './auth.service';
-import { DataService } from './data.service';
-import { BabiesListComponent } from './portal/babies-list/babies-list.component';
+import { UsersListComponent } from './portal/users-list/users-list.component';
 import { UserDetailsComponent } from './portal/user-details/user-details.component';
 
 
@@ -49,7 +56,7 @@ import { UserDetailsComponent } from './portal/user-details/user-details.compone
 		FindSitterComponent,
 		OverviewComponent,
 		IndexComponent,
-		BabiesListComponent,
+		UsersListComponent,
 		UserDetailsComponent
 	],
 	imports: [
@@ -66,7 +73,8 @@ import { UserDetailsComponent } from './portal/user-details/user-details.compone
 		MatInputModule,
 		MatSelectModule,
 		MatCardModule,
-		MatListModule
+		MatListModule,
+		MomentModule
 	],
 	providers: [AuthGuardService, AuthService, DataService, MatMomentDateModule],
 	bootstrap: [AppComponent]
