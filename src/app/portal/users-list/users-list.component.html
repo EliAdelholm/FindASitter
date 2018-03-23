@@ -1,7 +1,7 @@
-
-<h1>Manage users</h1>
+<h1>
+	Manage users</h1>
 <div id="user-listing">
-	
+
 	<mat-card class="list-card">
 		<mat-card-title>Babies</mat-card-title>
 		<mat-card-content>
@@ -22,16 +22,15 @@
 		<mat-card-title>Sitters</mat-card-title>
 		<mat-card-content>
 
-			<mat-list role="list">
-				<mat-list-item role="listitem" class="user-listing-item" *ngFor="let sitter of sitters">
-					<img matListAvatar src="../../assets/img/default-avatar.png" alt="...">
-					<h4 matLine>{{ sitter.username }}</h4>
-					<p matLine>{{ sitter.firstname }} {{ sitter.lastname }}</p>
-					<button mat-raised-button color="accent" type="button" routerLink="sitter/{{ sitter.username }}">Edit</button>
-				</mat-list-item>
-			</mat-list>
+			<mat-accordion class="example-headers-align">
+				<!-- <div *ngFor="let sitter of sitters"> -->
+				<app-user-details *ngFor="let sitter of sitters" [userInput]="sitter" (userClick)="onUserClicked($event)">
+				</app-user-details>
+			<!-- </div> -->
+			</mat-accordion>
+
+	
 
 		</mat-card-content>
 	</mat-card>
-
 </div>

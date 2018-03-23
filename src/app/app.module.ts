@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +40,10 @@ import { OverviewComponent } from './portal/overview/overview.component';
 import { IndexComponent } from './home/index/index.component';
 import { UsersListComponent } from './portal/users-list/users-list.component';
 import { UserDetailsComponent } from './portal/user-details/user-details.component';
+import { NgRedux, DevToolsExtension, NgReduxModule } from '@angular-redux/store';
+import { IAppState, rootReducer } from './store/store';
+import { NgReduxRouter, NgReduxRouterModule } from '@angular-redux/router';
+import { UsersActions } from './users.actions';
 
 
 
@@ -74,9 +79,24 @@ import { UserDetailsComponent } from './portal/user-details/user-details.compone
 		MatSelectModule,
 		MatCardModule,
 		MatListModule,
-		MomentModule
+		MomentModule,
+		MatExpansionModule,
+		NgReduxModule,
+		NgReduxRouterModule.forRoot()
 	],
-	providers: [AuthGuardService, AuthService, DataService, MatMomentDateModule],
+	providers: [AuthGuardService, AuthService, DataService, MatMomentDateModule, UsersActions],
 	bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+	constructor(private ngRedux: NgRedux<IAppState>,
+		private devTool: DevToolsExtension,
+		private ngReduxRouter: NgReduxRouter, ) {
+
+		this.ngRedux.configureStore(
+			rootReducer, {});
+
+		ngReduxRouter.initialize(/* args */);
+	}
+
+}

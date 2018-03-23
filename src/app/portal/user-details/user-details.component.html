@@ -1,72 +1,76 @@
-<div *ngIf="baby" class="user-details">
+<mat-expansion-panel>
+    <mat-expansion-panel-header class="user-panel">
+        <mat-panel-title>
+            <img class="icon" src="../../assets/img/default-avatar.png" alt="...">
+            <h4 matLine>{{ userInput.username }}</h4>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
 
-    <mat-card class="user-details-card">
-
-        <mat-card-header >
-            <img mat-card-avatar class="user-details-avatar" src="../../assets/img/default-avatar.png" alt="Avatar">
-            <mat-card-title class="user-details-title">
-                <h1>{{ baby.username }}</h1>
-                <p><b>Rating:</b> 0 (no ratings yet)</p>
-            </mat-card-title>
-            <mat-card-subtitle class="user-details-subtitle"></mat-card-subtitle>
-        </mat-card-header>
-
-        <mat-card-content class="user-details-content">
+    <form id="updateUserForm" [formGroup]="updateUserForm" (submit)="onSubmit(updateUserForm)" novalidate>
+    
             <div>
-                
-                <p><b>Fullname</b></p>
-                <p><b>Birthdate</b></p>
-                <p><b>Gender</b></p>
-                <p><b>Area</b></p>
+                <mat-form-field>
+                    <input matInput formControlName="username" placeholder="Username">
+                    <mat-error *ngIf="updateUserForm.controls.username.errors && updateUserForm.controls.username.touched">
+                        <span *ngIf="updateUserForm.controls.username.errors?.required">Username is required</span>
+                        <span *ngIf="updateUserForm.controls.username.errors?.minlength">Min 3 characters required</span>
+                        <span *ngIf="updateUserForm.controls.username.errors?.maxlength">Max 25 characters allowed</span>
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <input matInput formControlName="area" placeholder="Home area">
+                    <mat-error *ngIf="updateUserForm.controls.area.errors?.required && updateUserForm.controls.area.touched">
+                        Area is required
+                    </mat-error>
+                </mat-form-field>
             </div>
+    
             <div>
-                <p></p>
-                <p>{{ baby.firstname }} {{ baby.lastname }}</p>
-                <p>{{ baby.birthDate | amDateFormat:'LL' }}</p>
-                <p>{{ baby.gender }}</p>
-                <p>{{ baby.area }}</p>
+                <mat-form-field>
+                    <input matInput formControlName="firstname" placeholder="Firstname">
+                    <mat-error *ngIf="updateUserForm.controls.firstname.errors?.required && updateUserForm.controls.firstname.touched">
+                        You must fill out your firstname.
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <input matInput formControlName="lastname" placeholder="Lastname">
+                    <mat-error *ngIf="updateUserForm.controls.lastname.errors?.required && updateUserForm.controls.lastname.touched">
+                        You must fill out your lastname.
+                    </mat-error>
+                </mat-form-field>
             </div>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="primary">SAVE</button>
-            <button mat-raised-button color="warn" id="btnDeleteBaby" (click)="data.deleteBaby(baby.username)">DELETE</button>
-        </mat-card-actions>
-    </mat-card>
-
-</div>
-
-<div *ngIf="sitter" class="user-details">
-
-        <mat-card class="user-details-card">
     
-            <mat-card-header >
-                <img mat-card-avatar class="user-details-avatar" src="../../assets/img/default-avatar.png" alt="Avatar">
-                <mat-card-title class="user-details-title">
-                    <h1>{{ sitter.username }}</h1>
-                </mat-card-title>
-                <mat-card-subtitle class="user-details-subtitle"></mat-card-subtitle>
-            </mat-card-header>
+            <div>
+                <mat-form-field>
+                    <input matInput formControlName="birthdate" [matDatepicker]="picker" placeholder="Birthdate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="updateUserForm.controls.birthdate.errors?.required && updateUserForm.controls.birthdate.touched">
+                        You must fill out your baby's birthdate.
+                    </mat-error>
+                </mat-form-field>
     
-            <mat-card-content class="user-details-content">
-                <div>
-                    <p><b>Rating</b></p>
-                    <p><b>Fullname</b></p>
-                    <p><b>Birthdate</b></p>
-                    <p><b>Gender</b></p>
-                    <p><b>Area</b></p>
-                </div>
-                <div>
-                    <p>Avg. rating: 0 (no ratings yet)</p>
-                    <p>{{sitter.firstname}} {{sitter.lastname}}</p>
-                    <p>{{sitter.Birthdate | date :  "dd.MM.y"}}</p>
-                    <p>{{sitter.gender}}</p>
-                    <p>{{sitter.area}}</p>
-                </div>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-raised-button color="primary">EDIT</button>
-                <button mat-raised-button color="warn" (click)="data.deleteSitter(sitter.username)">DELETE</button>
-            </mat-card-actions>
-        </mat-card>
     
-    </div>
+                <mat-form-field>
+                    <mat-select formControlName="gender" placeholder="Gender">
+                        <mat-option value="Female">Female</mat-option>
+                        <mat-option value="Male">Male</mat-option>
+                        <mat-option value="Other">Other</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="updateUserForm.controls.gender.errors?.required && updateUserForm.controls.gender.touched">
+                        You must fill out your gender.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+    
+            <button id="submitNewBaby" mat-raised-button color="primary" type="submit">Register</button>
+        </form>
+
+    <mat-action-row>
+        <button mat-raised-button color="warn">Delete</button>
+        <button mat-raised-button color="primary" (click)="onUserClick()">Save</button>
+    </mat-action-row>
+
+</mat-expansion-panel>
