@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +30,7 @@ import { DataService } from './data.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterSitterComponent } from './home/register-sitter/register-sitter.component';
-import { RegisterBabyComponent } from './home/register-baby/register-baby.component';
+import { RegisterComponent } from './home/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './home/contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -52,7 +53,7 @@ import { UsersActions } from './users.actions';
 		AppComponent,
 		LoginComponent,
 		RegisterSitterComponent,
-		RegisterBabyComponent,
+		RegisterComponent,
 		HomeComponent,
 		ContactComponent,
 		PageNotFoundComponent,
@@ -81,6 +82,7 @@ import { UsersActions } from './users.actions';
 		MatListModule,
 		MomentModule,
 		MatExpansionModule,
+		MatButtonToggleModule,
 		NgReduxModule,
 		NgReduxRouterModule.forRoot()
 	],
@@ -94,7 +96,7 @@ export class AppModule {
 		private ngReduxRouter: NgReduxRouter, ) {
 
 		this.ngRedux.configureStore(
-			rootReducer, {});
+			rootReducer, {}, [], [ devTool.isEnabled() ? devTool.enhancer() : f => f]);
 
 		ngReduxRouter.initialize(/* args */);
 	}

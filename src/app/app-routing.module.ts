@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './home/login/login.component';
-import { RegisterBabyComponent } from './home/register-baby/register-baby.component';
-import { RegisterSitterComponent } from './home/register-sitter/register-sitter.component';
+import { RegisterComponent } from './home/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './home/contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -21,8 +20,7 @@ const routes: Routes = [
 		{ path: '', redirectTo: 'index', pathMatch: 'full' },
 		{ path: 'index', component: IndexComponent},
 		{ path: 'login', component: LoginComponent },
-		{ path: 'register-baby', component: RegisterBabyComponent},
-		{ path: 'register-sitter', component: RegisterSitterComponent},
+		{ path: 'register', component: RegisterComponent},
 		{ path: 'contact', component: ContactComponent },
 	] },
 	{ path: 'portal', component: PortalComponent, children: [

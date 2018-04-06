@@ -12,6 +12,7 @@
 					<h4 matLine>{{ baby.username }}</h4>
 					<p matLine>{{ baby.firstname }} {{ baby.lastname }}</p>
 					<button mat-raised-button color="accent" type="button" class="btnEditBaby" routerLink="baby/{{ baby.username }}">Edit</button>
+					<button mat-raised-button color="warn" type="button" class="btnEditBaby" (click)="usersActions.deleteBaby(baby.username)">Delete</button>
 				</mat-list-item>
 			</mat-list>
 
@@ -22,14 +23,22 @@
 		<mat-card-title>Sitters</mat-card-title>
 		<mat-card-content>
 
-			<mat-accordion class="example-headers-align">
-				<!-- <div *ngFor="let sitter of sitters"> -->
+			<mat-list role="list">
+				<mat-list-item role="listitem" class="user-listing-item" *ngFor="let sitter of sitters">
+					<img matListAvatar src="../../assets/img/default-avatar.png" alt="...">
+					<h4 matLine>{{ sitter.username }}</h4>
+					<p matLine>{{ sitter.firstname }} {{ sitter.lastname }}</p>
+					<button mat-raised-button color="accent" type="button" class="btnEditSitter" routerLink="sitter/{{ sitter.username }}">Edit</button>
+					<button mat-raised-button color="warn" type="button" class="btnEditSitter" (click)="usersActions.deleteSitter(sitter.username)">Delete</button>
+				</mat-list-item>
+			</mat-list>
+
+			<!-- <mat-accordion class="example-headers-align">
 				<app-user-details *ngFor="let sitter of sitters" [userInput]="sitter" (userClick)="onUserClicked($event)">
 				</app-user-details>
-			<!-- </div> -->
-			</mat-accordion>
+			</mat-accordion> -->
 
-	
+
 
 		</mat-card-content>
 	</mat-card>

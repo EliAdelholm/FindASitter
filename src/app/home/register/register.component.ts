@@ -1,50 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { DataService } from '../../data.service';
 import { Router } from '@angular/router';
 import { Baby } from '../../entities/baby';
 import { PasswordValidator } from '../../PasswordValidator';
 import { NgRedux } from '@angular-redux/store';
 import { UsersActions } from '../../users.actions';
 import { IAppState } from '../../store/store';
+import { Sitter } from '../../entities/sitter';
 
 @Component({
-	selector: 'register-baby',
-	templateUrl: './register-baby.component.html',
-	styleUrls: ['./register-baby.component.scss']
+	selector: 'register',
+	templateUrl: './register.component.html',
+	styleUrls: ['./register.component.scss']
 })
 
-export class RegisterBabyComponent implements OnInit {
-	private registerBabyForm: FormGroup;
+export class RegisterComponent implements OnInit {
+	private registerForm: FormGroup;
 	private isBaby: boolean;
 
-	constructor(private fb: FormBuilder, private data: DataService, private router: Router, 
+	constructor(private fb: FormBuilder, private router: Router, 
 		private usersActions: UsersActions, private ngRedux: NgRedux<IAppState>) {
 
 	}
 
-	onSubmit(registerBabyForm) {
-		let baby: Baby = registerBabyForm.value as Baby;
+	onSubmit(registerForm) {
+		if(this.isBaby) {
+			let baby: Baby = registerForm.value as Baby;
 
-		// console.log(registerBabyForm.value)
-
-		if (registerBabyForm.valid) {
-			this.usersActions.addBaby(baby)
-			// this.data.addBaby(baby)
-			this.router.navigate(['portal/overview'])
-			
+			if (registerForm.valid) {
+				this.usersActions.addBaby(baby)
+				this.router.navigate(['portal/overview'])
+				
+			}
 		} else {
-			
+			let sitter: Sitter = registerForm.value as Sitter;
+
+			if (registerForm.valid) {
+				this.usersActions.addSitter(sitter)
+				this.router.navigate(['portal/overview'])
+				
+			}
 		}
 	}
 
 	ngOnInit() {
 		this.ngRedux.select(state => state.users).subscribe(users => {
 			this.isBaby = users.isBaby;
-			console.log(this.isBaby)
 		});
 
-		this.registerBabyForm = this.fb.group({
+		this.registerForm = this.fb.group({
 			username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
 			area: ['', Validators.required],
 			password: ['', Validators.compose([

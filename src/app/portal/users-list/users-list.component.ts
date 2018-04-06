@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../data.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../../store/store';
+import { Subscription } from 'rxjs/Subscription';
+import { UsersActions } from '../../users.actions';
 
 @Component({
 	selector: 'app-users-list',
@@ -9,17 +10,24 @@ import { IAppState } from '../../store/store';
 	styleUrls: ['./users-list.component.scss']
 })
 
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit, OnDestroy {
+	subscription;
 	babies = [];
 	sitters = [];
 
-	constructor(private data: DataService, private ngRedux: NgRedux<IAppState>) { }
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
+	}
+
+	constructor(private ngRedux: NgRedux<IAppState>, private usersActions: UsersActions) { }
 
 	ngOnInit() {
-		this.ngRedux.select(state => state.users).subscribe(users => {
+		this.subscription = this.ngRedux.select(state => state.users).subscribe(users => {
 			this.babies = users.babies;
 			this.sitters = users.sitters;
 		});
+
+		console.log(this.babies)
 	}
 
 	onUserClicked(user) {

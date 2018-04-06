@@ -1,0 +1,88 @@
+<div class="form-container">
+	<form id="registerForm" [formGroup]="registerForm" (submit)="onSubmit(registerForm)" novalidate>
+		<h1>Register</h1>
+
+		<mat-button-toggle-group #group="matButtonToggleGroup">
+			<mat-button-toggle value="baby" (click)="usersActions.setType(true)">
+				Baby
+			</mat-button-toggle>
+			<mat-button-toggle value="sitter" (click)="usersActions.setType(false)">
+				Sitter
+			</mat-button-toggle>
+		</mat-button-toggle-group>
+		
+		<div>
+			<mat-form-field>
+				<input matInput formControlName="username" placeholder="Username">
+				<mat-error *ngIf="registerForm.controls.username.errors && registerForm.controls.username.touched">
+					<span *ngIf="registerForm.controls.username.errors?.required">Username is required</span>
+					<span *ngIf="registerForm.controls.username.errors?.minlength">Min 3 characters required</span>
+					<span *ngIf="registerForm.controls.username.errors?.maxlength">Max 25 characters allowed</span>
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="area" placeholder="Home area">
+				<mat-error *ngIf="registerForm.controls.area.errors?.required && registerForm.controls.area.touched">
+					Area is required
+				</mat-error>
+			</mat-form-field>
+		</div>
+
+		<div>
+			<mat-form-field>
+				<input matInput formControlName="password" placeholder="Password">
+				<mat-error *ngIf="registerForm.controls.password.errors && registerForm.controls.password.touched">
+					<span *ngIf="registerForm.controls.password.errors?.required">Password is required</span>
+				</mat-error>
+
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="repeat" placeholder="Repeat password">
+
+			</mat-form-field>
+		</div>
+
+		<div>
+			<mat-form-field>
+				<input matInput formControlName="firstname" placeholder="Firstname">
+				<mat-error *ngIf="registerForm.controls.firstname.errors?.required && registerForm.controls.firstname.touched">
+					You must fill out your firstname.
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field>
+				<input matInput formControlName="lastname" placeholder="Lastname">
+				<mat-error *ngIf="registerForm.controls.lastname.errors?.required && registerForm.controls.lastname.touched">
+					You must fill out your lastname.
+				</mat-error>
+			</mat-form-field>
+		</div>
+
+		<div>
+			<mat-form-field>
+				<input matInput formControlName="birthdate" [matDatepicker]="picker" placeholder="Birthdate">
+				<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+				<mat-error *ngIf="registerForm.controls.birthdate.errors?.required && registerForm.controls.birthdate.touched">
+					You must fill out birthdate.
+				</mat-error>
+			</mat-form-field>
+
+
+			<mat-form-field>
+				<mat-select formControlName="gender" placeholder="Gender">
+					<mat-option value="female">Female</mat-option>
+					<mat-option value="male">Male</mat-option>
+					<mat-option value="other">Other</mat-option>
+				</mat-select>
+				<mat-error *ngIf="registerForm.controls.gender.errors?.required && registerForm.controls.gender.touched">
+					You must fill out your gender.
+				</mat-error>
+			</mat-form-field>
+		</div>
+
+		<button id="submitUser" mat-raised-button color="primary" type="submit">Register</button>
+	</form>
+</div>
