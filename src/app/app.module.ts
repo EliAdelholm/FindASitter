@@ -17,6 +17,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -24,19 +26,15 @@ import { AppRoutingModule } from './app-routing.module';
 // Services
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
-import { DataService } from './data.service';
 
 // Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './home/login/login.component';
-import { RegisterSitterComponent } from './home/register-sitter/register-sitter.component';
 import { RegisterComponent } from './home/register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './home/contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PortalComponent } from './portal/portal.component';
-import { FindBabyComponent } from './portal/find-baby/find-baby.component';
-import { FindSitterComponent } from './portal/find-sitter/find-sitter.component';
 import { OverviewComponent } from './portal/overview/overview.component';
 import { IndexComponent } from './home/index/index.component';
 import { UsersListComponent } from './portal/users-list/users-list.component';
@@ -45,6 +43,15 @@ import { NgRedux, DevToolsExtension, NgReduxModule } from '@angular-redux/store'
 import { IAppState, rootReducer } from './store/store';
 import { NgReduxRouter, NgReduxRouterModule } from '@angular-redux/router';
 import { UsersActions } from './users.actions';
+import { UsersService } from './users.service';
+import { HttpClientModule } from '@angular/common/http';
+
+import { UsersEpic } from './users.epic';
+import { createEpicMiddleware, combineEpics } from "redux-observable";
+import { createLogger } from "redux-logger";
+import { FindBikerComponent } from './portal/find-biker/find-biker.component';
+import { BikerProfileComponent } from './portal/biker-profile/biker-profile.component';
+import { MessagesComponent } from './portal/messages/messages.component'
 
 
 
@@ -52,18 +59,18 @@ import { UsersActions } from './users.actions';
 	declarations: [
 		AppComponent,
 		LoginComponent,
-		RegisterSitterComponent,
 		RegisterComponent,
 		HomeComponent,
 		ContactComponent,
 		PageNotFoundComponent,
 		PortalComponent,
-		FindBabyComponent,
-		FindSitterComponent,
 		OverviewComponent,
 		IndexComponent,
 		UsersListComponent,
-		UserDetailsComponent
+		UserDetailsComponent,
+		FindBikerComponent,
+		BikerProfileComponent,
+		MessagesComponent
 	],
 	imports: [
 		BrowserModule,
@@ -84,19 +91,42 @@ import { UsersActions } from './users.actions';
 		MatExpansionModule,
 		MatButtonToggleModule,
 		NgReduxModule,
-		NgReduxRouterModule.forRoot()
+		NgReduxRouterModule.forRoot(),
+		HttpClientModule,
+		MatIconModule,
+		MatChipsModule
 	],
-	providers: [AuthGuardService, AuthService, DataService, MatMomentDateModule, UsersActions],
+	providers: [AuthGuardService, AuthService, MatMomentDateModule, UsersActions, UsersService, UsersEpic],
 	bootstrap: [AppComponent]
 })
 
 export class AppModule {
 	constructor(private ngRedux: NgRedux<IAppState>,
 		private devTool: DevToolsExtension,
-		private ngReduxRouter: NgReduxRouter, ) {
+		private ngReduxRouter: NgReduxRouter, private usersEpic: UsersEpic ) {
 
+
+		// From app.module.ts - constructor
+		const rootEpic = combineEpics(
+			this.usersEpic.getUsers,
+			this.usersEpic.getConversations,
+			// this.usersEpic.addUser,
+			// this.usersEpic.updateUser,
+			// this.usersEpic.deleteUser
+		);
+		// Middleware
+		// http://redux.js.org/docs/advanced/Middleware.html
+		// https://github.com/angular-redux/store/blob/master/articles/epics.md
+		// const epicMiddleware = createEpicMiddleware(rootEpic);
+		const middleware = [
+			createEpicMiddleware(rootEpic), createLogger({ level: 'info', collapsed: true })
+		];
 		this.ngRedux.configureStore(
-			rootReducer, {}, [], [ devTool.isEnabled() ? devTool.enhancer() : f => f]);
+			rootReducer,
+			{}, middleware, [devTool.isEnabled() ? devTool.enhancer() : f => f]);
+
+		// this.ngRedux.configureStore(
+		// 	rootReducer, {}, [], [ devTool.isEnabled() ? devTool.enhancer() : f => f]);
 
 		ngReduxRouter.initialize(/* args */);
 	}

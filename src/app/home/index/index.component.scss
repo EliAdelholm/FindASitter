@@ -1,0 +1,42 @@
+.container {
+    padding-top: 50px;
+}
+
+.index-container {
+    width: 100%;
+
+    h1 {
+        text-align: left;
+        font-weight: bold;
+        font-size: 48px;
+        color: #e91e63;
+    }
+}
+
+.login-text {
+    padding: 24px;
+    max-width: 450px;
+}
+
+.login-nav {
+    float: right;
+
+    .mat-card {
+        margin-bottom: 15px;
+        width: 350px;
+        background: rgba(0,0,0,0.7);
+    }
+}
+
+@media only screen and (max-width: 500px) {
+
+    .login-nav {
+        float: none;
+        margin: 0 auto;
+
+        .mat-card {
+            width: calc(100vw - 78px);
+            margin: 24px;
+        }
+    }
+}

@@ -1,0 +1,180 @@
+<div class="container">
+
+	<div class="messages-container">
+		<mat-card class="contacts" *ngIf="conversations">
+			<mat-card-content>
+				<mat-list role="list">
+					<mat-list-item role="listitem" class="contact-item active" *ngFor="let conversation of conversations">
+						<img matListAvatar src="../../assets/img/{{conversation.users[0].image}}" alt="...">
+						<h4 matLine>{{ conversation.users[0].username }}</h4>
+						<p matLine>Apr 18, 2018</p>
+					</mat-list-item>
+				</mat-list>
+			</mat-card-content>
+		</mat-card>
+
+		<mat-card class="conversation">
+			<mat-card-content>
+
+				<div class="message sender">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from someone else</p>
+					</div>
+				</div>
+
+				<div class="message receiver">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+				<div class="message receiver">
+						<div class="header">
+							<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+							<h4>Username</h4>
+						</div>
+						<div class="body">
+							<p>Hello there! This a message from you</p>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="message receiver">
+							<div class="header">
+								<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+								<h4>Username</h4>
+							</div>
+							<div class="body">
+								<p>Hello there! This a message from you</p>
+							</div>
+							<div class="clear"></div>
+						</div>
+
+				<div class="message sender">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from someone else</p>
+					</div>
+				</div>
+
+				<div class="message receiver">
+						<div class="header">
+							<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+							<h4>Username</h4>
+						</div>
+						<div class="body">
+							<p>Hello there! This a message from you</p>
+						</div>
+						<div class="clear"></div>
+					</div>
+
+					<div class="message receiver">
+							<div class="header">
+								<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+								<h4>Username</h4>
+							</div>
+							<div class="body">
+								<p>Hello there! This a message from you</p>
+							</div>
+							<div class="clear"></div>
+						</div>
+
+
+						<div class="message receiver">
+								<div class="header">
+									<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+									<h4>Username</h4>
+								</div>
+								<div class="body">
+									<p>Hello there! This a message from you</p>
+								</div>
+								<div class="clear"></div>
+							</div>
+
+
+							<div class="message receiver">
+									<div class="header">
+										<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+										<h4>Username</h4>
+									</div>
+									<div class="body">
+										<p>Hello there! This a message from you</p>
+									</div>
+									<div class="clear"></div>
+								</div>
+
+
+								<div class="message receiver">
+										<div class="header">
+											<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+											<h4>Username</h4>
+										</div>
+										<div class="body">
+											<p>Hello there! This a message from you</p>
+										</div>
+										<div class="clear"></div>
+									</div>
+
+
+									<div class="message receiver">
+											<div class="header">
+												<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+												<h4>Username</h4>
+											</div>
+											<div class="body">
+												<p>Hello there! This a message from you</p>
+											</div>
+											<div class="clear"></div>
+										</div>
+
+
+										<div class="message receiver">
+												<div class="header">
+													<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+													<h4>Username</h4>
+												</div>
+												<div class="body">
+													<p>Hello there! This a message from you</p>
+												</div>
+												<div class="clear"></div>
+											</div>
+
+
+											<div class="message receiver">
+													<div class="header">
+														<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+														<h4>Username</h4>
+													</div>
+													<div class="body">
+														<p>Hello there! This a message from you</p>
+													</div>
+													<div class="clear"></div>
+												</div>
+
+			</mat-card-content>
+
+			<div id="write-message">
+				<mat-form-field>
+					<textarea matInput placeholder="Type a Message"></textarea>
+				</mat-form-field>
+				<button mat-fab color="primary">
+					<mat-icon>send</mat-icon>
+				</button>
+			</div>
+		</mat-card>
+
+	</div>
+
+</div>

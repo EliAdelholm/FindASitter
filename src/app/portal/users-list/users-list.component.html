@@ -29,7 +29,7 @@
 					<h4 matLine>{{ sitter.username }}</h4>
 					<p matLine>{{ sitter.firstname }} {{ sitter.lastname }}</p>
 					<button mat-raised-button color="accent" type="button" class="btnEditSitter" routerLink="sitter/{{ sitter.username }}">Edit</button>
-					<button mat-raised-button color="warn" type="button" class="btnEditSitter" (click)="usersActions.deleteSitter(sitter.username)">Delete</button>
+					<button mat-raised-button color="warn" type="button" class="btnEditSitter" (click)="usersActions.deleteUser(sitter._id)">Delete</button>
 				</mat-list-item>
 			</mat-list>
 

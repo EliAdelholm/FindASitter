@@ -1,0 +1,81 @@
+<div class="container" *ngIf="user">
+
+    <div class="heading">
+        <h1>
+            {{ user.username }}
+        </h1>
+    </div>
+
+    <div class="profile-container">
+        <mat-card class="profile-details">
+            <mat-card-header>
+                <h3>
+                    <mat-icon class="star">perm_identity</mat-icon> Biker Details
+                </h3>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-list role="list">
+                    <mat-list-item role="listitem" class="rating">
+                        <p><b>Name: </b><span *ngIf="user.firstname">{{ user.firstname }}</span> <span *ngIf="user.lastname">{{ user.lastname }}</span></p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem" class="rating">
+                        <p><b>Area: </b>{{ user.area }}</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem" class="rating">
+                        <p><b>Age: </b><span *ngIf="user.birthdate">{{ user.birthdate | amTimeAgo:true }}</span></p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem" class="rating">
+                        <p><b>Licence: </b><span *ngIf="user.license">{{ user.license }}</span></p>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="profile-main">
+                <div class="biker-image" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+                <mat-card-content>
+                    <h3>Average Rating: 5</h3>
+                    <p>Based on 1 rating</p>
+                    <button mat-fab color="primary" class="chat-button" type="button">
+                        <mat-icon>chat</mat-icon>
+                    </button>
+                </mat-card-content>
+            </mat-card>
+    </div>
+
+    <div class="bike-container">
+        <mat-card class="bikes">
+            <mat-card-header>
+                <h3>
+                    <mat-icon class="star">motorcycle</mat-icon> Motorcycles
+                </h3>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-list role="list">
+                    <mat-list-item role="listitem" class="rating">
+                        <p>None</p>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="rating-container">
+        <mat-card class="ratings">
+            <mat-card-header>
+                <h3>
+                    <mat-icon class="star">star rating</mat-icon> Latest Ratings
+                </h3>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-list role="list">
+                    <mat-list-item role="listitem" class="rating">
+                        <img matListAvatar src="../../assets/img/default-avatar.png" alt="...">
+                        <h3 matLine>Username (5)</h3>
+                        <p matLine>We had a really great ride together! What happens if we were to write a really long text here I wonder?</p>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>

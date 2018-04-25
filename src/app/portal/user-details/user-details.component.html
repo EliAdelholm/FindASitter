@@ -1,12 +1,20 @@
-<mat-expansion-panel>
-    <mat-expansion-panel-header class="user-panel">
-        <mat-panel-title>
-            <img class="icon" src="../../assets/img/default-avatar.png" alt="...">
-            <h4 matLine>{{ userInput.username }}</h4>
-        </mat-panel-title>
-    </mat-expansion-panel-header>
 
-    <form id="updateUserForm" [formGroup]="updateUserForm" (submit)="onSubmit(updateUserForm)" novalidate>
+
+    <mat-card class="list-card" *ngIf="user">
+		<mat-card-title>{{ user.username }}</mat-card-title>
+		<mat-card-content>
+
+
+
+
+            <mat-action-row>
+                <button mat-raised-button color="warn">Delete</button>
+                <button mat-raised-button color="primary" (click)="onUserClick()">Save</button>
+            </mat-action-row>
+		</mat-card-content>
+	</mat-card>
+
+    <!-- <form id="updateUserForm" [formGroup]="updateUserForm" (submit)="onSubmit(updateUserForm)" novalidate>
     
             <div>
                 <mat-form-field>
@@ -66,11 +74,5 @@
             </div>
     
             <button id="submitNewBaby" mat-raised-button color="primary" type="submit">Register</button>
-        </form>
+        </form> -->
 
-    <mat-action-row>
-        <button mat-raised-button color="warn">Delete</button>
-        <button mat-raised-button color="primary" (click)="onUserClick()">Save</button>
-    </mat-action-row>
-
-</mat-expansion-panel>

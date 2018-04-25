@@ -7,6 +7,8 @@ import { NgRedux } from '@angular-redux/store';
 import { UsersActions } from '../../users.actions';
 import { IAppState } from '../../store/store';
 import { Sitter } from '../../entities/sitter';
+import { UsersService } from '../../users.service';
+import { Person } from '../../entities/person';
 
 @Component({
 	selector: 'register',
@@ -15,40 +17,28 @@ import { Sitter } from '../../entities/sitter';
 })
 
 export class RegisterComponent implements OnInit {
-	private registerForm: FormGroup;
+	registerForm: FormGroup;
 	private isBaby: boolean;
 
-	constructor(private fb: FormBuilder, private router: Router, 
-		private usersActions: UsersActions, private ngRedux: NgRedux<IAppState>) {
+	constructor(private fb: FormBuilder, private router: Router,
+		private usersActions: UsersActions, private ngRedux: NgRedux<IAppState>, private usersService: UsersService) {
 
 	}
 
 	onSubmit(registerForm) {
-		if(this.isBaby) {
-			let baby: Baby = registerForm.value as Baby;
+		let user: Person = registerForm.value as Person;
+		user.userType = this.isBaby ? 'baby' : 'sitter';
 
-			if (registerForm.valid) {
-				this.usersActions.addBaby(baby)
-				this.router.navigate(['portal/overview'])
-				
-			}
-		} else {
-			let sitter: Sitter = registerForm.value as Sitter;
-
-			if (registerForm.valid) {
-				this.usersActions.addSitter(sitter)
-				this.router.navigate(['portal/overview'])
-				
-			}
+		if (registerForm.valid) {
+			this.usersActions.addUser(user)
+			this.router.navigate(['portal/overview'])
 		}
 	}
 
 	ngOnInit() {
-		this.ngRedux.select(state => state.users).subscribe(users => {
-			this.isBaby = users.isBaby;
-		});
 
 		this.registerForm = this.fb.group({
+			userType: [''],
 			username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
 			area: ['', Validators.required],
 			password: ['', Validators.compose([
@@ -60,6 +50,7 @@ export class RegisterComponent implements OnInit {
 			lastname: ['', [Validators.required, Validators.maxLength(40)]],
 			birthdate: ['', Validators.required],
 			gender: ['', Validators.required],
+			rating: [[]]
 		});
 	}
 

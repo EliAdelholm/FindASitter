@@ -1,13 +1,11 @@
 import { routerReducer } from '@angular-redux/router';
 import { combineReducers } from 'redux';
 import { usersReducer } from './../users.reducer';
-import { Sitter } from '../entities/sitter';
-import { Baby } from '../entities/baby';
+import { Biker } from '../../entities/biker';
 
 export class UsersState {
-    isBaby: boolean;
-    babies: Baby[];
-    sitters: Sitter[];
+    profiles: Biker[];
+    conversations: any[]
 }
 
 export class IAppState {

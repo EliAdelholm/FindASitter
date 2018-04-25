@@ -1,6 +1,107 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 
+body {
+    background-image: url('/assets/img/bg-bike.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-blend-mode: lighten;
+}
+
+// Nav styles
+
+.desktop-nav.mat-toolbar-single-row {
+    display: flex;
+    position: fixed;
+}
+.mobile-nav.mat-icon-button {
+    display: none;
+    position: fixed;
+    top: 5px;
+
+    .menu-icon {
+        font-size: 40px;
+    }
+}
+
+// End nav styles
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 64px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.content-box {
+    max-width: 500px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.logged-in-user {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    font-size: 18px;
+
+    .profile-img {
+        margin: 14px 0 0 10px;
+    }
+}
+
+.profile-img {
+    width: 44px;
+    height: 44px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50px;
+}
+
+h1 {
+    text-align: center;
+    margin: 40px 0px 30px;
+    text-transform: uppercase;
+    font-weight: normal;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
+    font-size: 28px;
+}
+
+h4 {
+    margin: 0;
+}
+
+@media only screen and (max-width: 800px) {
+
+    h1 {
+        margin-top: 0px;
+    }
+
+    .desktop-nav.mat-toolbar-single-row {
+        display: none;
+    }
+
+    .mobile-nav.mat-icon-button {
+        display: block;
+    }
+}
+
+.heading {
+    min-width: 250px;
+}
+
 .mat-app-background {
     margin: 0;
     font-family: Roboto,"Helvetica Neue",sans-serif;

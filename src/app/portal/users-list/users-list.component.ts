@@ -22,10 +22,10 @@ export class UsersListComponent implements OnInit, OnDestroy {
 	constructor(private ngRedux: NgRedux<IAppState>, private usersActions: UsersActions) { }
 
 	ngOnInit() {
-		this.subscription = this.ngRedux.select(state => state.users).subscribe(users => {
-			this.babies = users.babies;
-			this.sitters = users.sitters;
-		});
+		// this.subscription = this.ngRedux.select(state => state.users).subscribe(users => {
+		// 	this.babies = users.babies;
+		// 	this.sitters = users.sitters;
+		// });
 
 		console.log(this.babies)
 	}
