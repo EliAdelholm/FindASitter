@@ -1,21 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/delay';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
 export class AuthService {
-	isLoggedIn = false;
 
-	// store the URL so we can redirect after logging in
-	redirectUrl: string;
+	constructor(public jwtHelper: JwtHelperService) { }
 
-	login(): Observable<boolean> {
-		return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
+	// Check if the user has an active token
+	public isAuthenticated(): boolean {
+
+		const token = localStorage.getItem('APIToken');
+
+		if (token) {
+			// Check whether the token is expired and return
+			// true or false
+			return !this.jwtHelper.isTokenExpired(token);
+		}
+
+		return false;
 	}
 
-	logout(): void {
-		this.isLoggedIn = false;
+	public authenticatedUserId(): number {
+
+		const token = localStorage.getItem('APIToken');
+		const decodedToken = this.jwtHelper.decodeToken(token);
+		console.log(decodedToken.user.id)
+		return decodedToken.user.id;
+		
 	}
+
 }

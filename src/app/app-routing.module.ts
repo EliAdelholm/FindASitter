@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +14,7 @@ import { UsersListComponent } from './portal/users-list/users-list.component';
 import { UserDetailsComponent } from './portal/user-details/user-details.component';
 import { BikerProfileComponent } from './portal/biker-profile/biker-profile.component';
 import { MessagesComponent } from './portal/messages/messages.component';
+import { ProfileComponent } from './portal/profile/profile.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -24,9 +25,10 @@ const routes: Routes = [
 		{ path: 'register', component: RegisterComponent},
 		{ path: 'contact', component: ContactComponent },
 	] },
-	{ path: 'portal', component: PortalComponent, children: [
+	{ path: 'portal', component: PortalComponent, canActivate: [AuthGuardService], children: [
 		{ path: 'overview', redirectTo: '', pathMatch: 'full' },
-		{ path: '', component: OverviewComponent },
+		{ path: '', component: OverviewComponent, canActivate: [AuthGuardService] },
+		{ path: 'profile', component: ProfileComponent },
 		{ path: 'find-biker', component: FindBikerComponent },
 		{ path: 'messages', component: MessagesComponent},
 		{ path: 'find-biker/:username', component: BikerProfileComponent },

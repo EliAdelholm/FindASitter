@@ -12,4 +12,8 @@ export class IndexComponent implements OnInit {
   ngOnInit() {
   }
 
+  signupWithGoogle () {
+    console.log('test')
+  }
+
 }

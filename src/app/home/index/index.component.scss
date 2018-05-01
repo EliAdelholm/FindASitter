@@ -24,7 +24,23 @@
     .mat-card {
         margin-bottom: 15px;
         width: 350px;
-        background: rgba(0,0,0,0.7);
+        cursor: pointer;
+    }
+
+    #signup-email {
+        background: #e91e63;
+    }
+
+    #signup-google {
+        background: #d44132;
+    }
+
+    #signup-facebook {
+        background: #395a9a;;
+    }
+
+    img {
+        width: 20px;
     }
 }
 

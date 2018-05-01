@@ -52,8 +52,16 @@ import { createLogger } from "redux-logger";
 import { FindBikerComponent } from './portal/find-biker/find-biker.component';
 import { BikerProfileComponent } from './portal/biker-profile/biker-profile.component';
 import { MessagesComponent } from './portal/messages/messages.component'
+import { JwtModule } from '@auth0/angular-jwt';
+import { StaticEpic } from './static.epic';
+import { StaticActions } from './static.actions';
+import { StaticService } from './static.service';
+import { SignupService } from './signup.service';
+import { ProfileComponent } from './portal/profile/profile.component';
 
-
+export function tokenGetter() {
+	return localStorage.getItem('APIToken');
+}
 
 @NgModule({
 	declarations: [
@@ -70,7 +78,8 @@ import { MessagesComponent } from './portal/messages/messages.component'
 		UserDetailsComponent,
 		FindBikerComponent,
 		BikerProfileComponent,
-		MessagesComponent
+		MessagesComponent,
+		ProfileComponent
 	],
 	imports: [
 		BrowserModule,
@@ -94,25 +103,42 @@ import { MessagesComponent } from './portal/messages/messages.component'
 		NgReduxRouterModule.forRoot(),
 		HttpClientModule,
 		MatIconModule,
-		MatChipsModule
+		MatChipsModule,
+		HttpClientModule,
+		JwtModule.forRoot({
+			config: {
+				tokenGetter: tokenGetter,
+				whitelistedDomains: ['localhost:3000'],
+        		blacklistedRoutes: ['localhost:3000/auth/']
+			}
+		})
 	],
-	providers: [AuthGuardService, AuthService, MatMomentDateModule, UsersActions, UsersService, UsersEpic],
+	providers: [AuthGuardService, AuthService, MatMomentDateModule, 
+		UsersActions, UsersService, UsersEpic, 
+		StaticActions, StaticService, StaticEpic,
+		SignupService
+	],
 	bootstrap: [AppComponent]
 })
 
 export class AppModule {
 	constructor(private ngRedux: NgRedux<IAppState>,
 		private devTool: DevToolsExtension,
-		private ngReduxRouter: NgReduxRouter, private usersEpic: UsersEpic ) {
+		private ngReduxRouter: NgReduxRouter, private usersEpic: UsersEpic, private staticEpic: StaticEpic) {
 
 
 		// From app.module.ts - constructor
 		const rootEpic = combineEpics(
+			this.usersEpic.authenticate,
+			this.usersEpic.getAuthUser,
 			this.usersEpic.getUsers,
 			this.usersEpic.getConversations,
-			// this.usersEpic.addUser,
-			// this.usersEpic.updateUser,
+			this.usersEpic.addUser,
+			this.usersEpic.updateUser,
 			// this.usersEpic.deleteUser
+
+			this.staticEpic.getAreas,
+			this.staticEpic.getLicences
 		);
 		// Middleware
 		// http://redux.js.org/docs/advanced/Middleware.html

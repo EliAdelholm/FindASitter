@@ -27,20 +27,20 @@
 			</mat-card>
 		</div> -->
 		<div class="login-nav">
-			<mat-card>
-				<h2>Login</h2>
+			<mat-card routerLink="login">
+				<h2><mat-icon>lock_open</mat-icon> Login</h2>
 			</mat-card>
 
-			<mat-card>
-				<h2>Signup with Email</h2>
+			<mat-card id="signup-email" routerLink="register">
+				<h2><mat-icon>mail_outline</mat-icon> Signup with Email</h2>
 			</mat-card>
 
-			<mat-card>
-				<h2>Signup with Google</h2>
+			<mat-card id="signup-google" (click)="signupWithGoogle()">
+				<h2><img src="../../../assets/img/g-icon.png"/> Signup with Google</h2>
 			</mat-card>
 
-			<mat-card>
-				<h2>Signup with Facebook</h2>
+			<mat-card id="signup-facebook" (click)="signupWithGoogle()">
+				<h2><img src="../../../assets/img/fb-icon.png"/> Signup with Facebook</h2>
 			</mat-card>
 		</div>
 	</div>

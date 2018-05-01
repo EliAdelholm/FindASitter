@@ -1,0 +1,108 @@
+<div class="container">
+
+	<div class="profile-container">
+
+
+		<mat-card class="details">
+			<mat-card-content *ngIf="user">
+				<form id="updateForm" [formGroup]="updateForm" (submit)="onSubmit(updateForm)" novalidate>
+					<div class="account-details">
+						<h2>Account Details</h2>
+
+						<mat-form-field>
+							<input matInput formControlName="username" placeholder="Username">
+							<mat-error *ngIf="updateForm.controls.username.errors && updateForm.controls.username.touched">
+								<span *ngIf="updateForm.controls.username.errors?.required">*Reguired</span>
+								<span *ngIf="updateForm.controls.username.errors?.minlength">Min 3 characters required</span>
+								<span *ngIf="updateForm.controls.username.errors?.maxlength">Max 25 characters allowed</span>
+							</mat-error>
+						</mat-form-field>
+
+						<mat-form-field>
+							<mat-select formControlName="area" placeholder="Home area">
+								<mat-option *ngFor="let option of areas" [value]="option.id">{{ option.name }}</mat-option>
+							</mat-select>
+							<mat-error *ngIf="updateForm.controls.area.errors?.required && updateForm.controls.area.touched">
+								*Reguired
+							</mat-error>
+						</mat-form-field>
+
+						<mat-form-field>
+							<input matInput formControlName="email" placeholder="Email">
+							<mat-error *ngIf="updateForm.controls.email.errors?.required && updateForm.controls.email.touched">
+								<span *ngIf="updateForm.controls.email.errors?.required">*Reguired</span>
+								<span *ngIf="updateForm.controls.email.errors?.emailTaken">test</span>
+							</mat-error>
+						</mat-form-field>
+
+						<mat-form-field>
+							<input matInput formControlName="phone" placeholder="Phone">
+							<mat-error *ngIf="updateForm.controls.phone.errors?.required && updateForm.controls.phone.touched">
+								*Reguired
+							</mat-error>
+						</mat-form-field>
+					</div>
+					<div class="profile-details">
+						<h2>Profile Details</h2>
+
+						<mat-form-field>
+							<input matInput formControlName="firstname" placeholder="Firstname">
+							<mat-error *ngIf="updateForm.controls.firstname.errors?.required && updateForm.controls.firstname.touched">
+								*Reguired
+							</mat-error>
+						</mat-form-field>
+
+						<mat-form-field>
+							<input matInput formControlName="lastname" placeholder="Lastname">
+							<mat-error *ngIf="updateForm.controls.lastname.errors?.required && updateForm.controls.lastname.touched">
+								*Reguired
+							</mat-error>
+						</mat-form-field>
+
+						<mat-form-field>
+							<input matInput formControlName="birthdate" [matDatepicker]="picker" placeholder="Birthdate">
+							<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker></mat-datepicker>
+							<mat-error *ngIf="updateForm.controls.birthdate.errors?.required && updateForm.controls.birthdate.touched">
+								*Required
+							</mat-error>
+						</mat-form-field>
+
+						<mat-form-field>
+							<mat-select formControlName="licence" placeholder="MC Licence">
+								<mat-option *ngFor="let option of licences" [value]="option.id">{{ option.name }}</mat-option>
+							</mat-select>
+							<mat-error *ngIf="updateForm.controls.licence.errors?.required && updateForm.controls.licence.touched">
+								*Reguired
+							</mat-error>
+						</mat-form-field>
+						<button id="submitUser" mat-raised-button color="primary" type="submit">Save Changes</button>
+					</div>
+				</form>
+			</mat-card-content>
+		</mat-card>
+
+		<mat-card class="options">
+			<mat-card-content>
+				<mat-list role="list">
+					<mat-list-item role="listitem" class="option-item active">
+						<mat-icon>person</mat-icon>
+					</mat-list-item>
+					<mat-list-item role="listitem" class="option-item">
+						<mat-icon>photo</mat-icon>
+					</mat-list-item>
+					<mat-list-item role="listitem" class="option-item">
+						<mat-icon>motorcycle</mat-icon>
+					</mat-list-item>
+					<mat-list-item role="listitem" class="option-item">
+						<mat-icon>settings</mat-icon>
+					</mat-list-item>
+					<mat-list-item role="listitem" class="option-item">
+						<mat-icon>delete_forever</mat-icon>
+					</mat-list-item>
+				</mat-list>
+			</mat-card-content>
+		</mat-card>
+	</div>
+
+</div>

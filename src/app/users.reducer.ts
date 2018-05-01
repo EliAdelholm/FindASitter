@@ -8,6 +8,25 @@ const INITIAL_STATE: UsersState = UsersService.getInitialUsersState();
 export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
 
     switch (action.type) {
+        case UsersActions.AUTHENTICATE:
+            return state;
+
+        case UsersActions.RECEIVED_AUTHENTICATE:
+            localStorage.setItem('APIToken', action.payload.token);
+            return tassign(state, { auth: action.payload.data });
+
+        case UsersActions.FAILED_RECEIVED_AUTHENTICATE:
+            return state;
+
+        case UsersActions.GET_AUTH_USER:
+            return state;
+
+        case UsersActions.RECEIVED_AUTH_USER:
+            return tassign(state, { auth: action.payload.data });
+
+        case UsersActions.FAILED_RECEIVED_AUTH_USER:
+            return state;
+
         case UsersActions.GET_USERS:
             return state;
 
@@ -26,21 +45,24 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
         case UsersActions.FAILED_RECEIVED_CONVERSATIONS:
             return state;
 
-        // case UsersActions.ADD_USER:
-        //     return state;
+        case UsersActions.ADD_USER:
+            return state;
 
-        // case UsersActions.ADDED_USER:
-        //     var newState = {}
-        //     if (action.payload.userType == 'baby') {
-        //         newState = { babies: [...state.babies, action.payload] }
-        //     } else {
-        //         newState = { sitters: [...state.sitters, action.payload] }
-        //     }
-        //     console.log("reducer: ", action.payload)
-        //     return tassign(state, newState)
+        case UsersActions.ADDED_USER:
+            localStorage.setItem('APIToken', action.payload.token);
+            return tassign(state, { auth: action.payload.data });
 
-        // case UsersActions.FAILED_ADDED_USER:
-        //     return state;
+        case UsersActions.FAILED_ADDED_USER:
+            return state;
+
+        case UsersActions.UPDATE_USER:
+            return state;
+
+        case UsersActions.UPDATED_USER:
+            return tassign(state, { auth: action.payload.data });
+
+        case UsersActions.FAILED_UPDATED_USER:
+            return state;
 
         // case UsersActions.DELETE_USER:
         //     return state;

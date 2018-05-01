@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { PasswordValidator } from '../../PasswordValidator';
+import { UsersActions } from '../../users.actions';
 
 @Component({
 	selector: 'login',
@@ -13,7 +14,7 @@ import { PasswordValidator } from '../../PasswordValidator';
 export class LoginComponent implements OnInit {
 	loginForm: FormGroup;
 
-	constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+	constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private usersActions: UsersActions) {
 	}
 
 	onSubmit(loginForm) {
@@ -22,17 +23,18 @@ export class LoginComponent implements OnInit {
 		if (loginForm.valid) {
 
 			// Navigate to some page
-			this.authService.login().subscribe(x => {
+			this.usersActions.authenticate(loginForm.value);
+			// this.authService.login().subscribe(x => {
 
-				// If a redictUrl is specified go there and then clear the slate
-				if (this.authService.redirectUrl) {
-					this.router.navigate([this.authService.redirectUrl])
-					this.authService.redirectUrl = null
-				} else {
-					// Else just go to the overview page
-					this.router.navigate(['portal'])
-				}
-			})
+			// 	// If a redictUrl is specified go there and then clear the slate
+			// 	if (this.authService.redirectUrl) {
+			// 		this.router.navigate([this.authService.redirectUrl])
+			// 		this.authService.redirectUrl = null
+			// 	} else {
+			// 		// Else just go to the overview page
+			// 		this.router.navigate(['portal'])
+			// 	}
+			// })
 
 		}
 	}
@@ -40,12 +42,7 @@ export class LoginComponent implements OnInit {
 	ngOnInit() {
 		this.loginForm = this.fb.group({
 			username: ['', Validators.required],
-			password: ['',
-				Validators.compose([
-					Validators.required,
-					PasswordValidator.getPasswordValidator()
-				]
-				)]
+			password: ['', Validators.required]
 		});
 	}
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from './users.service';
+import { StaticActions } from './static.actions';
+import { AuthService } from './auth.service';
 import { UsersActions } from './users.actions';
 
 @Component({
@@ -9,9 +10,15 @@ import { UsersActions } from './users.actions';
 })
 export class AppComponent implements OnInit {
 	title = 'FindASitter';
-	constructor(private usersService: UsersService, private usersActions: UsersActions) {}
+
+	constructor(private staticActions: StaticActions, private usersActions: UsersActions, private auth: AuthService) { }
 
 	ngOnInit(): void {
-		this.usersActions.getUsers();
+		this.staticActions.getAreas();
+		this.staticActions.getLicences();
+
+		if (this.auth.isAuthenticated()) {
+			this.usersActions.getAuthUser(this.auth.authenticatedUserId())
+		}
 	}
 }

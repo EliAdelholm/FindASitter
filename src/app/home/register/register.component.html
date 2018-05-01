@@ -11,16 +11,18 @@
 					<mat-form-field>
 						<input matInput formControlName="username" placeholder="Username">
 						<mat-error *ngIf="registerForm.controls.username.errors && registerForm.controls.username.touched">
-							<span *ngIf="registerForm.controls.username.errors?.required">Username is required</span>
+							<span *ngIf="registerForm.controls.username.errors?.required">*Reguired</span>
 							<span *ngIf="registerForm.controls.username.errors?.minlength">Min 3 characters required</span>
 							<span *ngIf="registerForm.controls.username.errors?.maxlength">Max 25 characters allowed</span>
 						</mat-error>
 					</mat-form-field>
 
 					<mat-form-field>
-						<input matInput formControlName="area" placeholder="Home area">
+						<mat-select formControlName="area" placeholder="Home area">
+							<mat-option *ngFor="let option of areas" [value]="option.id">{{ option.name }}</mat-option>
+						</mat-select>
 						<mat-error *ngIf="registerForm.controls.area.errors?.required && registerForm.controls.area.touched">
-							Area is required
+							*Reguired
 						</mat-error>
 					</mat-form-field>
 				</div>
@@ -29,14 +31,33 @@
 					<mat-form-field>
 						<input matInput formControlName="password" placeholder="Password">
 						<mat-error *ngIf="registerForm.controls.password.errors && registerForm.controls.password.touched">
-							<span *ngIf="registerForm.controls.password.errors?.required">Password is required</span>
+							<span *ngIf="registerForm.controls.password.errors?.required">*Reguired</span>
 						</mat-error>
 
 					</mat-form-field>
 
 					<mat-form-field>
 						<input matInput formControlName="repeat" placeholder="Repeat password">
+						<mat-error *ngIf="registerForm.controls.repeat.errors && registerForm.controls.repeat.touched">
+							<span *ngIf="registerForm.controls.repeat.errors?.required">*Reguired</span>
+						</mat-error>
+					</mat-form-field>
+				</div>
 
+				<div>
+					<mat-form-field>
+						<input matInput formControlName="email" placeholder="Email">
+						<mat-error *ngIf="registerForm.controls.email.errors?.required && registerForm.controls.email.touched">
+							<span *ngIf="registerForm.controls.email.errors?.required">*Reguired</span>
+							<span *ngIf="registerForm.controls.email.errors?.emailTaken">test</span>
+						</mat-error>
+					</mat-form-field>
+
+					<mat-form-field>
+						<input matInput formControlName="phone" placeholder="Phone">
+						<mat-error *ngIf="registerForm.controls.phone.errors?.required && registerForm.controls.phone.touched">
+							*Reguired
+						</mat-error>
 					</mat-form-field>
 				</div>
 
@@ -44,37 +65,14 @@
 					<mat-form-field>
 						<input matInput formControlName="firstname" placeholder="Firstname">
 						<mat-error *ngIf="registerForm.controls.firstname.errors?.required && registerForm.controls.firstname.touched">
-							You must fill out your firstname.
+							*Reguired
 						</mat-error>
 					</mat-form-field>
 
 					<mat-form-field>
 						<input matInput formControlName="lastname" placeholder="Lastname">
 						<mat-error *ngIf="registerForm.controls.lastname.errors?.required && registerForm.controls.lastname.touched">
-							You must fill out your lastname.
-						</mat-error>
-					</mat-form-field>
-				</div>
-
-				<div>
-					<mat-form-field>
-						<input matInput formControlName="birthdate" [matDatepicker]="picker" placeholder="Birthdate">
-						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-						<mat-datepicker #picker></mat-datepicker>
-						<mat-error *ngIf="registerForm.controls.birthdate.errors?.required && registerForm.controls.birthdate.touched">
-							You must fill out birthdate.
-						</mat-error>
-					</mat-form-field>
-
-
-					<mat-form-field>
-						<mat-select formControlName="gender" placeholder="Gender">
-							<mat-option value="female">Female</mat-option>
-							<mat-option value="male">Male</mat-option>
-							<mat-option value="other">Other</mat-option>
-						</mat-select>
-						<mat-error *ngIf="registerForm.controls.gender.errors?.required && registerForm.controls.gender.touched">
-							You must fill out your gender.
+							*Reguired
 						</mat-error>
 					</mat-form-field>
 				</div>

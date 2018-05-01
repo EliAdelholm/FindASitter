@@ -13,6 +13,36 @@ export class UsersEpic {
 
     constructor(private usersService: UsersService) {}
 
+    authenticate = (action$: ActionsObservable<any>) => {
+        return action$.ofType(UsersActions.AUTHENTICATE)
+            .mergeMap(({ payload }) => {
+                return this.usersService.authenticate(payload)
+                    .map((result: any[]) => ({ 
+                        type: UsersActions.RECEIVED_AUTHENTICATE,
+                        payload: result
+                    }))
+                    .catch(error => Observable.of({
+                        type: UsersActions.FAILED_RECEIVED_AUTHENTICATE,
+                        payload: error
+                    }));
+            });
+    }
+
+    getAuthUser = (action$: ActionsObservable<any>) => {
+        return action$.ofType(UsersActions.GET_AUTH_USER)
+            .mergeMap(({ payload }) => {
+                return this.usersService.getAuthUser(payload)
+                    .map((result: any[]) => ({ 
+                        type: UsersActions.RECEIVED_AUTH_USER,
+                        payload: result
+                    }))
+                    .catch(error => Observable.of({
+                        type: UsersActions.FAILED_RECEIVED_AUTH_USER,
+                        payload: error
+                    }));
+            });
+    }
+
     getUsers = (action$: ActionsObservable<any>) => {
         return action$.ofType(UsersActions.GET_USERS) 
             .mergeMap(({ payload }) => {
@@ -43,37 +73,37 @@ export class UsersEpic {
             });
     }
 
-    // addUser = (action$: ActionsObservable<any>) => {
-    //     return action$.ofType(UsersActions.ADD_USER) 
-    //         .mergeMap(({ payload }) => {
-    //             console.log("epic: ", payload)
-    //             return this.usersService.addUser(payload)
-    //                 .map((result: any[]) => ({ 
-    //                     type: UsersActions.ADDED_USER,
-    //                     payload: result
-    //                 }))
-    //                 .catch(error => Observable.of({
-    //                     type: UsersActions.FAILED_ADDED_USER,
-    //                     payload: error
-    //                 }));
-    //         });
-    // }
+    addUser = (action$: ActionsObservable<any>) => {
+        return action$.ofType(UsersActions.ADD_USER) 
+            .mergeMap(({ payload }) => {
+                console.log("epic: ", payload)
+                return this.usersService.addUser(payload)
+                    .map((result: any[]) => ({ 
+                        type: UsersActions.ADDED_USER,
+                        payload: result
+                    }))
+                    .catch(error => Observable.of({
+                        type: UsersActions.FAILED_ADDED_USER,
+                        payload: error
+                    }));
+            });
+    }
 
-    // updateUser = (action$: ActionsObservable<any>) => {
-    //     return action$.ofType(UsersActions.UPDATE_USER) 
-    //         .mergeMap(({ payload }) => {
-    //             console.log("epic: ", payload)
-    //             return this.usersService.updateUser(payload.user, payload.id)
-    //                 .map((result: any[]) => ({ 
-    //                     type: UsersActions.UPDATED_USER,
-    //                     payload: result.filter
-    //                 }))
-    //                 .catch(error => Observable.of({
-    //                     type: UsersActions.FAILED_UPDATED_USER,
-    //                     payload: error
-    //                 }));
-    //         });
-    // }
+    updateUser = (action$: ActionsObservable<any>) => {
+        return action$.ofType(UsersActions.UPDATE_USER) 
+            .mergeMap(({ payload }) => {
+                console.log("epic: ", payload)
+                return this.usersService.updateUser(payload.user, payload.userId)
+                    .map((result: any[]) => ({ 
+                        type: UsersActions.UPDATED_USER,
+                        payload: result
+                    }))
+                    .catch(error => Observable.of({
+                        type: UsersActions.FAILED_UPDATED_USER,
+                        payload: error
+                    }));
+            });
+    }
 
     // deleteUser = (action$: ActionsObservable<any>) => {
     //     return action$.ofType(UsersActions.DELETE_USER) 

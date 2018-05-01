@@ -11,6 +11,15 @@ export class UsersActions {
     }
     
     // Available actions
+    static AUTHENTICATE: string = 'AUTHENTICATE';
+    static RECEIVED_AUTHENTICATE: string = 'RECEIVED_AUTHENTICATE';
+    static FAILED_RECEIVED_AUTHENTICATE: string = 'FAILED_RECEIVED_AUTHENTICATE';
+
+     // Available actions
+     static GET_AUTH_USER: string = 'GET_AUTH_USER';
+     static RECEIVED_AUTH_USER: string = 'RECEIVED_AUTH_USER';
+     static FAILED_RECEIVED_AUTH_USER: string = 'FAILED_RECEIVED_AUTH_USER';
+
     static GET_USERS: string = 'GET_USERS';
     static RECEIVED_USERS: string = 'RECEIVED_USERS';
     static FAILED_RECEIVED_USERS: string = 'FAILED_RECEIVED_USERS';
@@ -18,7 +27,6 @@ export class UsersActions {
     static GET_CONVERSATIONS: string = 'GET_CONVERSATIONS';
     static RECEIVED_CONVERSATIONS: string = 'RECEIVED_CONVERSATIONS';
     static FAILED_RECEIVED_CONVERSATIONS: string = 'FAILED_RECEIVED_CONVERSATIONS';
-
 
     static ADD_USER: string = 'ADD_USER';
     static ADDED_USER: string = 'ADDED_USER';
@@ -32,12 +40,19 @@ export class UsersActions {
     static DELETED_USER: string = 'DELETED_USER';
     static FAILED_DELETED_USER: string = 'FAILED_DELETED_USER';
 
-    static SET_TYPE: string = 'SET_TYPE';
-    static ADD_BABY: string = 'ADD_BABY';
-    static DELETE_BABY: string = 'DELETE_BABY';
-    static ADD_SITTER: string = 'ADD_SITTER';
-    static DELETE_SITTER: string = 'DELETE_SITTER';
-    static RATE_BABY: string = 'RATE_BABY';
+    authenticate(authDetails: {}) {
+        this.ngRedux.dispatch({
+            type: UsersActions.AUTHENTICATE,
+            payload: authDetails
+        })
+    }
+
+    getAuthUser(userId: number) {
+        this.ngRedux.dispatch({
+            type: UsersActions.GET_AUTH_USER,
+            payload: userId
+        })
+    }
 
     getUsers() {
         this.ngRedux.dispatch({
@@ -52,10 +67,16 @@ export class UsersActions {
     }
 
     addUser(user: {}): void {
-        console.log("action: ", user)
         this.ngRedux.dispatch({
             type: UsersActions.ADD_USER,
             payload: user
+        })
+    }
+
+    updateUser(user: {}, userId: number): void {
+        this.ngRedux.dispatch({
+            type: UsersActions.UPDATE_USER,
+            payload: {user, userId}
         })
     }
 
@@ -66,38 +87,4 @@ export class UsersActions {
         })
     }
 
-    setType(isBaby: boolean): void {
-        this.ngRedux.dispatch({
-            type: UsersActions.SET_TYPE,
-            payload: isBaby
-        })
-    }
-
-    addBaby(baby: {}): void { 
-        this.ngRedux.dispatch({
-            type: UsersActions.ADD_BABY,
-            payload: baby
-        })
-     };
-
-     deleteBaby(babyId: string): void {
-        this.ngRedux.dispatch({
-            type: UsersActions.DELETE_BABY,
-            payload: babyId
-        })
-     }
-
-     addSitter(sitter: {}): void { 
-        this.ngRedux.dispatch({
-            type: UsersActions.ADD_SITTER,
-            payload: sitter
-        })
-     }
-
-     deleteSitter(sitterId: string): void {
-        this.ngRedux.dispatch({
-            type: UsersActions.DELETE_SITTER,
-            payload: sitterId
-        })
-     }
 }

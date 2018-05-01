@@ -4,9 +4,9 @@
 	<button mat-button routerLink="find-biker">Find biker</button>
 	<button mat-button routerLink="messages">Messages</button>
 	<!-- <button mat-button routerLink="users">Users</button> -->
-	<button mat-button routerLink="">Logout</button>
+	<button mat-button (click)="logout()">Logout</button>
 
-	<div class="logged-in-user">
+	<div class="logged-in-user" routerLink="profile">
 		<p>Username</p>
 		<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
 	</div>
