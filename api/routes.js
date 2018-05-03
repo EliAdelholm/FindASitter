@@ -16,10 +16,15 @@ const getMessages = require(__dirname + '/controllers/getMessages.js')
 const addMessage = require(__dirname + '/controllers/addMessage.js')
 const getAreas = require(__dirname + '/controllers/getAreas.js')
 const getLicences = require(__dirname + '/controllers/getLicences.js')
+const uploadImage = require(__dirname + '/controllers/uploadImage.js')
 
 /* API ROUTES */
 router.get('/areas', function (req, res) {
     getAreas(req, res)
+})
+
+router.post('/image/:id', function (req, res) {
+    uploadImage(req, res)
 })
 
 router.get('/licences', function (req, res) {
@@ -50,7 +55,7 @@ router.get('/user/:id', function (req, res) {
     getUser(req, res)
 })
 
-router.get('/user/delete/:id', function (req, res) {
+router.delete('/user/:id', function (req, res) {
     deleteUser(req, res)
 })
 

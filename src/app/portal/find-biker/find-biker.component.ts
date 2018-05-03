@@ -11,7 +11,10 @@ import { UsersActions } from '../../users.actions';
 })
 export class FindBikerComponent implements OnInit, OnDestroy {
 	subscription;
+	staticSubscription;
 	users = [];
+	areas = [];
+	licences = [];
 
 	ngOnDestroy(): void {
 		this.subscription.unsubscribe();
@@ -23,6 +26,11 @@ export class FindBikerComponent implements OnInit, OnDestroy {
 		this.subscription = this.ngRedux.select(state => state.users).subscribe(users => {
 			this.users = users.profiles
 		});
+
+		this.staticSubscription = this.ngRedux.select(state => state.static).subscribe(staticData => {
+			this.areas = staticData.areas;
+			this.licences = staticData.licences;
+		})
 
 	}
 

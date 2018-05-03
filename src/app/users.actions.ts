@@ -6,19 +6,18 @@ import { Baby } from './entities/baby';
 @Injectable()
 export class UsersActions {
 
-    constructor( private ngRedux: NgRedux<IAppState> ) { 
+    constructor(private ngRedux: NgRedux<IAppState>) {
 
     }
-    
+
     // Available actions
     static AUTHENTICATE: string = 'AUTHENTICATE';
     static RECEIVED_AUTHENTICATE: string = 'RECEIVED_AUTHENTICATE';
     static FAILED_RECEIVED_AUTHENTICATE: string = 'FAILED_RECEIVED_AUTHENTICATE';
 
-     // Available actions
-     static GET_AUTH_USER: string = 'GET_AUTH_USER';
-     static RECEIVED_AUTH_USER: string = 'RECEIVED_AUTH_USER';
-     static FAILED_RECEIVED_AUTH_USER: string = 'FAILED_RECEIVED_AUTH_USER';
+    static GET_AUTH_USER: string = 'GET_AUTH_USER';
+    static RECEIVED_AUTH_USER: string = 'RECEIVED_AUTH_USER';
+    static FAILED_RECEIVED_AUTH_USER: string = 'FAILED_RECEIVED_AUTH_USER';
 
     static GET_USERS: string = 'GET_USERS';
     static RECEIVED_USERS: string = 'RECEIVED_USERS';
@@ -35,6 +34,10 @@ export class UsersActions {
     static UPDATE_USER: string = 'UPDATE_USER';
     static UPDATED_USER: string = 'UPDATED_USER';
     static FAILED_UPDATED_USER: string = 'FAILED_UPDATED_USER';
+
+    static UPDATE_IMAGE: string = 'UPDATE_IMAGE';
+    static UPDATED_IMAGE: string = 'UPDATED_IMAGE';
+    static FAILED_UPDATED_IMAGE: string = 'FAILED_UPDATED_IMAGE';
 
     static DELETE_USER: string = 'DELETE_USER';
     static DELETED_USER: string = 'DELETED_USER';
@@ -76,11 +79,18 @@ export class UsersActions {
     updateUser(user: {}, userId: number): void {
         this.ngRedux.dispatch({
             type: UsersActions.UPDATE_USER,
-            payload: {user, userId}
+            payload: { user, userId }
         })
     }
 
-    deleteUser(userId: string): void {
+    updateImage(image: {}, userId: number) {
+        this.ngRedux.dispatch({
+            type: UsersActions.UPDATE_IMAGE,
+            payload: { image, userId }
+        })
+    }
+
+    deleteUser(userId: number): void {
         this.ngRedux.dispatch({
             type: UsersActions.DELETE_USER,
             payload: userId

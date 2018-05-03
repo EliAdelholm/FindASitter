@@ -1,14 +1,38 @@
+.find-biker {
+    display: flex;
+    justify-content: center;
+}
+
+.filter-bikers {
+    margin-bottom: 24px;
+    font-size: 16px;
+
+    .fill-remaining-space {
+        flex: 1 1 auto;
+    }
+
+    .mat-form-field {
+        padding: 0 5px;
+        width: 150px;
+    }
+
+    .mat-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+    }
+}
+
 .biker-card {
-    width: 350px;
+    width: 250px;
     margin: 0px 0px 30px;
 }
 
 .biker-image {
-    width: 398;
     height: 200px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
     margin: -24px -24px 25px -24px !important;
 }
 

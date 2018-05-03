@@ -4,9 +4,9 @@
 
 
 		<mat-card class="details">
-			<mat-card-content *ngIf="user">
+			<mat-card-content *ngIf="activeView == 'details' && user">
 				<form id="updateForm" [formGroup]="updateForm" (submit)="onSubmit(updateForm)" novalidate>
-					<div class="account-details">
+					<div class="profile-section">
 						<h2>Account Details</h2>
 
 						<mat-form-field>
@@ -42,7 +42,7 @@
 							</mat-error>
 						</mat-form-field>
 					</div>
-					<div class="profile-details">
+					<div class="profile-section">
 						<h2>Profile Details</h2>
 
 						<mat-form-field>
@@ -80,24 +80,52 @@
 					</div>
 				</form>
 			</mat-card-content>
+
+			<mat-card-content *ngIf="activeView == 'image-upload'">
+				<form id="uploadForm" [formGroup]="uploadForm" (submit)="onUpload(uploadForm)" novalidate>
+					<div class="profile-section">
+						<h2>Current Image</h2>
+						<img class="biker-image" [src]="'../../assets/img/' + user.image + ''" />
+					</div>
+
+					<div class="profile-section">
+						<h2>Change Image</h2>
+						
+							<input type="file" (change)="previewImage($event)">
+							<!-- <ngx-mat-file-input formControlName="image" placeholder="Select Image" type="file" (change)="previewImage($event)"></ngx-mat-file-input> -->
+							
+						
+
+						<button id="uploadImage" mat-raised-button color="primary" type="submit">Upload image</button>
+					</div>
+
+				</form>
+			</mat-card-content>
+
+			<mat-card-content *ngIf="activeView == 'delete-account'">
+				<div>
+					<h2>Delete Account</h2>
+					<button mat-raised-button color="primary" (click)="deleteAccount()">Delete forever</button>
+				</div>
+			</mat-card-content>
 		</mat-card>
 
 		<mat-card class="options">
 			<mat-card-content>
 				<mat-list role="list">
-					<mat-list-item role="listitem" class="option-item active">
+					<mat-list-item role="listitem" class="option-item" [class.active]="activeView=='details'" (click)="changeView('details')">
 						<mat-icon>person</mat-icon>
 					</mat-list-item>
-					<mat-list-item role="listitem" class="option-item">
+					<mat-list-item role="listitem" class="option-item" [class.active]="activeView=='image-upload'" (click)="changeView('image-upload')">
 						<mat-icon>photo</mat-icon>
 					</mat-list-item>
-					<mat-list-item role="listitem" class="option-item">
+					<mat-list-item role="listitem" class="option-item" [class.active]="activeView=='bikes'" (click)="changeView('bikes')">
 						<mat-icon>motorcycle</mat-icon>
 					</mat-list-item>
-					<mat-list-item role="listitem" class="option-item">
+					<mat-list-item role="listitem" class="option-item" [class.active]="activeView=='settings'" (click)="changeView('settings')">
 						<mat-icon>settings</mat-icon>
 					</mat-list-item>
-					<mat-list-item role="listitem" class="option-item">
+					<mat-list-item role="listitem" class="option-item" [class.active]="activeView=='delete-account'" (click)="changeView('delete-account')">
 						<mat-icon>delete_forever</mat-icon>
 					</mat-list-item>
 				</mat-list>

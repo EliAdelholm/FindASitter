@@ -13,6 +13,7 @@ export class UsersState {
 export class StaticState {
     areas: any[];
     licences: any[];
+    profileView: String;
 }
 
 export class IAppState {

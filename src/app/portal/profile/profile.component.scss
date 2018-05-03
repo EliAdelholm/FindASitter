@@ -13,6 +13,8 @@ h2 {
 form {
     background-color: #424242;
     padding-bottom: 24px;
+    display: flex;
+    justify-content: space-evenly;
 
     .mat-form-field {
         display: block;
@@ -33,6 +35,11 @@ form {
 
     .option-item {
         height: 80px;
+        cursor: pointer;
+    }
+
+    .option-item:hover {
+        background: #616161;
     }
 
     .active {
@@ -51,13 +58,8 @@ form {
     background: rgba(66,66,66,0.5);
     padding: 0;
 
-    .account-details, .profile-details {
+    .profile-section {
         width: 50%;
-    }
-
-    #updateForm {
-        display: flex;
-        justify-content: space-evenly;
     }
 
     .mat-card-content {
@@ -70,6 +72,11 @@ form {
     p {
         margin: 0;
     }
+}
+
+.biker-image {
+    width: 90%;
+    margin-left: 5%;
 }
 
 .clear {

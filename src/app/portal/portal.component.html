@@ -1,14 +1,12 @@
 <mat-toolbar color="primary" class="desktop-nav">
-	<h2>FindABiker </h2>
-	<button mat-button routerLink="overview">Overview</button>
-	<button mat-button routerLink="find-biker">Find biker</button>
+	<button mat-button routerLink="overview"><h2>Find a Biker</h2></button>
 	<button mat-button routerLink="messages">Messages</button>
 	<!-- <button mat-button routerLink="users">Users</button> -->
 	<button mat-button (click)="logout()">Logout</button>
 
-	<div class="logged-in-user" routerLink="profile">
-		<p>Username</p>
-		<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+	<div class="logged-in-user" routerLink="profile" *ngIf="user">
+		<p>{{ user.username }}</p>
+		<div class="profile-img" [style.background]="'url(../../assets/img/' + user.image + ')'"></div>
 	</div>
 </mat-toolbar>
 

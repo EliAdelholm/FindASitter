@@ -24,6 +24,11 @@ export class LoginComponent implements OnInit {
 
 			// Navigate to some page
 			this.usersActions.authenticate(loginForm.value);
+			setTimeout(function() {
+				if (localStorage.getItem('APIToken')) {
+					this.router.navigate(['portal'])
+				}
+			}, 1000)
 			// this.authService.login().subscribe(x => {
 
 			// 	// If a redictUrl is specified go there and then clear the slate

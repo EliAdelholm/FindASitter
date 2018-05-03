@@ -1,22 +1,45 @@
-<div class="container">
-
-    <div class="heading">
-        <h1>
-            Find Biker
-        </h1>
-    </div>
+<div class="find-biker">
 
     <div class="card-container">
+        <mat-toolbar class="filter-bikers">
+            <span class="fill-remaining-space"></span>
+            <mat-form-field>
+                <mat-select>
+                    <mat-option value="0">All areas</mat-option>
+                    <mat-option *ngFor="let option of areas" [value]="option.id">{{ option.name }}</mat-option>
+                </mat-select>
+                <mat-icon matPrefix>place</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select>
+                    <mat-option>All ages</mat-option>
+                </mat-select>
+                <mat-icon matPrefix>today</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select>
+                    <mat-option value="0">All licences</mat-option>
+                    <mat-option *ngFor="let option of licences" [value]="option.id">{{ option.name }}</mat-option>
+                </mat-select>
+                <mat-icon matPrefix>motorcycle</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="text">
+                <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+        </mat-toolbar>
+
 
         <mat-card class="biker-card" *ngFor="let user of users">
-            <div class="biker-image" style="background-image: url('../../assets/img/bg-bike1.jpg')" routerLink="{{ user.username }}"></div>
+            <div class="biker-image" [style.background]="'url(../../assets/img/' + user.image + ')'" routerLink="biker/{{ user.username }}"></div>
             <mat-card-content>
                 <h3>{{ user.username }}</h3>
                 <p>Average Rating: 5</p>
-                <button mat-fab color="primary" class="chat-button" type="button"><mat-icon>chat</mat-icon></button>
+                <button mat-fab color="primary" class="chat-button" type="button">
+                    <mat-icon>chat</mat-icon>
+                </button>
             </mat-card-content>
         </mat-card>
 
     </div>
-
 </div>

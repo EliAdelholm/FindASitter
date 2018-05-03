@@ -16,6 +16,6 @@ export class StaticService {
     }
 
     static getInitialStaticState(): StaticState {
-        return { areas: [], licences: [] };
+        return { areas: [], licences: [], profileView: "details" };
     }
 }

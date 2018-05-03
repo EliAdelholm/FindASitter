@@ -26,6 +26,9 @@ export function staticReducer(state: StaticState = INITIAL_STATE, action: any) {
         case StaticActions.FAILED_RECEIVED_LICENCES:
             return state;
 
+        case StaticActions.UPDATE_PROFILE_VIEW:
+            return tassign(state, { profileView: action.payload });
+
         default:
             return state;
     }

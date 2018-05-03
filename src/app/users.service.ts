@@ -35,14 +35,18 @@ export class UsersService {
         return this.http.post('/api/user/' + userId, user)
     }
 
-    // deleteUser(id: String) {
-    //     const httpOptions = {
-    //         headers: new HttpHeaders({
-    //             'Content-Type': 'application/json',
-    //         })
-    //     };
-    //     return this.http.post('http://angular2api1.azurewebsites.net/api/internships/delete/'+id, httpOptions)
-    // }
+    updateImage(image: {}, userId: number) {
+        return this.http.post('/api/image/' + userId, image)
+    }
+
+    deleteUser(userId: String) {
+        // const httpOptions = {
+        //     headers: new HttpHeaders({
+        //         'Content-Type': 'application/json',
+        //     })
+        // };
+        return this.http.delete('/api/user/' + userId)
+    }
 
     static getInitialUsersState(): UsersState {
         return { auth: null, profiles: [], conversations: [] };

@@ -59,23 +59,31 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
             return state;
 
         case UsersActions.UPDATED_USER:
-            return tassign(state, { auth: action.payload.data });
+            let updatedUser = Object.assign(state.auth, action.payload.data);
+            return tassign(state, { auth: updatedUser });
 
         case UsersActions.FAILED_UPDATED_USER:
             return state;
 
-        // case UsersActions.DELETE_USER:
-        //     return state;
+        case UsersActions.UPDATE_IMAGE:
+            return state;
 
-        // case UsersActions.DELETED_USER:
-        //     console.log(action.payload)
-        //     var newBabyArray = state.babies.filter((item) => item._id !== action.payload);
-        //     var newSitterArray = state.sitters.filter((item) => item._id !== action.payload);
-        //     return tassign(state, { sitters: newSitterArray, babies: newBabyArray });
+        case UsersActions.UPDATED_IMAGE:
+            let updatedImage = Object.assign(state.auth, action.payload.data);
+            return tassign(state, { auth: updatedImage });
 
-        // case UsersActions.FAILED_DELETED_USER:
-        //     console.log(action.payload)
-        //     return state;
+        case UsersActions.FAILED_UPDATED_IMAGE:
+            return state;
+
+        case UsersActions.DELETE_USER:
+            return state;
+
+        case UsersActions.DELETED_USER:
+            localStorage.removeItem('APIToken');
+            return tassign(state, { auth: null });
+
+        case UsersActions.FAILED_DELETED_USER:
+            return state;
 
         // case UsersActions.SET_TYPE: // payload: boolean
         //     return tassign(state, { isBaby: action.payload });

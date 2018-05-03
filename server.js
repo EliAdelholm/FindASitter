@@ -1,6 +1,7 @@
 /* DEPENDENCIES */
 
 const express = require('express')
+const fileUpload = require('express-fileupload')
 const app = express()
 const sqlite = require('sqlite3')
 const chalk = require('chalk')
@@ -124,7 +125,8 @@ app.get('/auth/google/callback',
 //     });
 
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}))
+app.use(fileUpload())
 
 // Use client-session middleware for persistent login
 app.use(session({

@@ -19,6 +19,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -104,7 +106,9 @@ export function tokenGetter() {
 		HttpClientModule,
 		MatIconModule,
 		MatChipsModule,
+		MatDialogModule,
 		HttpClientModule,
+		MaterialFileInputModule,
 		JwtModule.forRoot({
 			config: {
 				tokenGetter: tokenGetter,
@@ -135,7 +139,8 @@ export class AppModule {
 			this.usersEpic.getConversations,
 			this.usersEpic.addUser,
 			this.usersEpic.updateUser,
-			// this.usersEpic.deleteUser
+			this.usersEpic.updateImage,
+			this.usersEpic.deleteUser,
 
 			this.staticEpic.getAreas,
 			this.staticEpic.getLicences
