@@ -10,14 +10,15 @@ import { UsersActions } from '../../users.actions';
 	styleUrls: ['./find-biker.component.scss']
 })
 export class FindBikerComponent implements OnInit, OnDestroy {
-	subscription;
-	staticSubscription;
+	subscription: Subscription;
+	staticSubscription: Subscription;
 	users = [];
 	areas = [];
 	licences = [];
 
 	ngOnDestroy(): void {
 		this.subscription.unsubscribe();
+		this.staticSubscription.unsubscribe();
 	}
 
 	constructor(private ngRedux: NgRedux<IAppState>, private usersActions: UsersActions) { }

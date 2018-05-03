@@ -5,8 +5,10 @@
 			<mat-card-content>
 				<mat-list role="list">
 					<mat-list-item role="listitem" class="contact-item active" *ngFor="let conversation of conversations">
-						<img matListAvatar src="../../assets/img/{{conversation.users[0].image}}" alt="...">
-						<h4 matLine>{{ conversation.users[0].username }}</h4>
+						<img matListAvatar *ngIf="conversation.users[0]" src="../../assets/img/{{conversation.users[0].image}}" alt="...">
+						<img matListAvatar *ngIf="!conversation.users[0]" src="../../assets/img/deleted-user.png" alt="...">
+						<h4 matLine *ngIf="conversation.users[0]">{{ conversation.users[0].username }}</h4>
+						<h4 matLine *ngIf="!conversation.users[0]">Deleted User</h4>
 						<p matLine>Apr 18, 2018</p>
 					</mat-list-item>
 				</mat-list>

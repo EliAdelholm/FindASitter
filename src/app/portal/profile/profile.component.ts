@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { PasswordValidator } from '../../PasswordValidator';
 import { NgRedux } from '@angular-redux/store';
@@ -6,6 +6,7 @@ import { IAppState } from '../../store/store';
 import { Biker } from '../../../entities/biker';
 import { UsersActions } from '../../users.actions';
 import { StaticActions } from '../../static.actions';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
 	selector: 'app-profile',
@@ -13,15 +14,21 @@ import { StaticActions } from '../../static.actions';
 	styleUrls: ['./profile.component.scss']
 })
 
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 	activeView;
 	updateForm: FormGroup;
 	uploadForm: FormGroup;
-	staticSubscription;
-	userSubscription;
+	staticSubscription: Subscription;
+	userSubscription: Subscription;
 	user: Biker;
 	areas = [];
 	licences = [];
+
+	ngOnDestroy(): void {
+		// Always unsubscribe on destroy.
+		this.staticSubscription.unsubscribe();
+		this.userSubscription.unsubscribe();
+	}
 
 	constructor(private fb: FormBuilder, private ngRedux: NgRedux<IAppState>,
 		private usersActions: UsersActions, private staticActions: StaticActions, private cd: ChangeDetectorRef) { }

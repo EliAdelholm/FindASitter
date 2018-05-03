@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../../store/store';
 import { UsersActions } from '../../users.actions';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
 	selector: 'app-messages',
@@ -10,7 +11,7 @@ import { UsersActions } from '../../users.actions';
 })
 
 export class MessagesComponent implements OnInit, OnDestroy {
-	subscription;
+	subscription: Subscription;
 	conversations = [];
 
 	ngOnDestroy(): void {

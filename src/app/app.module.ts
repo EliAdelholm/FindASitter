@@ -3,6 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MomentModule } from 'angular2-moment';
+import { FilterBikers } from './filter.bikers';
 
 // Material Design
 import { MatMenuModule } from '@angular/material/menu';
@@ -24,6 +25,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 
 // Services
 import { AuthGuardService } from './auth-guard.service';
@@ -81,7 +83,8 @@ export function tokenGetter() {
 		FindBikerComponent,
 		BikerProfileComponent,
 		MessagesComponent,
-		ProfileComponent
+		ProfileComponent,
+		FilterBikers
 	],
 	imports: [
 		BrowserModule,
@@ -109,6 +112,7 @@ export function tokenGetter() {
 		MatDialogModule,
 		HttpClientModule,
 		MaterialFileInputModule,
+		FormsModule,
 		JwtModule.forRoot({
 			config: {
 				tokenGetter: tokenGetter,

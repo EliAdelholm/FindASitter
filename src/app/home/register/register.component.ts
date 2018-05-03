@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PasswordValidator } from '../../PasswordValidator';
@@ -8,6 +8,7 @@ import { IAppState } from '../../store/store';
 import { UsersService } from '../../users.service';
 import { Biker } from '../../../entities/biker';
 import { SignupService } from '../../signup.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
 	selector: 'register',
@@ -15,10 +16,14 @@ import { SignupService } from '../../signup.service';
 	styleUrls: ['./register.component.scss']
 })
 
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
 	registerForm: FormGroup;
-	subscription;
+	subscription: Subscription;
 	areas = [];
+
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
+	}
 
 	constructor(private fb: FormBuilder, private router: Router,
 		private usersActions: UsersActions, private ngRedux: NgRedux<IAppState>, 

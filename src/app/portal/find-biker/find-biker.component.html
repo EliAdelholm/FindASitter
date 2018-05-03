@@ -24,13 +24,13 @@
                 <mat-icon matPrefix>motorcycle</mat-icon>
             </mat-form-field>
             <mat-form-field>
-                <input matInput type="text">
+                <input matInput type="text" [(ngModel)]="search">
                 <mat-icon matPrefix>search</mat-icon>
             </mat-form-field>
         </mat-toolbar>
 
 
-        <mat-card class="biker-card" *ngFor="let user of users">
+        <mat-card class="biker-card" *ngFor="let user of users | filterBikers: search">
             <div class="biker-image" [style.background]="'url(../../assets/img/' + user.image + ')'" routerLink="biker/{{ user.username }}"></div>
             <mat-card-content>
                 <h3>{{ user.username }}</h3>
