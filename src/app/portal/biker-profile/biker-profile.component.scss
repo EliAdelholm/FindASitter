@@ -27,6 +27,23 @@
     margin-top: -65px;
 }
 
+.ratings-container {
+    margin-bottom: 24px;
+
+    form {
+        padding: 24px;
+    }
+}
+
+.rating-comment {
+    display: block;
+}
+
+.add-rating {
+    position: absolute;
+    right: 24px;
+}
+
 .ratings, .bikes {
     width: 746px;
     margin-top: 24px;

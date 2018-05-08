@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 import { PasswordValidator } from '../../PasswordValidator';
 import { UsersActions } from '../../users.actions';
+import { Subscription } from 'rxjs/Subscription';
+import { NgRedux } from '@angular-redux/store';
+import { IAppState } from '../../store/store';
 
 @Component({
 	selector: 'login',
@@ -11,24 +14,24 @@ import { UsersActions } from '../../users.actions';
 	styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 	loginForm: FormGroup;
+	subscription: Subscription;
+	authMessage: string;
 
-	constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private usersActions: UsersActions) {
+	ngOnDestroy(): void {
+		this.subscription.unsubscribe();
+	}
+
+	constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, 
+		private usersActions: UsersActions, private ngRedux: NgRedux<IAppState>) {
 	}
 
 	onSubmit(loginForm) {
-		console.log("is Valid?: " + loginForm.valid);
 
 		if (loginForm.valid) {
-
-			// Navigate to some page
 			this.usersActions.authenticate(loginForm.value);
-			setTimeout(function() {
-				if (localStorage.getItem('APIToken')) {
-					this.router.navigate(['portal'])
-				}
-			}, 1000)
+
 			// this.authService.login().subscribe(x => {
 
 			// 	// If a redictUrl is specified go there and then clear the slate
@@ -45,6 +48,14 @@ export class LoginComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.subscription = this.ngRedux.select(state => state.users).subscribe(users => {
+			this.authMessage = users.authMessage;
+
+			if(this.authMessage == "OK") {
+				this.router.navigate(['portal'])
+			}
+		});
+
 		this.loginForm = this.fb.group({
 			username: ['', Validators.required],
 			password: ['', Validators.required]

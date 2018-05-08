@@ -14,7 +14,9 @@ body {
 .desktop-nav.mat-toolbar-single-row {
     display: flex;
     position: fixed;
+    z-index: 1;
 }
+
 .mobile-nav.mat-icon-button {
     display: none;
     position: fixed;

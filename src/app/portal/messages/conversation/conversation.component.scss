@@ -1,0 +1,87 @@
+.conversation {
+    width: calc(100vw - 250px);
+    height: 100%;
+    background: rgba(66,66,66,0.5);
+    padding: 0;
+
+    .mat-card-content {
+        height: calc(100% - 150px);
+        overflow: auto;
+        padding: 24px;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+.message {
+    .profile-img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+    }
+    
+    .body {
+        padding: 10px;
+        max-width: 60%;
+        border-radius: 5px;
+        display: inline-flex;
+    }
+}
+
+.clear {
+    clear: both;
+}
+
+.message.sender {
+    .profile-img {
+        margin-right: 10px;
+    }
+
+    .body {
+        margin-left: 35px;
+        background-color: #b0bec5;
+        color: black;
+    }
+}
+
+
+.message.receiver {
+
+    .profile-img {
+        margin-left: 10px;
+    }
+
+    .header {
+        flex-direction: row-reverse;
+    }
+
+    .body {
+        float: right;
+        margin-right: 35px;
+        background-color: #931446;
+    }
+}
+
+#write-message {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 24px;
+
+    .mat-form-field {
+        width: calc(100% - 80px);
+    }
+
+    .mat-fab.mat-primary {
+        position: absolute;
+        right: 24px;
+        bottom: 24px;
+    }
+}

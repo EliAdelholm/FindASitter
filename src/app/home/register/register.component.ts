@@ -47,7 +47,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		});
 
 		this.registerForm = this.fb.group({
-			username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
+			username: ['', Validators.compose([
+				Validators.required, 
+				Validators.minLength(3), 
+				Validators.maxLength(25)
+			]), this.validateUsernameNotTaken.bind(this)],
 			area: ['', Validators.required],
 			password: ['', Validators.compose([
 				Validators.required,
@@ -67,8 +71,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 	validateEmailNotTaken(control: AbstractControl) {
 		return this.signupService.checkEmailNotTaken(control.value).map(res => {
-			console.log(res)
 			return res ? null : { emailTaken: true };
+		});
+	}
+
+	validateUsernameNotTaken(control: AbstractControl) {
+		return this.signupService.checkUsernameNotTaken(control.value).map(res => {
+			return res ? null : { usernameTaken: true };
 		});
 	}
 

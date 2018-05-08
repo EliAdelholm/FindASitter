@@ -82,21 +82,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
 		this.userSubscription = this.ngRedux.select(state => state.users).subscribe(users => {
 			this.user = users.auth
 			console.log(this.user)
+
+			this.updateForm = this.fb.group({
+				username: [this.user && this.user.username, [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
+				area: [this.user && this.user.areaId, Validators.required],
+				email: [this.user && this.user.email, Validators.compose([
+					Validators.required,
+					Validators.email
+				])],
+				phone: [this.user && this.user.phone, Validators.required],
+				firstname: [this.user && this.user.firstname, [Validators.required, Validators.maxLength(30)]],
+				lastname: [this.user && this.user.lastname, [Validators.required, Validators.maxLength(40)]],
+				birthdate: [this.user && this.user.birthdate],
+				licence: [this.user && this.user.licence]
+			});
 		});
 
-		this.updateForm = this.fb.group({
-			username: [this.user && this.user.username, [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],
-			area: [this.user && this.user.areaId, Validators.required],
-			email: [this.user && this.user.email, Validators.compose([
-				Validators.required,
-				Validators.email
-			])],
-			phone: [this.user && this.user.phone, Validators.required],
-			firstname: [this.user && this.user.firstname, [Validators.required, Validators.maxLength(30)]],
-			lastname: [this.user && this.user.lastname, [Validators.required, Validators.maxLength(40)]],
-			birthdate: [this.user && this.user.birthdate],
-			licence: [this.user && this.user.licence]
-		});
+		
 
 		this.uploadForm = this.fb.group({
 			image: [null, [Validators.required]],

@@ -48,7 +48,11 @@ export class UsersService {
         return this.http.delete('/api/user/' + userId)
     }
 
+    addRating(rating: {}, userId: number) {
+        return this.http.post('/api/rating/' + userId, rating)
+    }
+
     static getInitialUsersState(): UsersState {
-        return { auth: null, profiles: [], conversations: [] };
+        return { auth: null, authMessage: null, ratingMessage: null, profiles: [], conversations: [] };
     }
 }

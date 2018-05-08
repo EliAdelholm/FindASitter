@@ -4,6 +4,7 @@ import { UsersActions } from '../users.actions';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../store/store';
 import { Biker } from '../../entities/biker';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
 	selector: 'app-portal',
@@ -11,7 +12,7 @@ import { Biker } from '../../entities/biker';
 	styleUrls: ['./portal.component.scss']
 })
 export class PortalComponent implements OnInit {
-	subscription;
+	subscription: Subscription;
 	user: Biker;
 
 	constructor(private router: Router, private usersActions: UsersActions, private ngRedux: NgRedux<IAppState>) { }

@@ -11,7 +11,8 @@ module.exports = function (req, res) {
                 return res.json({ 'status': 'error' })
             }
             gLog('info', ajRows)
-            return res.json({ 'status': 'ok', 'data': ajRows});
+            let result = ajRows[0].count == 0 ? true : false
+            return res.json( result);
 
         })
     } catch (ex) {

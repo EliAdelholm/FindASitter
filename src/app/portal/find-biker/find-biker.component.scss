@@ -1,6 +1,7 @@
 .find-biker {
     display: flex;
     justify-content: center;
+    width: 90vw;
 }
 
 .filter-bikers {
@@ -24,7 +25,7 @@
 }
 
 .biker-card {
-    width: 250px;
+    width: calc(100% - 30px);
     margin: 0px 0px 30px;
 }
 
@@ -40,3 +41,34 @@
     float: right;
     margin-top: -65px;
 }
+
+@media only screen and (min-width: 700px) {
+    .biker-card {
+        width: calc(50% - 60px);
+    }
+}
+
+@media only screen and (min-width: 1050px) {
+    .biker-card {
+        width: calc(33% - 60px);
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .biker-card {
+        width: calc(25% - 60px);
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .find-biker {
+        width: calc(100vw - 20px);
+    }
+}
+
+@media only screen and (max-width: 599px) {
+    .mat-card {
+        padding: 24px;
+    }
+}
+

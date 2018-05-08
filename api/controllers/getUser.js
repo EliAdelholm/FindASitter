@@ -13,6 +13,7 @@ module.exports = function (req, res) {
             gLog('info', ajRows)
             let user = ajRows[0];
             delete user.password
+            user.ratings = JSON.parse(user.ratings)
             return res.json({ 'status': 'ok', 'data': user});
 
         })

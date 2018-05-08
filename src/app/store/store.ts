@@ -6,6 +6,8 @@ import { staticReducer } from '../static.reducer';
 
 export class UsersState {
     auth: Biker;
+    authMessage: string;
+    ratingMessage: string;
     profiles: Biker[];
     conversations: any[]
 }

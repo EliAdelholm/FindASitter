@@ -4,7 +4,7 @@
 		<mat-card class="contacts" *ngIf="conversations">
 			<mat-card-content>
 				<mat-list role="list">
-					<mat-list-item role="listitem" class="contact-item active" *ngFor="let conversation of conversations">
+					<mat-list-item role="listitem" *ngFor="let conversation of conversations" routerLink="{{conversation.id}}" routerLinkActive="active">
 						<img matListAvatar *ngIf="conversation.users[0]" src="../../assets/img/{{conversation.users[0].image}}" alt="...">
 						<img matListAvatar *ngIf="!conversation.users[0]" src="../../assets/img/deleted-user.png" alt="...">
 						<h4 matLine *ngIf="conversation.users[0]">{{ conversation.users[0].username }}</h4>
@@ -15,7 +15,9 @@
 			</mat-card-content>
 		</mat-card>
 
-		<mat-card class="conversation">
+		<router-outlet></router-outlet>
+
+		<!-- <mat-card class="conversation">
 			<mat-card-content>
 
 				<div class="message sender">
@@ -40,26 +42,26 @@
 				</div>
 
 				<div class="message receiver">
-						<div class="header">
-							<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-							<h4>Username</h4>
-						</div>
-						<div class="body">
-							<p>Hello there! This a message from you</p>
-						</div>
-						<div class="clear"></div>
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
 					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
 
-					<div class="message receiver">
-							<div class="header">
-								<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-								<h4>Username</h4>
-							</div>
-							<div class="body">
-								<p>Hello there! This a message from you</p>
-							</div>
-							<div class="clear"></div>
-						</div>
+				<div class="message receiver">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
 
 				<div class="message sender">
 					<div class="header">
@@ -72,98 +74,98 @@
 				</div>
 
 				<div class="message receiver">
-						<div class="header">
-							<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-							<h4>Username</h4>
-						</div>
-						<div class="body">
-							<p>Hello there! This a message from you</p>
-						</div>
-						<div class="clear"></div>
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
 					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
 
-					<div class="message receiver">
-							<div class="header">
-								<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-								<h4>Username</h4>
-							</div>
-							<div class="body">
-								<p>Hello there! This a message from you</p>
-							</div>
-							<div class="clear"></div>
-						</div>
-
-
-						<div class="message receiver">
-								<div class="header">
-									<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-									<h4>Username</h4>
-								</div>
-								<div class="body">
-									<p>Hello there! This a message from you</p>
-								</div>
-								<div class="clear"></div>
-							</div>
+				<div class="message receiver">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
 
 
-							<div class="message receiver">
-									<div class="header">
-										<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-										<h4>Username</h4>
-									</div>
-									<div class="body">
-										<p>Hello there! This a message from you</p>
-									</div>
-									<div class="clear"></div>
-								</div>
+				<div class="message receiver">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
 
 
-								<div class="message receiver">
-										<div class="header">
-											<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-											<h4>Username</h4>
-										</div>
-										<div class="body">
-											<p>Hello there! This a message from you</p>
-										</div>
-										<div class="clear"></div>
-									</div>
+				<div class="message receiver">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
 
 
-									<div class="message receiver">
-											<div class="header">
-												<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-												<h4>Username</h4>
-											</div>
-											<div class="body">
-												<p>Hello there! This a message from you</p>
-											</div>
-											<div class="clear"></div>
-										</div>
+				<div class="message receiver">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
 
 
-										<div class="message receiver">
-												<div class="header">
-													<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-													<h4>Username</h4>
-												</div>
-												<div class="body">
-													<p>Hello there! This a message from you</p>
-												</div>
-												<div class="clear"></div>
-											</div>
+				<div class="message receiver">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
 
 
-											<div class="message receiver">
-													<div class="header">
-														<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-														<h4>Username</h4>
-													</div>
-													<div class="body">
-														<p>Hello there! This a message from you</p>
-													</div>
-													<div class="clear"></div>
-												</div>
+				<div class="message receiver">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
+
+
+				<div class="message receiver">
+					<div class="header">
+						<div class="profile-img" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+						<h4>Username</h4>
+					</div>
+					<div class="body">
+						<p>Hello there! This a message from you</p>
+					</div>
+					<div class="clear"></div>
+				</div>
 
 			</mat-card-content>
 
@@ -175,7 +177,7 @@
 					<mat-icon>send</mat-icon>
 				</button>
 			</div>
-		</mat-card>
+		</mat-card> -->
 
 	</div>
 

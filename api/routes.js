@@ -17,10 +17,15 @@ const addMessage = require(__dirname + '/controllers/addMessage.js')
 const getAreas = require(__dirname + '/controllers/getAreas.js')
 const getLicences = require(__dirname + '/controllers/getLicences.js')
 const uploadImage = require(__dirname + '/controllers/uploadImage.js')
+const addRating = require(__dirname + '/controllers/addRating.js')
 
 /* API ROUTES */
 router.get('/areas', function (req, res) {
     getAreas(req, res)
+})
+
+router.post('/rating/:id', function (req, res) {
+    addRating(req, res)
 })
 
 router.post('/image/:id', function (req, res) {

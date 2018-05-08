@@ -13,10 +13,10 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
 
         case UsersActions.RECEIVED_AUTHENTICATE:
             localStorage.setItem('APIToken', action.payload.token);
-            return tassign(state, { auth: action.payload.data });
+            return tassign(state, { auth: action.payload.data, authMessage: "OK" });
 
         case UsersActions.FAILED_RECEIVED_AUTHENTICATE:
-            return state;
+            return tassign(state, { authMessage: "ERROR" });
 
         case UsersActions.GET_AUTH_USER:
             return state;
@@ -25,7 +25,7 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
             return tassign(state, { auth: action.payload.data });
 
         case UsersActions.FAILED_RECEIVED_AUTH_USER:
-            return state;
+            return tassign(state, { authMessage: "Login failed. Try again." });
 
         case UsersActions.GET_USERS:
             return state;
@@ -83,6 +83,25 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
             return tassign(state, { auth: null });
 
         case UsersActions.FAILED_DELETED_USER:
+            return state;
+
+        case UsersActions.ADD_RATING:
+            return state;
+
+        case UsersActions.ADDED_RATING:
+            let index = state.profiles.findIndex(profile => profile.id == action.payload.profile)
+            let newRatings = [...state.profiles[index].ratings, action.payload.data];
+            let newProfileObj = Object.assign({}, state.profiles[index]);
+            newProfileObj.ratings = newRatings;
+
+            let newProfiles = [...state.profiles.slice(0, index),
+                newProfileObj,
+            ...state.profiles.slice(index + 1)];
+            console.log(newProfiles);
+            return tassign(state, { profiles: newProfiles, ratingMessage: "OK" });
+
+
+        case UsersActions.FAILED_ADDED_RATING:
             return state;
 
         // case UsersActions.SET_TYPE: // payload: boolean

@@ -3,7 +3,6 @@ import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
 import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './home/contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PortalComponent } from './portal/portal.component';
 import { OverviewComponent } from './portal/overview/overview.component';
@@ -15,21 +14,23 @@ import { UserDetailsComponent } from './portal/user-details/user-details.compone
 import { BikerProfileComponent } from './portal/biker-profile/biker-profile.component';
 import { MessagesComponent } from './portal/messages/messages.component';
 import { ProfileComponent } from './portal/profile/profile.component';
+import { ConversationComponent } from './portal/messages/conversation/conversation.component';
+import { NoConversationComponent } from './portal/messages/no-conversation/no-conversation.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full'},
 	{ path: 'home', component: HomeComponent, children: [
-		{ path: 'index', redirectTo: '', pathMatch: 'full' },
 		{ path: '', component: IndexComponent},
 		{ path: 'login', component: LoginComponent },
 		{ path: 'register', component: RegisterComponent},
-		{ path: 'contact', component: ContactComponent },
 	] },
-	{ path: 'portal', component: PortalComponent, canActivate: [AuthGuardService], children: [
-		{ path: 'overview', redirectTo: '', pathMatch: 'full' },
-		{ path: '', component: OverviewComponent, canActivate: [AuthGuardService] },
+	{ path: 'portal', component: PortalComponent, canActivateChild: [AuthGuardService], children: [
+		{ path: '', component: OverviewComponent },
 		{ path: 'profile', component: ProfileComponent },
-		{ path: 'messages', component: MessagesComponent},
+		{ path: 'messages', component: MessagesComponent, children: [
+			{ path: '', component: NoConversationComponent },
+			{ path: ':conversationId', component: ConversationComponent}
+		]},
 		{ path: 'biker/:username', component: BikerProfileComponent },
 		{ path: 'users/:type/:id', component: UserDetailsComponent},
 		{ path: 'users', component: UsersListComponent},

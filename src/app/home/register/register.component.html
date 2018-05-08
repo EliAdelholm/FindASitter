@@ -14,6 +14,7 @@
 							<span *ngIf="registerForm.controls.username.errors?.required">*Reguired</span>
 							<span *ngIf="registerForm.controls.username.errors?.minlength">Min 3 characters required</span>
 							<span *ngIf="registerForm.controls.username.errors?.maxlength">Max 25 characters allowed</span>
+							<span *ngIf="registerForm.controls.username.errors?.usernameTaken === true">Username already in use</span>
 						</mat-error>
 					</mat-form-field>
 
@@ -47,9 +48,9 @@
 				<div>
 					<mat-form-field>
 						<input matInput formControlName="email" placeholder="Email">
-						<mat-error *ngIf="registerForm.controls.email.errors?.required && registerForm.controls.email.touched">
+						<mat-error *ngIf="registerForm.controls.email.errors && registerForm.controls.email.touched">
 							<span *ngIf="registerForm.controls.email.errors?.required">*Reguired</span>
-							<span *ngIf="registerForm.controls.email.errors?.emailTaken">test</span>
+							<span *ngIf="registerForm.controls.email.errors?.emailTaken === true">Email already in use</span>
 						</mat-error>
 					</mat-form-field>
 

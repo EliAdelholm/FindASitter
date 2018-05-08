@@ -10,10 +10,10 @@ export class SignupService {
     constructor(private http: HttpClient) { }
 
     checkEmailNotTaken(email: string) {
-        return this.http.get('/api/lookup-email/' + email).delay(1000)
-        // console.log("test: ", check)
-            // .map(users => users.filter(user => user.email === email))
-            // .map(users => !users.length);
-            // return check;
+        return this.http.get('/api/lookup-email/' + email).delay(500)
+    }
+
+    checkUsernameNotTaken(username: string) {
+        return this.http.get('/api/lookup-username/' + username).delay(500)
     }
 }

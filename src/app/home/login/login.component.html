@@ -17,7 +17,10 @@
 				</mat-error>
 			</mat-form-field>
 		</div>
-
+		<div *ngIf="authMessage == 'ERROR'">
+			<p>Username and password does not match</p>
+			<p>Have you forgotten your password?</p>
+		</div>
 		<button mat-raised-button color="primary" type="submit">Login</button>
 
 	</form>

@@ -36,7 +36,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
 import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './home/contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PortalComponent } from './portal/portal.component';
 import { OverviewComponent } from './portal/overview/overview.component';
@@ -62,6 +61,8 @@ import { StaticActions } from './static.actions';
 import { StaticService } from './static.service';
 import { SignupService } from './signup.service';
 import { ProfileComponent } from './portal/profile/profile.component';
+import { ConversationComponent } from './portal/messages/conversation/conversation.component';
+import { NoConversationComponent } from './portal/messages/no-conversation/no-conversation.component';
 
 export function tokenGetter() {
 	return localStorage.getItem('APIToken');
@@ -73,7 +74,6 @@ export function tokenGetter() {
 		LoginComponent,
 		RegisterComponent,
 		HomeComponent,
-		ContactComponent,
 		PageNotFoundComponent,
 		PortalComponent,
 		OverviewComponent,
@@ -84,7 +84,9 @@ export function tokenGetter() {
 		BikerProfileComponent,
 		MessagesComponent,
 		ProfileComponent,
-		FilterBikers
+		FilterBikers,
+		ConversationComponent,
+		NoConversationComponent
 	],
 	imports: [
 		BrowserModule,
@@ -106,7 +108,6 @@ export function tokenGetter() {
 		MatButtonToggleModule,
 		NgReduxModule,
 		NgReduxRouterModule.forRoot(),
-		HttpClientModule,
 		MatIconModule,
 		MatChipsModule,
 		MatDialogModule,
@@ -134,8 +135,6 @@ export class AppModule {
 		private devTool: DevToolsExtension,
 		private ngReduxRouter: NgReduxRouter, private usersEpic: UsersEpic, private staticEpic: StaticEpic) {
 
-
-		// From app.module.ts - constructor
 		const rootEpic = combineEpics(
 			this.usersEpic.authenticate,
 			this.usersEpic.getAuthUser,
@@ -145,23 +144,18 @@ export class AppModule {
 			this.usersEpic.updateUser,
 			this.usersEpic.updateImage,
 			this.usersEpic.deleteUser,
+			this.usersEpic.addRating,
 
 			this.staticEpic.getAreas,
 			this.staticEpic.getLicences
 		);
-		// Middleware
-		// http://redux.js.org/docs/advanced/Middleware.html
-		// https://github.com/angular-redux/store/blob/master/articles/epics.md
-		// const epicMiddleware = createEpicMiddleware(rootEpic);
+
 		const middleware = [
 			createEpicMiddleware(rootEpic), createLogger({ level: 'info', collapsed: true })
 		];
 		this.ngRedux.configureStore(
 			rootReducer,
 			{}, middleware, [devTool.isEnabled() ? devTool.enhancer() : f => f]);
-
-		// this.ngRedux.configureStore(
-		// 	rootReducer, {}, [], [ devTool.isEnabled() ? devTool.enhancer() : f => f]);
 
 		ngReduxRouter.initialize(/* args */);
 	}

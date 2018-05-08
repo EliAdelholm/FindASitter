@@ -16,30 +16,44 @@
             <mat-card-content>
                 <mat-list role="list">
                     <mat-list-item role="listitem" class="rating">
-                        <p><b>Name: </b><span *ngIf="user.firstname">{{ user.firstname }}</span> <span *ngIf="user.lastname">{{ user.lastname }}</span></p>
+                        <p>
+                            <b>Name: </b>
+                            <span *ngIf="user.firstname">{{ user.firstname }}</span>
+                            <span *ngIf="user.lastname">{{ user.lastname }}</span>
+                        </p>
                     </mat-list-item>
                     <mat-list-item role="listitem" class="rating">
-                        <p><b>Area: </b>{{ user.area }}</p>
+                        <p>
+                            <b>Area: </b>{{ user.area }}</p>
                     </mat-list-item>
                     <mat-list-item role="listitem" class="rating">
-                        <p><b>Age: </b><span *ngIf="user.birthdate">{{ user.birthdate | amTimeAgo:true }}</span></p>
+                        <p>
+                            <b>Age: </b>
+                            <span *ngIf="user.birthdate">{{ user.birthdate | amTimeAgo:true }}</span>
+                        </p>
                     </mat-list-item>
                     <mat-list-item role="listitem" class="rating">
-                        <p><b>Licence: </b><span *ngIf="user.license">{{ user.license }}</span></p>
+                        <p>
+                            <b>Licence: </b>
+                            <span *ngIf="user.license">{{ user.license }}</span>
+                        </p>
                     </mat-list-item>
                 </mat-list>
             </mat-card-content>
         </mat-card>
         <mat-card class="profile-main">
-                <div class="biker-image" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
-                <mat-card-content>
-                    <h3>Average Rating: 5</h3>
-                    <p>Based on 1 rating</p>
-                    <button mat-fab color="primary" class="chat-button" type="button">
-                        <mat-icon>chat</mat-icon>
-                    </button>
-                </mat-card-content>
-            </mat-card>
+            <div class="biker-image" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+            <mat-card-content>
+                <h3 *ngIf="ratings.length">Average Rating: {{ calculateAverage(user.ratings) }}</h3>
+                <p *ngIf="ratings.length">Based on {{ user.ratings.length }}
+                    <span *ngIf="ratings.length == 1">rating</span>
+                    <span *ngIf="ratings.length > 1">ratings</span>
+                </p>
+                <button mat-fab color="primary" class="chat-button" type="button">
+                    <mat-icon>chat</mat-icon>
+                </button>
+            </mat-card-content>
+        </mat-card>
     </div>
 
     <div class="bike-container">
@@ -59,21 +73,62 @@
         </mat-card>
     </div>
 
-    <div class="rating-container">
-        <mat-card class="ratings">
+    <div class="ratings-container">
+        <mat-card class="ratings" *ngIf="ratingView == 'latest'">
             <mat-card-header>
                 <h3>
                     <mat-icon class="star">star rating</mat-icon> Latest Ratings
                 </h3>
+                <button mat-fab color="primary" class="add-rating" type="button" (click)="ratingView = 'form'">
+                    <mat-icon>add</mat-icon>
+                </button>
             </mat-card-header>
-            <mat-card-content>
+            <mat-card-content *ngIf="ratings">
                 <mat-list role="list">
-                    <mat-list-item role="listitem" class="rating">
-                        <img matListAvatar src="../../assets/img/default-avatar.png" alt="...">
-                        <h3 matLine>Username (5)</h3>
-                        <p matLine>We had a really great ride together! What happens if we were to write a really long text here I wonder?</p>
+                    <mat-list-item role="listitem" class="rating" *ngFor="let rating of ratings">
+                        <img matListAvatar src="../../assets/img/{{ rating.user.image }}" alt="...">
+                        <h3 matLine>{{ rating.user.username }} ({{ rating.rating }})</h3>
+                        <p matLine>{{ rating.message }}</p>
                     </mat-list-item>
                 </mat-list>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card class="ratings" *ngIf="ratingView == 'form'">
+            <mat-card-header>
+                <h3>
+                    <mat-icon class="star">star rating</mat-icon> Add Rating
+                </h3>
+                <button mat-fab color="primary" class="add-rating" type="button" (click)="ratingView = 'latest'">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </mat-card-header>
+            <mat-card-content *ngIf="ratings">
+                <form id="ratingForm" [formGroup]="ratingForm" (submit)="onSubmit(ratingForm)" novalidate>
+                    <mat-form-field>
+                        <mat-select formControlName="rating" placeholder="Rating">
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                            <mat-option value="4">4</mat-option>
+                            <mat-option value="5">5</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="ratingForm.controls.rating.errors?.required && ratingForm.controls.rating.touched">
+                            *Required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="rating-comment">
+                        <textarea matInput formControlName="message" placeholder="Comment"></textarea>
+                        <mat-error *ngIf="ratingForm.controls.message.errors && ratingForm.controls.message.touched">
+                            <span *ngIf="ratingForm.controls.message.errors?.required">*Reguired</span>
+                            <span *ngIf="ratingForm.controls.message.errors?.minlength">*Min 3 characters</span>
+                            <span *ngIf="ratingForm.controls.message.errors?.maxlength">*Max 140 characters</span>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <button id="submitRating" mat-raised-button color="primary" type="submit">Add Rating</button>
+                </form>
             </mat-card-content>
         </mat-card>
     </div>

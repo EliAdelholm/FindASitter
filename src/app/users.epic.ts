@@ -136,4 +136,20 @@ export class UsersEpic {
                     }));
             });
     }
+
+    addRating = (action$: ActionsObservable<any>) => {
+        return action$.ofType(UsersActions.ADD_RATING)
+            .mergeMap(({ payload }) => {
+                console.log("epic: ", payload)
+                return this.usersService.addRating(payload.rating, payload.userId)
+                    .map((result: any[]) => ({
+                        type: UsersActions.ADDED_RATING,
+                        payload: result
+                    }))
+                    .catch(error => Observable.of({
+                        type: UsersActions.FAILED_ADDED_RATING,
+                        payload: error
+                    }));
+            });
+    }
 }

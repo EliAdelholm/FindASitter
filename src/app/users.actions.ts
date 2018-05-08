@@ -43,6 +43,10 @@ export class UsersActions {
     static DELETED_USER: string = 'DELETED_USER';
     static FAILED_DELETED_USER: string = 'FAILED_DELETED_USER';
 
+    static ADD_RATING: string = 'ADD_RATING';
+    static ADDED_RATING: string = 'ADDED_RATING';
+    static FAILED_ADDED_RATING: string = 'FAILED_ADDED_RATING';
+
     authenticate(authDetails: {}) {
         this.ngRedux.dispatch({
             type: UsersActions.AUTHENTICATE,
@@ -94,6 +98,13 @@ export class UsersActions {
         this.ngRedux.dispatch({
             type: UsersActions.DELETE_USER,
             payload: userId
+        })
+    }
+
+    addRating(rating: {}, userId: number): void {
+        this.ngRedux.dispatch({
+            type: UsersActions.ADD_RATING,
+            payload: { rating, userId }
         })
     }
 
