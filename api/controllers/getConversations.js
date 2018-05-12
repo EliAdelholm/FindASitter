@@ -17,7 +17,7 @@ module.exports = function (req, res) {
             for (let i = 0; i < ajRows.length; i++) {
                 if (flags[ajRows[i].conversationId]) continue;
                 flags[ajRows[i].conversationId] = true;
-                retval.push({id: ajRows[i].conversationId, users: []});
+                retval.push({id: ajRows[i].conversationId, users: [], messages: []});
             }
 
             // Fill user data into respective objects
@@ -28,7 +28,7 @@ module.exports = function (req, res) {
                 }
             });
 
-            gLog('info', retval)
+            // gLog('info', retval)
             return res.json({ 'status': 'ok', 'data': retval });
 
         })

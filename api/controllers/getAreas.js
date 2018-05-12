@@ -9,7 +9,7 @@ module.exports = function (req, res) {
                 gLog('err', 'ERROR in GetAreas: ' + err)
                 return res.json({ 'status': 'error' })
             }
-            gLog('info', ajRows)
+            // gLog('info', ajRows)
             return res.json({ 'status': 'ok', 'data': ajRows});
 
         })

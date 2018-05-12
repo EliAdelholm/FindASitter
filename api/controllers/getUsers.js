@@ -15,7 +15,7 @@ module.exports = function (req, res) {
             // Parse json
             for (let i = 0; i < ajRows.length; i++) {
                 ajRows[i].ratings = JSON.parse(ajRows[i].ratings)
-                console.log(ajRows[i].ratings)
+                // console.log(ajRows[i].ratings)
             }
 
             return res.json({ 'status': 'ok', 'data': ajRows});

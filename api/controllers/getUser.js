@@ -10,7 +10,7 @@ module.exports = function (req, res) {
                 gLog('err', 'ERROR in GetUser: ' + err)
                 return res.json({ 'status': 'error' })
             }
-            gLog('info', ajRows)
+            // gLog('info', ajRows)
             let user = ajRows[0];
             delete user.password
             user.ratings = JSON.parse(user.ratings)

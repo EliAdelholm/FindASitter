@@ -18,6 +18,7 @@ const getAreas = require(__dirname + '/controllers/getAreas.js')
 const getLicences = require(__dirname + '/controllers/getLicences.js')
 const uploadImage = require(__dirname + '/controllers/uploadImage.js')
 const addRating = require(__dirname + '/controllers/addRating.js')
+const lookupConversation = require(__dirname + '/controllers/lookupConversation.js')
 
 /* API ROUTES */
 router.get('/areas', function (req, res) {
@@ -76,8 +77,8 @@ router.get('/messages/:id', function (req, res) {
     getMessages(req, res)
 })
 
-router.post('/message/add', function (req, res) {
-    addMessage(req, res)
+router.get('/lookup-conversation/:user1/:user2', function (req, res) {
+    lookupConversation(req, res)
 })
 
 module.exports = router

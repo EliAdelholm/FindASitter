@@ -61,8 +61,9 @@ export class BikerProfileComponent implements OnInit {
 				])]
 			});
 
-			if(users.ratingMessage == "OK") {
+			if(users.requestStatus == "OK") {
 				this.ratingView = "latest"
+				this.usersActions.resetRequestStatus();
 			}
 		});
 	}

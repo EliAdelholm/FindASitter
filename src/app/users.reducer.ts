@@ -13,10 +13,10 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
 
         case UsersActions.RECEIVED_AUTHENTICATE:
             localStorage.setItem('APIToken', action.payload.token);
-            return tassign(state, { auth: action.payload.data, authMessage: "OK" });
+            return tassign(state, { auth: action.payload.data, requestStatus: "OK" });
 
         case UsersActions.FAILED_RECEIVED_AUTHENTICATE:
-            return tassign(state, { authMessage: "ERROR" });
+            return tassign(state, { requestStatus: "ERROR" });
 
         case UsersActions.GET_AUTH_USER:
             return state;
@@ -25,7 +25,7 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
             return tassign(state, { auth: action.payload.data });
 
         case UsersActions.FAILED_RECEIVED_AUTH_USER:
-            return tassign(state, { authMessage: "Login failed. Try again." });
+            return tassign(state, { requestStatus: "Login failed. Try again." });
 
         case UsersActions.GET_USERS:
             return state;
@@ -36,6 +36,15 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
         case UsersActions.FAILED_RECEIVED_USERS:
             return state;
 
+        case UsersActions.LOOKUP_CONVERSATION:
+            return tassign(state, { requestStatus: null });
+
+        case UsersActions.RECEIVED_LOOKUP_CONVERSATION:
+            return tassign(state, { requestStatus: action.payload.conversationId });
+
+        case UsersActions.FAILED_RECEIVED_LOOKUP_CONVERSATION:
+            return tassign(state, { requestStatus: action.payload.conversationId });
+
         case UsersActions.GET_CONVERSATIONS:
             return state;
 
@@ -43,6 +52,26 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
             return tassign(state, { conversations: action.payload.data });
 
         case UsersActions.FAILED_RECEIVED_CONVERSATIONS:
+            return state;
+
+        case UsersActions.GET_MESSAGES:
+            return state;
+
+        case UsersActions.RECEIVED_MESSAGES:
+            let conversationIndex = state.conversations.findIndex(conversation => conversation.id == action.payload.conversation)
+            let newMessages = [...state.conversations[conversationIndex].messages, action.payload.data];
+            // console.log(action.payload.data)
+            // console.log(newMessages)
+            let newConversation = Object.assign({}, state.conversations[conversationIndex]);
+            newConversation.messages = newMessages;
+            // console.log(newConversation)
+
+            let newConversations = [...state.conversations.slice(0, conversationIndex), newConversation,
+            ...state.conversations.slice(conversationIndex + 1)];
+            return tassign(state, { conversations: newConversations });
+
+
+        case UsersActions.FAILED_RECEIVED_MESSAGES:
             return state;
 
         case UsersActions.ADD_USER:
@@ -97,12 +126,14 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
             let newProfiles = [...state.profiles.slice(0, index),
                 newProfileObj,
             ...state.profiles.slice(index + 1)];
-            console.log(newProfiles);
-            return tassign(state, { profiles: newProfiles, ratingMessage: "OK" });
+            return tassign(state, { profiles: newProfiles, requestStatus: "OK" });
 
 
         case UsersActions.FAILED_ADDED_RATING:
             return state;
+
+        case UsersActions.RESET_REQUEST_STATUS:
+            return tassign(state, { requestStatus: null });
 
         // case UsersActions.SET_TYPE: // payload: boolean
         //     return tassign(state, { isBaby: action.payload });

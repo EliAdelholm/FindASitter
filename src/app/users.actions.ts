@@ -23,9 +23,17 @@ export class UsersActions {
     static RECEIVED_USERS: string = 'RECEIVED_USERS';
     static FAILED_RECEIVED_USERS: string = 'FAILED_RECEIVED_USERS';
 
+    static LOOKUP_CONVERSATION: string = 'LOOKUP_CONVERSATION';
+    static RECEIVED_LOOKUP_CONVERSATION: string = 'RECEIVED_LOOKUP_CONVERSATION';
+    static FAILED_RECEIVED_LOOKUP_CONVERSATION: string = 'FAILED_RECEIVED_LOOKUP_CONVERSATION';
+
     static GET_CONVERSATIONS: string = 'GET_CONVERSATIONS';
     static RECEIVED_CONVERSATIONS: string = 'RECEIVED_CONVERSATIONS';
     static FAILED_RECEIVED_CONVERSATIONS: string = 'FAILED_RECEIVED_CONVERSATIONS';
+
+    static GET_MESSAGES: string = 'GET_MESSAGES';
+    static RECEIVED_MESSAGES: string = 'RECEIVED_MESSAGES';
+    static FAILED_RECEIVED_MESSAGES: string = 'FAILED_RECEIVED_MESSAGES';
 
     static ADD_USER: string = 'ADD_USER';
     static ADDED_USER: string = 'ADDED_USER';
@@ -47,6 +55,8 @@ export class UsersActions {
     static ADDED_RATING: string = 'ADDED_RATING';
     static FAILED_ADDED_RATING: string = 'FAILED_ADDED_RATING';
 
+    static RESET_REQUEST_STATUS: string = 'RESET_REQUEST_STATUS';
+
     authenticate(authDetails: {}) {
         this.ngRedux.dispatch({
             type: UsersActions.AUTHENTICATE,
@@ -67,9 +77,24 @@ export class UsersActions {
         })
     }
 
-    getConversations() {
+    lookupConversation(user1: number, user2: number) {
         this.ngRedux.dispatch({
-            type: UsersActions.GET_CONVERSATIONS
+            type: UsersActions.LOOKUP_CONVERSATION,
+            payload: {user1, user2}
+        })
+    }
+
+    getConversations(userId: number) {
+        this.ngRedux.dispatch({
+            type: UsersActions.GET_CONVERSATIONS,
+            payload: userId
+        })
+    }
+
+    getMessages(conversationId: number) {
+        this.ngRedux.dispatch({
+            type: UsersActions.GET_MESSAGES,
+            payload: conversationId
         })
     }
 
@@ -105,6 +130,12 @@ export class UsersActions {
         this.ngRedux.dispatch({
             type: UsersActions.ADD_RATING,
             payload: { rating, userId }
+        })
+    }
+
+    resetRequestStatus() {
+        this.ngRedux.dispatch({
+            type: UsersActions.RESET_REQUEST_STATUS
         })
     }
 

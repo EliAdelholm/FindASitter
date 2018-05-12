@@ -7,4 +7,5 @@ export class User {
     public password: String;
     public admin: boolean;
     public phone: number;
+    public image: string;
 }

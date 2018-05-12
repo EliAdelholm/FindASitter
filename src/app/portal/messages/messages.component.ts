@@ -3,6 +3,7 @@ import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../../store/store';
 import { UsersActions } from '../../users.actions';
 import { Subscription } from 'rxjs/Subscription';
+import { AuthService } from '../../auth.service';
 
 @Component({
 	selector: 'app-messages',
@@ -18,10 +19,10 @@ export class MessagesComponent implements OnInit, OnDestroy {
 		this.subscription.unsubscribe();
 	}
 
-	constructor(private ngRedux: NgRedux<IAppState>, private usersActions: UsersActions) { }
+	constructor(private ngRedux: NgRedux<IAppState>, private usersActions: UsersActions, private auth: AuthService) { }
 
 	ngOnInit() {
-		this.usersActions.getConversations();
+		this.usersActions.getConversations(this.auth.authenticatedUserId());
 
 		this.subscription = this.ngRedux.select(state => state.users).subscribe(users => {
 			this.conversations = users.conversations

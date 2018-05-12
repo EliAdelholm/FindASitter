@@ -22,7 +22,7 @@
                 <h3>{{ user.username }}</h3>
                 <p *ngIf="user.ratings.length">Average Rating: {{ calculateAverage(user.ratings) }}</p>
                 <p *ngIf="!user.ratings.length">No ratings yet</p>
-                <button mat-fab color="primary" class="chat-button" type="button">
+                <button mat-fab color="primary" class="chat-button" type="button" (click)="findConversation(user.id)">
                     <mat-icon>chat</mat-icon>
                 </button>
             </mat-card-content>

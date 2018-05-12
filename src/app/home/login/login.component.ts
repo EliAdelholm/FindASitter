@@ -49,10 +49,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.subscription = this.ngRedux.select(state => state.users).subscribe(users => {
-			this.authMessage = users.authMessage;
+			this.authMessage = users.requestStatus;
 
 			if(this.authMessage == "OK") {
 				this.router.navigate(['portal'])
+				this.usersActions.resetRequestStatus();
 			}
 		});
 

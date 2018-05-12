@@ -22,8 +22,16 @@ export class UsersService {
         return this.http.get('/api/users');
     }
 
-    getConversations() {
-        return this.http.get('/api/conversations/1')
+    lookupConversation(user1: number, user2: number) {
+        return this.http.get('/api/lookup-conversation/' + user1 + '/' + user2)
+    }
+
+    getConversations(userId: number) {
+        return this.http.get('/api/conversations/' + userId)
+    }
+
+    getMessages(conversationId: number) {
+        return this.http.get('/api/messages/' + conversationId)
     }
 
     addUser(user: Biker) {
@@ -53,6 +61,6 @@ export class UsersService {
     }
 
     static getInitialUsersState(): UsersState {
-        return { auth: null, authMessage: null, ratingMessage: null, profiles: [], conversations: [] };
+        return { auth: null, profiles: [], conversations: [], requestStatus: null };
     }
 }

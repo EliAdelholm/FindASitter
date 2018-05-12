@@ -58,16 +58,46 @@ export class UsersEpic {
             });
     }
 
+    lookupConversation = (action$: ActionsObservable<any>) => {
+        return action$.ofType(UsersActions.LOOKUP_CONVERSATION)
+            .mergeMap(({ payload }) => {
+                return this.usersService.lookupConversation(payload.user1, payload.user2)
+                    .map((result: any[]) => ({
+                        type: UsersActions.RECEIVED_LOOKUP_CONVERSATION,
+                        payload: result
+                    }))
+                    .catch(error => Observable.of({
+                        type: UsersActions.FAILED_RECEIVED_LOOKUP_CONVERSATION,
+                        payload: error
+                    }));
+            });
+    }
+
     getConversations = (action$: ActionsObservable<any>) => {
         return action$.ofType(UsersActions.GET_CONVERSATIONS)
             .mergeMap(({ payload }) => {
-                return this.usersService.getConversations()
+                return this.usersService.getConversations(payload)
                     .map((result: any[]) => ({
                         type: UsersActions.RECEIVED_CONVERSATIONS,
                         payload: result
                     }))
                     .catch(error => Observable.of({
                         type: UsersActions.FAILED_RECEIVED_CONVERSATIONS,
+                        payload: error
+                    }));
+            });
+    }
+
+    getMessages = (action$: ActionsObservable<any>) => {
+        return action$.ofType(UsersActions.GET_MESSAGES)
+            .mergeMap(({ payload }) => {
+                return this.usersService.getMessages(payload)
+                    .map((result: any[]) => ({
+                        type: UsersActions.RECEIVED_MESSAGES,
+                        payload: result
+                    }))
+                    .catch(error => Observable.of({
+                        type: UsersActions.FAILED_RECEIVED_MESSAGES,
                         payload: error
                     }));
             });

@@ -63,6 +63,8 @@ import { SignupService } from './signup.service';
 import { ProfileComponent } from './portal/profile/profile.component';
 import { ConversationComponent } from './portal/messages/conversation/conversation.component';
 import { NoConversationComponent } from './portal/messages/no-conversation/no-conversation.component';
+import { WebsocketService } from './websocket.service';
+import { ChatService } from './chat.service';
 
 export function tokenGetter() {
 	return localStorage.getItem('APIToken');
@@ -125,7 +127,7 @@ export function tokenGetter() {
 	providers: [AuthGuardService, AuthService, MatMomentDateModule, 
 		UsersActions, UsersService, UsersEpic, 
 		StaticActions, StaticService, StaticEpic,
-		SignupService
+		SignupService, WebsocketService, ChatService
 	],
 	bootstrap: [AppComponent]
 })
@@ -139,7 +141,9 @@ export class AppModule {
 			this.usersEpic.authenticate,
 			this.usersEpic.getAuthUser,
 			this.usersEpic.getUsers,
+			this.usersEpic.lookupConversation,
 			this.usersEpic.getConversations,
+			this.usersEpic.getMessages,
 			this.usersEpic.addUser,
 			this.usersEpic.updateUser,
 			this.usersEpic.updateImage,
