@@ -16,13 +16,19 @@ import { MessagesComponent } from './portal/messages/messages.component';
 import { ProfileComponent } from './portal/profile/profile.component';
 import { ConversationComponent } from './portal/messages/conversation/conversation.component';
 import { NoConversationComponent } from './portal/messages/no-conversation/no-conversation.component';
+import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './home/reset-password/reset-password.component';
+import { ConfirmAccountComponent } from './home/confirm-account/confirm-account.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full'},
 	{ path: 'home', component: HomeComponent, children: [
 		{ path: '', component: IndexComponent},
-		{ path: 'login', component: LoginComponent },
 		{ path: 'register', component: RegisterComponent},
+		{ path: 'confirm-account', component: ConfirmAccountComponent },
+		{ path: 'login', component: LoginComponent },
+		{ path: 'forgot-password', component: ForgotPasswordComponent },
+		{ path: 'reset-password/:token', component: ResetPasswordComponent }
 	] },
 	{ path: 'portal', component: PortalComponent, canActivateChild: [AuthGuardService], children: [
 		{ path: '', component: OverviewComponent },

@@ -26,6 +26,10 @@ export class UsersActions {
     static LOOKUP_CONVERSATION: string = 'LOOKUP_CONVERSATION';
     static RECEIVED_LOOKUP_CONVERSATION: string = 'RECEIVED_LOOKUP_CONVERSATION';
     static FAILED_RECEIVED_LOOKUP_CONVERSATION: string = 'FAILED_RECEIVED_LOOKUP_CONVERSATION';
+    
+    static ADD_CONVERSATION: string = 'ADD_CONVERSATION';
+    static ADDED_CONVERSATION: string = 'ADDED_CONVERSATION';
+    static FAILED_ADDED_CONVERSATION: string = 'FAILED_ADDED_CONVERSATION';
 
     static GET_CONVERSATIONS: string = 'GET_CONVERSATIONS';
     static RECEIVED_CONVERSATIONS: string = 'RECEIVED_CONVERSATIONS';
@@ -80,6 +84,13 @@ export class UsersActions {
     lookupConversation(user1: number, user2: number) {
         this.ngRedux.dispatch({
             type: UsersActions.LOOKUP_CONVERSATION,
+            payload: {user1, user2}
+        })
+    }
+
+    addConversation(user1: number, user2: number) {
+        this.ngRedux.dispatch({
+            type: UsersActions.ADD_CONVERSATION,
             payload: {user1, user2}
         })
     }

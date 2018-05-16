@@ -6,14 +6,12 @@ export class AuthService {
 
 	constructor(public jwtHelper: JwtHelperService) { }
 
-	// Check if the user has an active token
 	public isAuthenticated(): boolean {
 
 		const token = localStorage.getItem('APIToken');
 
 		if (token) {
-			// Check whether the token is expired and return
-			// true or false
+			// Check whether the token is expired
 			return !this.jwtHelper.isTokenExpired(token);
 		}
 
@@ -21,12 +19,9 @@ export class AuthService {
 	}
 
 	public authenticatedUserId(): number {
-
 		const token = localStorage.getItem('APIToken');
 		const decodedToken = this.jwtHelper.decodeToken(token);
 		console.log(decodedToken.user.id)
 		return decodedToken.user.id;
-		
 	}
-
 }

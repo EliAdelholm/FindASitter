@@ -20,6 +20,7 @@ export class FindBikerComponent implements OnInit, OnDestroy {
 	filteredUsers: Biker[];
 	areas = [{ id: 0, name: "All areas" }];
 	licences = [];
+	conversationUser;
 
 	ngOnDestroy(): void {
 		this.subscription.unsubscribe();
@@ -48,6 +49,7 @@ export class FindBikerComponent implements OnInit, OnDestroy {
 	};
 
 	findConversation(userId) {
+		this.conversationUser = userId;
 		this.usersActions.lookupConversation(userId, this.auth.id)
 	}
 
@@ -62,6 +64,10 @@ export class FindBikerComponent implements OnInit, OnDestroy {
 			if (users.requestStatus && users.requestStatus != "ERROR") {
 				this.router.navigate(['portal/messages/' + users.requestStatus])
 				this.usersActions.resetRequestStatus()
+			}
+
+			if(users.requestStatus && users.requestStatus == "ERROR") {
+				this.usersActions.addConversation(this.conversationUser, this.auth.id)
 			}
 
 		});

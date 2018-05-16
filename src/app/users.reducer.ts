@@ -45,6 +45,15 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
         case UsersActions.FAILED_RECEIVED_LOOKUP_CONVERSATION:
             return tassign(state, { requestStatus: action.payload.conversationId });
 
+        case UsersActions.ADD_CONVERSATION:
+            return tassign(state, { requestStatus: null });
+
+        case UsersActions.ADDED_CONVERSATION:
+            return tassign(state, { requestStatus: action.payload.conversationId });
+
+        case UsersActions.FAILED_ADDED_CONVERSATION:
+            return tassign(state, { requestStatus: 'ERROR' });
+
         case UsersActions.GET_CONVERSATIONS:
             return state;
 

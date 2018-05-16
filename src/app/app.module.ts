@@ -65,6 +65,9 @@ import { ConversationComponent } from './portal/messages/conversation/conversati
 import { NoConversationComponent } from './portal/messages/no-conversation/no-conversation.component';
 import { WebsocketService } from './websocket.service';
 import { ChatService } from './chat.service';
+import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './home/reset-password/reset-password.component';
+import { ConfirmAccountComponent } from './home/confirm-account/confirm-account.component';
 
 export function tokenGetter() {
 	return localStorage.getItem('APIToken');
@@ -88,7 +91,10 @@ export function tokenGetter() {
 		ProfileComponent,
 		FilterBikers,
 		ConversationComponent,
-		NoConversationComponent
+		NoConversationComponent,
+		ForgotPasswordComponent,
+		ResetPasswordComponent,
+		ConfirmAccountComponent
 	],
 	imports: [
 		BrowserModule,
@@ -142,6 +148,7 @@ export class AppModule {
 			this.usersEpic.getAuthUser,
 			this.usersEpic.getUsers,
 			this.usersEpic.lookupConversation,
+			this.usersEpic.addConversation,
 			this.usersEpic.getConversations,
 			this.usersEpic.getMessages,
 			this.usersEpic.addUser,

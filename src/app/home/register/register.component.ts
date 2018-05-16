@@ -20,13 +20,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	registerForm: FormGroup;
 	subscription: Subscription;
 	areas = [];
+	requestStatus;
+	statusMessage;
 
 	ngOnDestroy(): void {
 		this.subscription.unsubscribe();
 	}
 
 	constructor(private fb: FormBuilder, private router: Router,
-		private usersActions: UsersActions, private ngRedux: NgRedux<IAppState>, 
+		private usersActions: UsersActions, private ngRedux: NgRedux<IAppState>,
 		private usersService: UsersService, private signupService: SignupService) {
 	}
 
@@ -34,10 +36,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		let user: Biker = registerForm.value as Biker;
 
 		if (registerForm.valid) {
-			this.usersActions.addUser(user)
-			setTimeout(function() {
-				this.router.navigate(['portal/profile'])
-			}, 1000)
+			this.signupService.registerUser(user)
+				.subscribe(data => {
+					this.requestStatus = data;
+					if (this.requestStatus && this.requestStatus.status == "ERROR") {
+						this.statusMessage = this.requestStatus && this.requestStatus.message;
+					} else {
+						this.router.navigate(['home/confirm-account'])
+					}
+				});
 		}
 	}
 
@@ -48,8 +55,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 		this.registerForm = this.fb.group({
 			username: ['', Validators.compose([
-				Validators.required, 
-				Validators.minLength(3), 
+				Validators.required,
+				Validators.minLength(3),
 				Validators.maxLength(25)
 			]), this.validateUsernameNotTaken.bind(this)],
 			area: ['', Validators.required],

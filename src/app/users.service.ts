@@ -26,6 +26,10 @@ export class UsersService {
         return this.http.get('/api/lookup-conversation/' + user1 + '/' + user2)
     }
 
+    addConversation(user1: number, user2: number) {
+        return this.http.get('/api/add-conversation/' + user1 + '/' + user2)
+    }
+
     getConversations(userId: number) {
         return this.http.get('/api/conversations/' + userId)
     }

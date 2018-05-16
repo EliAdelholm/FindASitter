@@ -19,6 +19,11 @@ const getLicences = require(__dirname + '/controllers/getLicences.js')
 const uploadImage = require(__dirname + '/controllers/uploadImage.js')
 const addRating = require(__dirname + '/controllers/addRating.js')
 const lookupConversation = require(__dirname + '/controllers/lookupConversation.js')
+const addConversation = require(__dirname + '/controllers/addConversation.js')
+const sendPasswordResetEmail = require(__dirname + '/controllers/sendPasswordResetEmail.js')
+const lookupToken = require(__dirname + '/controllers/lookupToken.js')
+const resetPassword = require(__dirname + '/controllers/resetPassword.js')
+const confirmAccount = require(__dirname + '/controllers/confirmAccount.js')
 
 /* API ROUTES */
 router.get('/areas', function (req, res) {
@@ -79,6 +84,26 @@ router.get('/messages/:id', function (req, res) {
 
 router.get('/lookup-conversation/:user1/:user2', function (req, res) {
     lookupConversation(req, res)
+})
+
+router.get('/add-conversation/:user1/:user2', function (req, res) {
+    addConversation(req, res)
+})
+
+router.get('/reset-password/:email', function (req, res) {
+    sendPasswordResetEmail(req, res)
+})
+
+router.get('/lookup-token/:token', function (req, res) {
+    lookupToken( req, res )
+})
+
+router.post('/reset-password/', function (req, res) {
+    resetPassword( req, res )
+})
+
+router.get('/confirm-account/:token', function (req, res) {
+    confirmAccount( req, res )
 })
 
 module.exports = router

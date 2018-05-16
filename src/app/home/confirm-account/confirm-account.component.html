@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="heading">
+      <h1>Confirm Account</h1>
+    </div>
+  
+    <mat-card>
+      <mat-card-content>
+        <p>Thank you for signing up with us! We just need one last thing from you. In order to verify your account we have sent you an SMS with 4-digit code that you must fill in here.</p>
+        <form [formGroup]="tokenForm" (submit)="onSubmit(tokenForm)" novalidate>
+          <div class="token-input">
+            <mat-form-field>
+              <input matInput formControlName="token" placeholder="Code">
+              <mat-error *ngIf="tokenForm.controls.token.errors?.required && tokenForm.controls.token.touched">
+                *Required
+              </mat-error>
+            </mat-form-field>
+  
+            <div *ngIf="statusMessage">
+              <mat-error>{{ statusMessage }}</mat-error>
+            </div>
+          </div>
+  
+          <button mat-raised-button color="primary" type="submit">Confirm Account</button>
+  
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>

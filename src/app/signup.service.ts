@@ -16,4 +16,24 @@ export class SignupService {
     checkUsernameNotTaken(username: string) {
         return this.http.get('/api/lookup-username/' + username).delay(500)
     }
+
+    registerUser(user: object) {
+        return this.http.post('/api/user', user)
+    }
+
+    confirmAccount(token: object) {
+        return this.http.get('/api/confirm-account/' + token)
+    }
+
+    sendResetPasswordEmail(email: string) {
+        return this.http.get('/api/reset-password/' + email)
+    }
+
+    getTokenStatus(token: string) {
+        return this.http.get('/api/lookup-token/' + token)
+    }
+
+    resetPassword(data: object) {
+        return this.http.post('/api/reset-password', data)
+    }
 }

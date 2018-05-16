@@ -73,6 +73,21 @@ export class UsersEpic {
             });
     }
 
+    addConversation = (action$: ActionsObservable<any>) => {
+        return action$.ofType(UsersActions.ADD_CONVERSATION)
+            .mergeMap(({ payload }) => {
+                return this.usersService.addConversation(payload.user1, payload.user2)
+                    .map((result: any[]) => ({
+                        type: UsersActions.ADDED_CONVERSATION,
+                        payload: result
+                    }))
+                    .catch(error => Observable.of({
+                        type: UsersActions.FAILED_ADDED_CONVERSATION,
+                        payload: error
+                    }));
+            });
+    }
+
     getConversations = (action$: ActionsObservable<any>) => {
         return action$.ofType(UsersActions.GET_CONVERSATIONS)
             .mergeMap(({ payload }) => {
