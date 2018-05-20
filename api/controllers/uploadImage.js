@@ -1,11 +1,11 @@
-var buffer = require('buffer');
-var path = require('path');
-var fs = require('fs');
+const buffer = require('buffer');
+const path = require('path');
+const fs = require('fs');
 const moment = require('moment')
 
 function decode_base64(base64str, filename) {
 
-    var buf = new Buffer(base64str, "base64")
+    let buf = new Buffer(base64str, "base64")
 
     fs.writeFile(path.join(__dirname, '../../src/assets/img/uploads/', filename), buf, function (error) {
         if (error) {

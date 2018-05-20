@@ -1,0 +1,48 @@
+<form id="bikeForm" [formGroup]="bikeForm" (submit)="onSubmit(bikeForm)" novalidate>
+	<div class="profile-section">
+		<h2>Add Bike</h2>
+
+		<mat-form-field>
+			<input type="text" placeholder="Find make" aria-label="Number" matInput [formControl]="searchMake" [matAutocomplete]="autoMake">
+			<mat-autocomplete #autoMake="matAutocomplete">
+				<mat-option *ngFor="let make of searchMakeResult" [value]="make.MakeName">
+					{{ make.MakeName }}
+				</mat-option>
+			</mat-autocomplete>
+			<mat-error *ngIf="!searchMake.value">
+				*Reguired
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<input type="text" placeholder="Find make" aria-label="Number" matInput [formControl]="searchModel" [matAutocomplete]="autoModel">
+			<mat-autocomplete #autoModel="matAutocomplete">
+				<mat-option *ngFor="let model of searchModelResult" [value]="model.Model_Name">
+					{{ model.Model_Name }}
+				</mat-option>
+			</mat-autocomplete>
+			<mat-error *ngIf="!searchModel.value">
+				*Reguired
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<input matInput formControlName="year" placeholder="Year">
+			<mat-error *ngIf="bikeForm.controls.year.errors?.required && bikeForm.controls.year.touched">
+				*Reguired
+			</mat-error>
+		</mat-form-field>
+
+		<div class="mat-form-field">
+			<label>Upload image</label>
+			<input type="file" (change)="previewImage($event)">
+		</div>
+
+	</div>
+	<div class="profile-section">
+		<h2>Profile Details</h2>
+
+		<div class="bike-image" [style.background]="'url(' + previewImg + ')'"></div>
+		<button id="submitUser" mat-raised-button color="primary" type="submit">Save Changes</button>
+	</div>
+</form>

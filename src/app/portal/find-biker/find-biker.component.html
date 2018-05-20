@@ -17,12 +17,13 @@
 
         <mat-card class="biker-card" *ngFor="let user of filteredUsers | filterBikers: search">
             <div *ngIf="user === -1"> No biker found </div>
+            
             <div class="biker-image" [style.background]="'url(../../assets/img/' + user.image + ')'" routerLink="biker/{{ user.username }}"></div>
             <mat-card-content *ngIf="user !== -1">
                 <h3>{{ user.username }}</h3>
-                <p *ngIf="user.ratings.length">Average Rating: {{ calculateAverage(user.ratings) }}</p>
+                <p *ngIf="user.ratings.length">Average Rating: {{ calculateAverage(user.ratings) | decimal }}</p>
                 <p *ngIf="!user.ratings.length">No ratings yet</p>
-                <button mat-fab color="primary" class="chat-button" type="button" (click)="findConversation(user.id)">
+                <button mat-fab color="primary" class="chat-button" type="button" (click)="findConversation(user.id)" *ngIf="user.id != auth.id">
                     <mat-icon>chat</mat-icon>
                 </button>
             </mat-card-content>

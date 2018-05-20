@@ -35,6 +35,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 	onSubmit(registerForm) {
 		let user: Biker = registerForm.value as Biker;
 
+		console.log(registerForm.controls.password.errors)
+		console.log(registerForm.controls.confirmPassword.errors)
 		if (registerForm.valid) {
 			this.signupService.registerUser(user)
 				.subscribe(data => {
@@ -64,7 +66,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 				Validators.required,
 				PasswordValidator.getPasswordValidator()
 			])],
-			repeat: ['', Validators.required],
+			confirmPassword: ['', Validators.required],
 			email: ['', Validators.compose([
 				Validators.required,
 				Validators.email
@@ -72,6 +74,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 			phone: ['', Validators.required],
 			firstname: ['', [Validators.required, Validators.maxLength(30)]],
 			lastname: ['', [Validators.required, Validators.maxLength(40)]],
+		}, {
+			validator: PasswordValidator.getMatchPassword
 		});
 
 	}

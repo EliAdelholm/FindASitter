@@ -4,28 +4,26 @@ module.exports = function (req, res) {
     let sUser1 = req.params.user1
     let sUser2 = req.params.user2
 
-    let sQuery = "SELECT id, COUNT(*) AS count FROM conversations JOIN users_conversations ON conversations.id = conversationId WHERE userId IN ( ?, ? ) GROUP BY id"
+    console.log(sUser1, sUser2)
+
+    let sQuery = "SELECT conversationId FROM users_conversations WHERE conversationId IN (\n" +
+        "SELECT conversationId FROM users_conversations WHERE userId = (?) GROUP BY conversationId)\n" +
+        "AND userId = (?)"
 
     try {
-        gDb.all(sQuery, sUser1, sUser2, function (err, ajRows) {
+        gDb.all(sQuery, sUser2, sUser1, function (err, ajRows) {
             if (err) {
                 gLog('err', 'ERROR in LookupConversation: ' + err)
                 return res.status(500)
             }
-            // gLog('info', ajRows)
+            gLog('info', ajRows)
 
-            // Find the right conversation
-            let conversationId
-            let conversation = ajRows.find(item => {
-                return item.count == 2
-            })
-
-            if (conversation) {
-                conversationId = conversation.id
-            } else {
+            if (!ajRows[0]) {
                 conversationId = 'ERROR'
+            } else {
+                conversationId = ajRows[0].conversationId
             }
-            
+
             return res.json({ status: 'OK', conversationId });
 
         })

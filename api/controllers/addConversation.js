@@ -17,6 +17,7 @@ module.exports = function (req, res) {
             console.log(this)
 
             // Prepare query and data for users
+            console.log(req.params.user1, req.params.user2)
             let conversationId = this.lastID
             let sQuery = "INSERT INTO users_conversations VALUES ( ?, ? ), ( ?, ? )"
             let aData = [conversationId, req.params.user1, conversationId, req.params.user2]

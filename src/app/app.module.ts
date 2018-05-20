@@ -12,7 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material';
+import { MatInputModule, MatAutocompleteModule } from '@angular/material';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +31,7 @@ import { FormsModule } from '@angular/forms';
 // Services
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth.service';
+import { BikeService } from './bike.service'
 
 // Components
 import { AppComponent } from './app.component';
@@ -68,6 +70,8 @@ import { ChatService } from './chat.service';
 import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './home/reset-password/reset-password.component';
 import { ConfirmAccountComponent } from './home/confirm-account/confirm-account.component';
+import { DecimalPipe } from './decimal.pipe';
+import { AddBikerComponent } from './portal/profile/add-biker/add-biker.component';
 
 export function tokenGetter() {
 	return localStorage.getItem('APIToken');
@@ -94,7 +98,9 @@ export function tokenGetter() {
 		NoConversationComponent,
 		ForgotPasswordComponent,
 		ResetPasswordComponent,
-		ConfirmAccountComponent
+		ConfirmAccountComponent,
+		DecimalPipe,
+		AddBikerComponent
 	],
 	imports: [
 		BrowserModule,
@@ -108,6 +114,7 @@ export function tokenGetter() {
 		MatDatepickerModule,
 		MatFormFieldModule,
 		MatInputModule,
+		MatAutocompleteModule,
 		MatSelectModule,
 		MatCardModule,
 		MatListModule,
@@ -122,6 +129,7 @@ export function tokenGetter() {
 		HttpClientModule,
 		MaterialFileInputModule,
 		FormsModule,
+		NgxMatSelectSearchModule,
 		JwtModule.forRoot({
 			config: {
 				tokenGetter: tokenGetter,
@@ -133,7 +141,7 @@ export function tokenGetter() {
 	providers: [AuthGuardService, AuthService, MatMomentDateModule, 
 		UsersActions, UsersService, UsersEpic, 
 		StaticActions, StaticService, StaticEpic,
-		SignupService, WebsocketService, ChatService
+		SignupService, WebsocketService, ChatService, BikeService
 	],
 	bootstrap: [AppComponent]
 })
@@ -151,14 +159,14 @@ export class AppModule {
 			this.usersEpic.addConversation,
 			this.usersEpic.getConversations,
 			this.usersEpic.getMessages,
-			this.usersEpic.addUser,
 			this.usersEpic.updateUser,
 			this.usersEpic.updateImage,
 			this.usersEpic.deleteUser,
 			this.usersEpic.addRating,
 
 			this.staticEpic.getAreas,
-			this.staticEpic.getLicences
+			this.staticEpic.getLicences,
+			this.staticEpic.getMakes
 		);
 
 		const middleware = [

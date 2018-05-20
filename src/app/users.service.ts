@@ -38,11 +38,6 @@ export class UsersService {
         return this.http.get('/api/messages/' + conversationId)
     }
 
-    addUser(user: Biker) {
-        console.log("service: ", user)
-        return this.http.post('/api/user', user)
-    }
-
     updateUser(user: Biker, userId: number) {
         return this.http.post('/api/user/' + userId, user)
     }

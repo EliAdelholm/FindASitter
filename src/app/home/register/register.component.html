@@ -7,7 +7,7 @@
 		<mat-card-content>
 			<form id="registerForm" [formGroup]="registerForm" (submit)="onSubmit(registerForm)" novalidate>
 
-				<div>
+				<div class="register-inputs">
 					<mat-form-field>
 						<input matInput formControlName="username" placeholder="Username">
 						<mat-error *ngIf="registerForm.controls.username.errors && registerForm.controls.username.touched">
@@ -28,25 +28,42 @@
 					</mat-form-field>
 				</div>
 
-				<div>
+				<div class="register-inputs">
 					<mat-form-field>
-						<input matInput formControlName="password" placeholder="Password">
+						<input matInput type="password" formControlName="password" placeholder="Password">
 						<mat-error *ngIf="registerForm.controls.password.errors && registerForm.controls.password.touched">
-							<span *ngIf="registerForm.controls.password.errors?.required">*Reguired</span>
+							<span *ngIf="registerForm.controls.password.errors.required">*Reguired</span>
+							<span *ngIf="!registerForm.controls.password.errors.required && registerForm.controls.password.errors.invalidPassword">Must contain a mix of lowercase letters, uppercase letters and numbers</span>
 						</mat-error>
 
 					</mat-form-field>
 
 					<mat-form-field>
-						<input matInput formControlName="repeat" placeholder="Repeat password">
-						<mat-error *ngIf="registerForm.controls.repeat.errors && registerForm.controls.repeat.touched">
-							<span *ngIf="registerForm.controls.repeat.errors?.required">*Reguired</span>
+						<input matInput type="password" formControlName="confirmPassword" placeholder="Confirm password">
+						<mat-error *ngIf="registerForm.controls.confirmPassword.errors && registerForm.controls.confirmPassword.touched">
+							<span *ngIf="registerForm.controls.confirmPassword.errors.required">*Reguired</span>
+							<span *ngIf="!registerForm.controls.confirmPassword.errors.required && registerForm.controls.confirmPassword.errors.matchPassword">Password does not match</span>
 						</mat-error>
 					</mat-form-field>
 				</div>
 
-				<div>
-					<p>Email and phone MUST be valid</p>
+				<div class="register-inputs">
+					<mat-form-field>
+						<input matInput formControlName="firstname" placeholder="Firstname">
+						<mat-error *ngIf="registerForm.controls.firstname.errors?.required && registerForm.controls.firstname.touched">
+							*Reguired
+						</mat-error>
+					</mat-form-field>
+
+					<mat-form-field>
+						<input matInput formControlName="lastname" placeholder="Lastname">
+						<mat-error *ngIf="registerForm.controls.lastname.errors?.required && registerForm.controls.lastname.touched">
+							*Reguired
+						</mat-error>
+					</mat-form-field>
+				</div>
+
+				<div class="register-inputs">
 					<mat-form-field>
 						<input matInput formControlName="email" placeholder="Email">
 						<mat-error *ngIf="registerForm.controls.email.errors && registerForm.controls.email.touched">
@@ -61,22 +78,7 @@
 							*Reguired
 						</mat-error>
 					</mat-form-field>
-				</div>
-
-				<div>
-					<mat-form-field>
-						<input matInput formControlName="firstname" placeholder="Firstname">
-						<mat-error *ngIf="registerForm.controls.firstname.errors?.required && registerForm.controls.firstname.touched">
-							*Reguired
-						</mat-error>
-					</mat-form-field>
-
-					<mat-form-field>
-						<input matInput formControlName="lastname" placeholder="Lastname">
-						<mat-error *ngIf="registerForm.controls.lastname.errors?.required && registerForm.controls.lastname.touched">
-							*Reguired
-						</mat-error>
-					</mat-form-field>
+					<p>Email and phone MUST be valid</p>
 				</div>
 
 				<button id="submitUser" mat-raised-button color="primary" type="submit">Register</button>

@@ -7,9 +7,11 @@ const chalk = require('chalk')
 const bodyParser = require('body-parser')
 const path = require('path')
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('socket.io')(http)
+const request = require('request')
 
 // GLOBALS
+global.gFs = require('fs')
 global.gDb = new sqlite.Database(__dirname + '/db.db')
 global.gLog = (sStatus, sMessage) => {
     switch (sStatus) {
@@ -27,6 +29,11 @@ global.gLog = (sStatus, sMessage) => {
             break
     }
 }
+
+// Get motorcycle data from API and save to file
+// Don't use with nodemon because server will restart everytime the function writes to file
+const getMotorcycleMakes = require(__dirname + '/api/controllers/getMotorcycleMakes.js')
+// getMotorcycleMakes()
 
 // Use BodyParser
 app.use(bodyParser.json({limit: '50mb'}))

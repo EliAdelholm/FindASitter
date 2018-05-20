@@ -42,14 +42,16 @@
             </mat-card-content>
         </mat-card>
         <mat-card class="profile-main">
-            <div class="biker-image" style="background-image: url('../../assets/img/bg-bike1.jpg')"></div>
+            <div class="biker-image" [style.background]="'url(../../assets/img/' + user.image + ')'"></div>
             <mat-card-content>
-                <h3 *ngIf="ratings.length">Average Rating: {{ calculateAverage(user.ratings) }}</h3>
+                <h3 *ngIf="!ratings.length">No ratings yet</h3>
+                <p *ngIf="!ratings.length">Be the first to add a rating!</p>
+                <h3 *ngIf="ratings.length">Average Rating: {{ calculateAverage(user.ratings) | decimal }}</h3>
                 <p *ngIf="ratings.length">Based on {{ user.ratings.length }}
                     <span *ngIf="ratings.length == 1">rating</span>
                     <span *ngIf="ratings.length > 1">ratings</span>
                 </p>
-                <button mat-fab color="primary" class="chat-button" type="button">
+                <button mat-fab color="primary" class="chat-button" type="button" *ngIf="user.id != auth.id">
                     <mat-icon>chat</mat-icon>
                 </button>
             </mat-card-content>
@@ -79,7 +81,7 @@
                 <h3>
                     <mat-icon class="star">star rating</mat-icon> Latest Ratings
                 </h3>
-                <button mat-fab color="primary" class="add-rating" type="button" (click)="ratingView = 'form'">
+                <button mat-fab color="primary" class="add-rating" type="button" (click)="ratingView = 'form'" *ngIf="user.id != auth.id">
                     <mat-icon>add</mat-icon>
                 </button>
             </mat-card-header>

@@ -39,10 +39,6 @@ export class UsersActions {
     static RECEIVED_MESSAGES: string = 'RECEIVED_MESSAGES';
     static FAILED_RECEIVED_MESSAGES: string = 'FAILED_RECEIVED_MESSAGES';
 
-    static ADD_USER: string = 'ADD_USER';
-    static ADDED_USER: string = 'ADDED_USER';
-    static FAILED_ADDED_USER: string = 'FAILED_ADDED_USER';
-
     static UPDATE_USER: string = 'UPDATE_USER';
     static UPDATED_USER: string = 'UPDATED_USER';
     static FAILED_UPDATED_USER: string = 'FAILED_UPDATED_USER';
@@ -106,13 +102,6 @@ export class UsersActions {
         this.ngRedux.dispatch({
             type: UsersActions.GET_MESSAGES,
             payload: conversationId
-        })
-    }
-
-    addUser(user: {}): void {
-        this.ngRedux.dispatch({
-            type: UsersActions.ADD_USER,
-            payload: user
         })
     }
 

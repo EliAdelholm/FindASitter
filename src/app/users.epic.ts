@@ -118,22 +118,6 @@ export class UsersEpic {
             });
     }
 
-    addUser = (action$: ActionsObservable<any>) => {
-        return action$.ofType(UsersActions.ADD_USER)
-            .mergeMap(({ payload }) => {
-                console.log("epic: ", payload)
-                return this.usersService.addUser(payload)
-                    .map((result: any[]) => ({
-                        type: UsersActions.ADDED_USER,
-                        payload: result
-                    }))
-                    .catch(error => Observable.of({
-                        type: UsersActions.FAILED_ADDED_USER,
-                        payload: error
-                    }));
-            });
-    }
-
     updateUser = (action$: ActionsObservable<any>) => {
         return action$.ofType(UsersActions.UPDATE_USER)
             .mergeMap(({ payload }) => {

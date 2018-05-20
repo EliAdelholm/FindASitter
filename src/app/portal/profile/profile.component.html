@@ -85,21 +85,20 @@
 				<form id="uploadForm" [formGroup]="uploadForm" (submit)="onUpload(uploadForm)" novalidate>
 					<div class="profile-section">
 						<h2>Current Image</h2>
-						<img class="biker-image" [src]="'../../assets/img/' + user.image + ''" />
+						<img class="biker-image" *ngIf="!previewImg" [src]="'../../assets/img/' + user.image + ''" />
+						<img class="biker-image" *ngIf="previewImg" [src]="previewImg"/>
 					</div>
 
 					<div class="profile-section">
 						<h2>Change Image</h2>
-						
-							<input type="file" (change)="previewImage($event)">
-							<!-- <ngx-mat-file-input formControlName="image" placeholder="Select Image" type="file" (change)="previewImage($event)"></ngx-mat-file-input> -->
-							
-						
-
+						<input type="file" (change)="previewImage($event)">
 						<button id="uploadImage" mat-raised-button color="primary" type="submit">Upload image</button>
 					</div>
-
 				</form>
+			</mat-card-content>
+
+			<mat-card-content *ngIf="activeView == 'bikes'">
+				<add-bike></add-bike>
 			</mat-card-content>
 
 			<mat-card-content *ngIf="activeView == 'delete-account'">

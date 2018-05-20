@@ -29,6 +29,15 @@ export function staticReducer(state: StaticState = INITIAL_STATE, action: any) {
         case StaticActions.UPDATE_PROFILE_VIEW:
             return tassign(state, { profileView: action.payload });
 
+        case StaticActions.GET_MAKES:
+            return state;
+
+        case StaticActions.RECEIVED_MAKES:
+            return tassign(state, { makes: action.payload.data });
+
+        case StaticActions.FAILED_RECEIVED_MAKES:
+            return state;
+
         default:
             return state;
     }

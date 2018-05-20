@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	user: Biker;
 	areas = [];
 	licences = [];
+	previewImg = null;
 
 	ngOnDestroy(): void {
 		// Always unsubscribe on destroy.
@@ -53,6 +54,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 			reader.readAsDataURL(file);
 
 			reader.onload = () => {
+				this.previewImg = reader.result;
 				this.uploadForm.patchValue({
 					image: reader.result.split(',')[1],
 					extension: file.name.split('.')[1]

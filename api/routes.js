@@ -24,6 +24,9 @@ const sendPasswordResetEmail = require(__dirname + '/controllers/sendPasswordRes
 const lookupToken = require(__dirname + '/controllers/lookupToken.js')
 const resetPassword = require(__dirname + '/controllers/resetPassword.js')
 const confirmAccount = require(__dirname + '/controllers/confirmAccount.js')
+const findMotorcycleMakes = require(__dirname + '/controllers/findMotorcycleMakes.js')
+const findMotorcycleModels = require(__dirname + '/controllers/findMotorcycleModels.js')
+const addBike = require(__dirname + '/controllers/addBike.js')
 
 /* API ROUTES */
 router.get('/areas', function (req, res) {
@@ -105,5 +108,18 @@ router.post('/reset-password/', function (req, res) {
 router.get('/confirm-account/:token', function (req, res) {
     confirmAccount( req, res )
 })
+
+router.get('/motorcycle-makes/:search', function (req, res) {
+    findMotorcycleMakes( req, res )
+})
+
+router.get('/motorcycle-models/:make/:search', function (req, res) {
+    findMotorcycleModels( req, res )
+})
+
+router.post('/bike', function (req, res) {
+    addBike( req, res )
+})
+
 
 module.exports = router

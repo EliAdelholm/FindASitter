@@ -42,4 +42,19 @@ export class StaticEpic {
                     }));
             });
     }
+
+    getMakes = (action$: ActionsObservable<any>) => {
+        return action$.ofType(StaticActions.GET_MAKES)
+            .mergeMap(({ payload }) => {
+                return this.staticService.getMakes()
+                    .map((result: any[]) => ({
+                        type: StaticActions.RECEIVED_MAKES,
+                        payload: result
+                    }))
+                    .catch(error => Observable.of({
+                        type: StaticActions.FAILED_RECEIVED_MAKES,
+                        payload: error
+                    }));
+            });
+    }
 }

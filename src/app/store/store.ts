@@ -15,6 +15,7 @@ export class StaticState {
     areas: any[];
     licences: any[];
     profileView: String;
+    makes: any[];
 }
 
 export class IAppState {

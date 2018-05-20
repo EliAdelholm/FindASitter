@@ -15,7 +15,11 @@ export class StaticService {
         return this.http.get('/api/licences');
     }
 
+    getMakes() {
+        return this.http.get('/api/motorcycle-makes');
+    }
+
     static getInitialStaticState(): StaticState {
-        return { areas: [], licences: [], profileView: "details" };
+        return { areas: [], licences: [], profileView: "details", makes: [] };
     }
 }

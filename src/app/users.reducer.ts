@@ -83,16 +83,6 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
         case UsersActions.FAILED_RECEIVED_MESSAGES:
             return state;
 
-        case UsersActions.ADD_USER:
-            return state;
-
-        case UsersActions.ADDED_USER:
-            localStorage.setItem('APIToken', action.payload.token);
-            return tassign(state, { auth: action.payload.data });
-
-        case UsersActions.FAILED_ADDED_USER:
-            return state;
-
         case UsersActions.UPDATE_USER:
             return state;
 

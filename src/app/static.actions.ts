@@ -18,6 +18,10 @@ export class StaticActions {
     static RECEIVED_LICENCES: string = 'RECEIVED_LICENCES';
     static FAILED_RECEIVED_LICENCES: string = 'FAILED_RECEIVED_LICENCES';
 
+    static GET_MAKES: string = 'GET_MAKES';
+    static RECEIVED_MAKES: string = 'RECEIVED_MAKES';
+    static FAILED_RECEIVED_MAKES: string = 'FAILED_RECEIVED_MAKES';
+
     static UPDATE_PROFILE_VIEW: string = 'UPDATE_PROFILE_VIEW';
 
     getAreas() {
@@ -29,6 +33,12 @@ export class StaticActions {
     getLicences() {
         this.ngRedux.dispatch({
             type: StaticActions.GET_LICENCES
+        })
+    }
+
+    getMakes() {
+        this.ngRedux.dispatch({
+            type: StaticActions.GET_MAKES
         })
     }
 
