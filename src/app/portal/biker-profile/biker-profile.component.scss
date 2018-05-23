@@ -50,7 +50,16 @@
 }
 
 @media only screen and (max-width: 800px) {
+
     .ratings, .bikes {
         width: 350px;
+    }
+
+    .profile-container {
+        width: 398px;
+    }
+
+    .profile-main, .profile-details {
+        width: 100%;
     }
 }

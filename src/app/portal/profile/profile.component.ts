@@ -24,6 +24,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	areas = [];
 	licences = [];
 	previewImg = null;
+	gotBikes = false;
+	bikes;
 
 	ngOnDestroy(): void {
 		// Always unsubscribe on destroy.
@@ -75,6 +77,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
+		
 		this.staticSubscription = this.ngRedux.select(state => state.static).subscribe(staticData => {
 			this.areas = staticData.areas;
 			this.licences = staticData.licences;
@@ -83,7 +86,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
 		this.userSubscription = this.ngRedux.select(state => state.users).subscribe(users => {
 			this.user = users.auth
-			console.log(this.user)
+			this.bikes = this.user && this.user.bikes
 
 			this.updateForm = this.fb.group({
 				username: [this.user && this.user.username, [Validators.required, Validators.minLength(3), Validators.maxLength(25)]],

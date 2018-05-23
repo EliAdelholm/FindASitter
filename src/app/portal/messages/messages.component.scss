@@ -18,3 +18,14 @@
     }
 }
 
+@media only screen and (max-width: 800px) {
+
+    .contacts {
+        width: 70px;
+        
+        .mat-line {
+            display: none;
+        }
+    }
+}
+

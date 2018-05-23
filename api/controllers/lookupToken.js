@@ -2,7 +2,6 @@ const moment = require('moment')
 
 module.exports = function (req, res) {
 
-    // Prepate query - get only insensitive information
     let sToken = req.params.token
     let sQuery = "SELECT * FROM tokens WHERE token = (?)"
 
@@ -12,16 +11,20 @@ module.exports = function (req, res) {
                 gLog('err', 'ERROR in LookupToken: ' + err)
                 return res.json({ 'status': 'error' })
             }
-            gLog('info', ajRows)
+
             if (!ajRows[0]) {
                 return res.json( {status: 'ERROR', message: 'Invalid Token' });
             }
+
+            gLog('info', ajRows)
+
             let expirationDate = moment(ajRows[0].expiresAt, "YYYY-MM-DD HH:mm:ss");
             let now = moment();
-            console.log(expirationDate, now)
+
             if (expirationDate.isBefore(now)) {
                 return res.json({ status: 'ERROR', message: 'Token has expired' })
             }
+            
             return res.json( { status: 'OK' } );
 
         })

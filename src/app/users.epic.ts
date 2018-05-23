@@ -58,6 +58,21 @@ export class UsersEpic {
             });
     }
 
+    getBikes = (action$: ActionsObservable<any>) => {
+        return action$.ofType(UsersActions.GET_BIKES)
+            .mergeMap(({ payload }) => {
+                return this.usersService.getBikes(payload)
+                    .map((result: any[]) => ({
+                        type: UsersActions.RECEIVED_BIKES,
+                        payload: result
+                    }))
+                    .catch(error => Observable.of({
+                        type: UsersActions.FAILED_RECEIVED_BIKES,
+                        payload: error
+                    }));
+            });
+    }
+
     lookupConversation = (action$: ActionsObservable<any>) => {
         return action$.ofType(UsersActions.LOOKUP_CONVERSATION)
             .mergeMap(({ payload }) => {

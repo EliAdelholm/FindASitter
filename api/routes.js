@@ -27,6 +27,7 @@ const confirmAccount = require(__dirname + '/controllers/confirmAccount.js')
 const findMotorcycleMakes = require(__dirname + '/controllers/findMotorcycleMakes.js')
 const findMotorcycleModels = require(__dirname + '/controllers/findMotorcycleModels.js')
 const addBike = require(__dirname + '/controllers/addBike.js')
+const getBikes = require(__dirname + '/controllers/getBikes.js')
 
 /* API ROUTES */
 router.get('/areas', function (req, res) {
@@ -119,6 +120,10 @@ router.get('/motorcycle-models/:make/:search', function (req, res) {
 
 router.post('/bike', function (req, res) {
     addBike( req, res )
+})
+
+router.get('/bikes/:id', function (req, res) {
+    getBikes( req, res )
 })
 
 

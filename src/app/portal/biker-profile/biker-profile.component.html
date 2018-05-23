@@ -51,7 +51,7 @@
                     <span *ngIf="ratings.length == 1">rating</span>
                     <span *ngIf="ratings.length > 1">ratings</span>
                 </p>
-                <button mat-fab color="primary" class="chat-button" type="button" *ngIf="user.id != auth.id">
+                <button mat-fab color="primary" class="chat-button" type="button" (click)="findConversation()" *ngIf="user.id != auth.id">
                     <mat-icon>chat</mat-icon>
                 </button>
             </mat-card-content>
@@ -67,8 +67,13 @@
             </mat-card-header>
             <mat-card-content>
                 <mat-list role="list">
-                    <mat-list-item role="listitem" class="rating">
+                    <mat-list-item role="listitem" class="rating" *ngIf="!bikes">
                         <p>None</p>
+                    </mat-list-item>
+                    <mat-list-item role="listitem" class="rating" *ngFor="let bike of bikes">
+                        <img matListAvatar src="../../assets/img/{{ bike.image }}" alt="...">
+                        <h3 matLine>{{ bike.make }} {{ bike.model }}</h3>
+                        <p matLine>{{ bike.year }}</p>
                     </mat-list-item>
                 </mat-list>
             </mat-card-content>

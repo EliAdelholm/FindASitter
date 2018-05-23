@@ -4,8 +4,8 @@ export class User {
     public username: String;
     public firstname: String;
     public lastname: String;
-    public password: String;
-    public admin: boolean;
+    public password?: String;
+    public admin: number;
     public phone: number;
     public image: string;
 }

@@ -36,6 +36,25 @@ export function usersReducer(state: UsersState = INITIAL_STATE, action: any) {
         case UsersActions.FAILED_RECEIVED_USERS:
             return state;
 
+        case UsersActions.GET_BIKES:
+            return state;
+
+        case UsersActions.RECEIVED_BIKES:
+            if (action.payload.data.length >= 1) {
+                let userIndex = state.profiles.findIndex(profile => profile.id == action.payload.userId)
+                let newBikes = [...state.profiles[userIndex].bikes, action.payload.data];
+                let newProfileBikeObj = Object.assign({}, state.profiles[userIndex]);
+                newProfileBikeObj.bikes = newBikes;
+
+                let newBikeProfiles = [...state.profiles.slice(0, userIndex),
+                    newProfileBikeObj,
+                ...state.profiles.slice(userIndex + 1)];
+                return tassign(state, { profiles: newBikeProfiles });
+            }
+
+        case UsersActions.FAILED_RECEIVED_BIKES:
+            return state;
+
         case UsersActions.LOOKUP_CONVERSATION:
             return tassign(state, { requestStatus: null });
 

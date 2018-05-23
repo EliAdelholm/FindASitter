@@ -22,6 +22,10 @@ export class UsersService {
         return this.http.get('/api/users');
     }
 
+    getBikes(userId: number) {
+        return this.http.get('/api/bikes/' + userId)
+    }
+
     lookupConversation(user1: number, user2: number) {
         return this.http.get('/api/lookup-conversation/' + user1 + '/' + user2)
     }

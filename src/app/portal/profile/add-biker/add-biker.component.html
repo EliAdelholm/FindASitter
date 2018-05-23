@@ -40,9 +40,10 @@
 
 	</div>
 	<div class="profile-section">
-		<h2>Profile Details</h2>
+		<h2>Image Preview</h2>
 
 		<div class="bike-image" [style.background]="'url(' + previewImg + ')'"></div>
+		<p *ngIf="requestMessage">{{ requestMessage }}</p>
 		<button id="submitUser" mat-raised-button color="primary" type="submit">Save Changes</button>
 	</div>
 </form>

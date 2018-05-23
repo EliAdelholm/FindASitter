@@ -91,13 +91,26 @@
 
 					<div class="profile-section">
 						<h2>Change Image</h2>
-						<input type="file" (change)="previewImage($event)">
+						<div class="mat-form-field">
+								<input type="file" (change)="previewImage($event)">
+						</div>
 						<button id="uploadImage" mat-raised-button color="primary" type="submit">Upload image</button>
 					</div>
 				</form>
 			</mat-card-content>
 
 			<mat-card-content *ngIf="activeView == 'bikes'">
+				<h2>Your Bikes</h2>
+				<mat-list role="list">
+						<mat-list-item role="listitem" *ngIf="!bikes">
+							<p>None</p>
+						</mat-list-item>
+						<mat-list-item role="listitem" *ngFor="let bike of bikes">
+							<img matListAvatar src="../../assets/img/{{ bike.image }}" alt="...">
+							<h3 matLine>{{ bike.make }} {{ bike.model }}</h3>
+							<p matLine>{{ bike.year }}</p>
+						</mat-list-item>
+					</mat-list>
 				<add-bike></add-bike>
 			</mat-card-content>
 
@@ -121,9 +134,9 @@
 					<mat-list-item role="listitem" class="option-item" [class.active]="activeView=='bikes'" (click)="changeView('bikes')">
 						<mat-icon>motorcycle</mat-icon>
 					</mat-list-item>
-					<mat-list-item role="listitem" class="option-item" [class.active]="activeView=='settings'" (click)="changeView('settings')">
+					<!-- <mat-list-item role="listitem" class="option-item" [class.active]="activeView=='settings'" (click)="changeView('settings')">
 						<mat-icon>settings</mat-icon>
-					</mat-list-item>
+					</mat-list-item> -->
 					<mat-list-item role="listitem" class="option-item" [class.active]="activeView=='delete-account'" (click)="changeView('delete-account')">
 						<mat-icon>delete_forever</mat-icon>
 					</mat-list-item>

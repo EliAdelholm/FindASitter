@@ -155,6 +155,7 @@ export class AppModule {
 			this.usersEpic.authenticate,
 			this.usersEpic.getAuthUser,
 			this.usersEpic.getUsers,
+			this.usersEpic.getBikes,
 			this.usersEpic.lookupConversation,
 			this.usersEpic.addConversation,
 			this.usersEpic.getConversations,

@@ -32,3 +32,16 @@ form {
     background-size: cover !important;
     background-position: center !important;
 }
+
+@media only screen and (max-width: 800px) {
+
+    form {
+        display: block;
+        padding-bottom: 80px;
+    }
+
+    .profile-section {
+        width: 100%;
+    }
+    
+}

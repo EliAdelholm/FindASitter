@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../../../store/store';
 import { BikeService } from '../../../bike.service';
+import { AuthService } from '../../../auth.service';
 
 @Component({
 	selector: 'add-bike',
@@ -18,9 +19,11 @@ export class AddBikerComponent implements OnInit {
 	searchMakeResult;
 	searchModelResult;
 	previewImg;
+	requestStatus;
+	requestMessage;
 
 
-	constructor(private fb: FormBuilder, private bikeService: BikeService, private cd: ChangeDetectorRef) {
+	constructor(private fb: FormBuilder, private bikeService: BikeService, private cd: ChangeDetectorRef, private authService: AuthService) {
 
 		this.searchMake.valueChanges
 			.subscribe(data => {
@@ -30,7 +33,7 @@ export class AddBikerComponent implements OnInit {
 				})
 			})
 
-			this.searchModel.valueChanges
+		this.searchModel.valueChanges
 			.subscribe(data => {
 				let make = this.searchMake.value
 				this.bikeService.searchModel(make, data).subscribe(response => {
@@ -44,6 +47,7 @@ export class AddBikerComponent implements OnInit {
 	ngOnInit() {
 
 		this.bikeForm = this.fb.group({
+			userId: [this.authService.authenticatedUserId(), Validators.required],
 			year: ['', Validators.required],
 			image: ['', Validators.required],
 			extension: ['', Validators.required]
@@ -53,11 +57,12 @@ export class AddBikerComponent implements OnInit {
 	onSubmit(bikeForm) {
 		bikeForm.value.make = this.searchMake.value;
 		bikeForm.value.model = this.searchModel.value;
-		
+
 		if (bikeForm.valid) {
 			console.log('add bike')
-			this.bikeService.addBike(bikeForm.value).subscribe(data => {
-				console.log(data)
+			this.bikeService.addBike(bikeForm.value).subscribe(response => {
+				this.requestStatus = response;
+				this.requestMessage = this.requestStatus.message;
 			});
 		}
 	}

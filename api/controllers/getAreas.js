@@ -1,6 +1,5 @@
 module.exports = function (req, res) {
 
-    // Prepate query - get only insensitive information
     let sQuery = "SELECT * FROM areas"
 
     try {

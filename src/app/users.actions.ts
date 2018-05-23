@@ -23,6 +23,10 @@ export class UsersActions {
     static RECEIVED_USERS: string = 'RECEIVED_USERS';
     static FAILED_RECEIVED_USERS: string = 'FAILED_RECEIVED_USERS';
 
+    static GET_BIKES: string = 'GET_BIKES';
+    static RECEIVED_BIKES: string = 'RECEIVED_BIKES';
+    static FAILED_RECEIVED_BIKES: string = 'FAILED_RECEIVED_BIKES';
+
     static LOOKUP_CONVERSATION: string = 'LOOKUP_CONVERSATION';
     static RECEIVED_LOOKUP_CONVERSATION: string = 'RECEIVED_LOOKUP_CONVERSATION';
     static FAILED_RECEIVED_LOOKUP_CONVERSATION: string = 'FAILED_RECEIVED_LOOKUP_CONVERSATION';
@@ -74,6 +78,13 @@ export class UsersActions {
     getUsers() {
         this.ngRedux.dispatch({
             type: UsersActions.GET_USERS
+        })
+    }
+
+    getBikes(userId: number) {
+        this.ngRedux.dispatch({
+            type: UsersActions.GET_BIKES,
+            payload: userId
         })
     }
 

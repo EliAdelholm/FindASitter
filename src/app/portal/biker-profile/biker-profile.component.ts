@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../../store/store';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Biker } from '../../../entities/biker';
 import { MomentModule } from 'angular2-moment';
 import { Subscription } from 'rxjs/Subscription';
@@ -23,17 +23,26 @@ export class BikerProfileComponent implements OnInit {
 	ratings;
 	ratingForm: FormGroup;
 	ratingView = "latest";
+	bikes;
+	gotBikes = false;
+	action;
 
 	ngOnDestroy(): void {
 		this.subscription.unsubscribe();
 	}
 
-	constructor(private fb: FormBuilder, private route: ActivatedRoute, private ngRedux: NgRedux<IAppState>, private usersActions: UsersActions) { }
+	constructor(private fb: FormBuilder, private route: ActivatedRoute, private ngRedux: NgRedux<IAppState>, private usersActions: UsersActions, private router: Router) { }
 
 	onSubmit(ratingForm) {
 		if (ratingForm.valid) {
 			this.usersActions.addRating(ratingForm.value, this.user.id)
+			this.action = "rate";
 		}
+	}
+
+	findConversation() {
+		this.usersActions.lookupConversation(this.user.id, this.auth.id)
+		this.action = "chat";
 	}
 
 	ngOnInit() {
@@ -43,12 +52,20 @@ export class BikerProfileComponent implements OnInit {
 			this.users = users.profiles
 
 			if (this.user && this.users) {
+
+				if (!this.gotBikes) {
+					this.usersActions.getBikes(this.user.id)
+					this.gotBikes = true;
+				}
+
 				let ratings = this.user.ratings;
 
 				for (let i = 0; i < ratings.length; i++) {
 					ratings[i].user = this.findUser(ratings[i].userId);
 				}
 				this.ratings = ratings;
+
+				this.bikes = this.user.bikes[0]
 			}
 
 			this.ratingForm = this.fb.group({
@@ -61,9 +78,18 @@ export class BikerProfileComponent implements OnInit {
 				])]
 			});
 
-			if(users.requestStatus == "OK") {
+			if (this.action === "rate" && users.requestStatus == "OK") {
 				this.ratingView = "latest"
 				this.usersActions.resetRequestStatus();
+			}
+
+			if (this.action === "chat" && users.requestStatus && users.requestStatus != "ERROR") {
+				this.router.navigate(['portal/messages/' + users.requestStatus])
+				this.usersActions.resetRequestStatus()
+			}
+
+			if( this.action == "chat" && users.requestStatus && users.requestStatus == "ERROR") {
+				this.usersActions.addConversation(this.user.id, this.auth.id)
 			}
 		});
 	}

@@ -1,6 +1,5 @@
 module.exports = function (req, res) {
 
-    // Prepate query - get only insensitive information
     let sEmail = req.params.email
     let sQuery = "SELECT COUNT(*) AS count FROM users WHERE email = (?)"
 
@@ -11,6 +10,7 @@ module.exports = function (req, res) {
                 return res.json({ 'status': 'error' })
             }
             gLog('info', ajRows)
+            
             let result = ajRows[0].count == 0 ? true : false
             return res.json( result);
 

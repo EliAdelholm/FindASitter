@@ -87,3 +87,14 @@
         bottom: 24px;
     }
 }
+
+@media only screen and (max-width: 800px) {
+
+    .conversation {
+        width: calc(100vw - 70px);
+
+        .mat-card-content {
+            padding: 5px;
+        }
+    }
+}

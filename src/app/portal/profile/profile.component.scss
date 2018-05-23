@@ -63,9 +63,6 @@ form {
     }
 
     .mat-card-content {
-        width: calc(100% - 48px);
-        height: calc(100% - 150px);
-        overflow: auto;
         padding: 24px;
     }
 
@@ -81,4 +78,20 @@ form {
 
 .clear {
     clear: both;
+}
+
+@media only screen and (max-width: 800px) {
+    .details {
+
+        form {
+            display: block;
+            padding-bottom: 80px;
+        }
+    
+        .profile-section {
+            width: 100%;
+        }
+
+    }
+    
 }

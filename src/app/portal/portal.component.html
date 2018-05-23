@@ -1,7 +1,6 @@
 <mat-toolbar color="primary" class="desktop-nav">
 	<button mat-button routerLink="/portal"><h2>Find a Biker</h2></button>
 	<button mat-button routerLink="messages">Messages</button>
-	<!-- <button mat-button routerLink="users">Users</button> -->
 	<button mat-button (click)="logout()">Logout</button>
 
 	<div class="logged-in-user" routerLink="profile" *ngIf="user">
@@ -14,20 +13,22 @@
 	<mat-icon class="menu-icon">menu</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-	<button mat-menu-item>
-		<mat-icon>dialpad</mat-icon>
-		<span>Redial</span>
+	<button mat-menu-item routerLink="/portal">
+		<mat-icon>home</mat-icon>
+		<span>Home</span>
 	</button>
-	<button mat-menu-item disabled>
-		<mat-icon>voicemail</mat-icon>
-		<span>Check voicemail</span>
+	<button mat-menu-item routerLink="messages">
+		<mat-icon>chat</mat-icon>
+		<span>Messages</span>
 	</button>
-	<button mat-menu-item>
-		<mat-icon>notifications_off</mat-icon>
-		<span>Disable alerts</span>
+	<button mat-menu-item routerLink="profile">
+		<mat-icon>person</mat-icon>
+		<span>Profile</span>
+	</button>
+	<button mat-menu-item (click)="logout()">
+		<mat-icon>power_settings_new</mat-icon>
+		<span>Logout</span>
 	</button>
 </mat-menu>
-
-
 
 <router-outlet></router-outlet>
