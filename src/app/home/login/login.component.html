@@ -5,17 +5,17 @@
 
 	<mat-card>
 		<mat-card-content>
-			<form [formGroup]="loginForm" (submit)="onSubmit(loginForm)" novalidate>
+			<form id="loginForm" [formGroup]="loginForm" (submit)="onSubmit(loginForm)" novalidate>
 				<div class="login-inputs">
 					<mat-form-field>
-						<input matInput formControlName="username" placeholder="Username">
+						<input matInput formControlName="username" placeholder="Username" name="username">
 						<mat-error *ngIf="loginForm.controls.username.errors?.required && loginForm.controls.username.touched">
 							You must fill out a username.
 						</mat-error>
 					</mat-form-field>
 
 					<mat-form-field>
-						<input matInput formControlName="password" placeholder="Password">
+						<input matInput formControlName="password" placeholder="Password" name="password">
 						<mat-error *ngIf="loginForm.controls.password.errors?.required && loginForm.controls.password.touched">
 							You must fill out your password.
 						</mat-error>
@@ -26,7 +26,7 @@
 					</div>
 				</div>
 
-				<button mat-raised-button color="primary" type="submit">Login</button>
+				<button mat-raised-button color="primary" id="btnLogin" type="submit">Login</button>
 				<button mat-raised-button color="accent" routerLink="/home/forgot-password">Forgot Passoword</button>
 
 			</form>

@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	onSubmit(loginForm) {
 
+		console.log("btnLogin clicked")
+
 		if (loginForm.valid) {
 			this.usersActions.authenticate(loginForm.value);
 

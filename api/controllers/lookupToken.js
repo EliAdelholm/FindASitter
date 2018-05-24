@@ -24,7 +24,7 @@ module.exports = function (req, res) {
             if (expirationDate.isBefore(now)) {
                 return res.json({ status: 'ERROR', message: 'Token has expired' })
             }
-            
+
             return res.json( { status: 'OK' } );
 
         })
@@ -34,3 +34,6 @@ module.exports = function (req, res) {
     }
 
 }
+
+
+
